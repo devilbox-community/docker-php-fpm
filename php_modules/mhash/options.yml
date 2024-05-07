@@ -4,7 +4,7 @@
 name: mhash
 
 # Exclude module build/installation for the following PHP versions
-exclude: [7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2]  # Deprecated
+exclude: [7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3]  # Deprecated
 
 # In order for this module to built correctly against all dependencies,
 # the following modules must have been built first.

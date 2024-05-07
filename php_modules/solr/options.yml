@@ -5,7 +5,7 @@ name: solr
 
 # Exclude module build/installation for the following PHP versions
 # PHP 8.2:  SolrParams::__toString() implemented without string return type in Unknown on line 0
-exclude: [5.2, 5.3, 5.4, 5.5, 5.6, 7.0, 8.2]
+exclude: [5.2, 5.3, 5.4, 5.5, 5.6, 7.0, 8.2, 8.3]
 
 # In order for this module to built correctly against all dependencies,
 # the following modules must have been built first.

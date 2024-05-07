@@ -7,6 +7,12 @@
 all:
   type: builtin
 
+8.3:
+  # Remove ucred (currently breaks build)
+  pre: |
+    docker-php-ext-configure sockets \
+    && sed -i'' 's/.*ucred.*//g' /usr/src/php/ext/sockets/sendrecvmsg.c \
+
 8.2:
   # Remove ucred (currently breaks build)
   pre: |
