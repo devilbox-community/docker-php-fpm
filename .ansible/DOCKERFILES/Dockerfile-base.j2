@@ -58,6 +58,34 @@ RUN set -eux \
 	&& groupadd -g ${MY_GID} -r ${MY_GROUP} \
 	&& useradd -u ${MY_UID} -m -s /bin/bash -g ${MY_GROUP} ${MY_USER}
 
+{% if php_version in [5.2, 5.3, 5.4, 5.5] %}
+
+###
+### Fix end of support in Debian
+###
+RUN set -eux \
+    && sed -i 's/^deb /# deb /g' /etc/apt/sources.list \
+    && echo "deb http://archive.debian.org/debian/ jessie main contrib non-free" > /etc/apt/sources.list
+
+{% elif php_version in [5.6, 7.0] %}
+
+###
+### Fix end of support in Debian
+###
+RUN set -eux \
+    && sed -i 's/^deb /# deb /g' /etc/apt/sources.list \
+    && echo "deb http://archive.debian.org/debian/ stretch main contrib non-free" > /etc/apt/sources.list
+
+{% elif php_version in [7.1, 7.2] %}
+
+###
+### Fix end of support in Debian
+###
+RUN set -eux \
+    && sed -i 's/^deb /# deb /g' /etc/apt/sources.list \
+    && echo "deb http://archive.debian.org/debian/ buster main contrib non-free" > /etc/apt/sources.list
+
+{% endif %}
 
 ###
 ### Upgrade (install ps)

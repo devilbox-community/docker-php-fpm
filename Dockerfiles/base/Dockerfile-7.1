@@ -42,6 +42,14 @@ RUN set -eux \
 
 
 ###
+### Fix end of support in Debian
+###
+RUN set -eux \
+    && sed -i 's/^deb /# deb /g' /etc/apt/sources.list \
+    && echo "deb http://archive.debian.org/debian/ buster main contrib non-free" > /etc/apt/sources.list
+
+
+###
 ### Upgrade (install ps)
 ###
 RUN set -eux \
