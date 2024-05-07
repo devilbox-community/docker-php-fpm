@@ -1,3 +1,4 @@
+.idea
 .ansible/*.retry
 
 Makefile.docker

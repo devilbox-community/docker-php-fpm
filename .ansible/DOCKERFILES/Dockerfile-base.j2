@@ -15,6 +15,9 @@ FROM devilbox/php-fpm-8.1
 {% elif php_version == 8.2 %}
 FROM devilbox/php-fpm-8.2
 {% else %}
+{% elif php_version == 8.3 %}
+FROM devilbox/php-fpm-8.3
+{% else %}
 FROM php:{{ php_version }}-fpm
 {% endif %}
 MAINTAINER "cytopia" <cytopia@everythingcli.org>

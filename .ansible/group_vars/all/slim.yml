@@ -16,6 +16,9 @@ os_release:
   all:
     debian: bullseye
     ubuntu: focal
+  8.3:
+    debian: bullseye
+    ubuntu: focal
   8.2:
     debian: bullseye
     ubuntu: focal
@@ -163,6 +166,7 @@ base_apt_repositories_available:
   ### MongoDB (currently obsolete)
   ###
   mongo:
+    # 8.3: mongodb-org-(tools|shell) (amd64, arm64)
     # 8.2: mongodb-org-(tools|shell) (amd64, arm64)
     # 8.1: mongodb-org-(tools|shell) (amd64, arm64)
     # 8.0: mongodb-org-(tools|shell) (amd64, arm64)
@@ -330,6 +334,7 @@ base_software_available:
   ###
   ### MongoDB Command line client
   ###
+  # 8.3: mongodb-org-(tools|shell) (amd64, arm64)
   # 8.2: mongodb-org-(tools|shell) (amd64, arm64)
   # 8.1: mongodb-org-(tools|shell) (amd64, arm64)
   # 8.0: mongodb-org-(tools|shell) (amd64, arm64)
@@ -461,6 +466,7 @@ base_software_available:
   ###
   ### PostgrSQL Command line client
   ###
+  # 8.3: (amd64, arm64)
   # 8.2: (amd64, arm64)
   # 8.1: (amd64, arm64)
   # 8.0: (amd64, arm64)
