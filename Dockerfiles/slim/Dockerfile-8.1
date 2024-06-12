@@ -413,6 +413,7 @@ COPY ./data/php-fpm.conf/php-fpm-8.1.conf /usr/local/etc/php-fpm.conf
 COPY ./data/docker-entrypoint.sh /docker-entrypoint.sh
 COPY ./data/docker-entrypoint.d/*.sh /docker-entrypoint.d/
 COPY ./data/bash-devilbox /etc/bash-devilbox
+COPY ./data/msmtprc-devilbox /etc/msmtprc
 COPY ./data/sudo-devilbox /etc/sudoers.d/devilbox
 
 ###

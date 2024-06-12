@@ -30,8 +30,8 @@ RUN set -eux \
 ### Add apt repositories
 ###
 RUN set -eux \
-	&& apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 648ACFD622F3D138	\
-	&& echo "deb http://ftp.debian.org/debian bookworm-backports main contrib non-free" > /etc/apt/sources.list.d/backports.list \
+	&& apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 648ACFD622F3D138 6A26B1AE64C3C388	\
+	&& echo "deb http://ftp.debian.org/debian bullseye-backports main contrib non-free" > /etc/apt/sources.list.d/backports.list \
 	&& curl -sS -L --fail "https://packages.blackfire.io/gpg.key" | APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1 apt-key add -	\
 	&& echo "deb http://packages.blackfire.io/debian any main" > /etc/apt/sources.list.d/blackfire.list \
 	&& true
@@ -413,6 +413,7 @@ COPY ./data/php-fpm.conf/php-fpm-7.3.conf /usr/local/etc/php-fpm.conf
 COPY ./data/docker-entrypoint.sh /docker-entrypoint.sh
 COPY ./data/docker-entrypoint.d/*.sh /docker-entrypoint.d/
 COPY ./data/bash-devilbox /etc/bash-devilbox
+COPY ./data/msmtprc-devilbox /etc/msmtprc
 COPY ./data/sudo-devilbox /etc/sudoers.d/devilbox
 
 ###
