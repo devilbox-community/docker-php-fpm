@@ -358,6 +358,7 @@ RUN set -eux \
         {%- if fn.get_type(php_version, tool, tools_available) == 'pip' -%}
             {%- set pip_package = fn.tool_pip_get_package(php_version, tool, tools_available) -%}
             {%- set pip_version = fn.tool_pip_get_version(php_version, tool, tools_available) -%}
+            {%- set pip_flags   = fn.tool_pip_get_flags(php_version, tool, tools_available) -%}
             {{ "\n\t" }}&& pip install --no-cache-dir --no-compile --force-reinstall {{ pip_package }}{{ pip_version }} \
         {%- endif -%}
         {#- -#}

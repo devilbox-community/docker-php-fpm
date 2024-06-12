@@ -130,6 +130,21 @@ RUN set -eux \
 	&& true
 
 
+# -------------------- Installing PHP Extension: blackfire --------------------
+RUN set -eux \
+	# Installation: Generic
+	# Type:         Custom extension
+	&& ARCH="$(dpkg-architecture --query DEB_HOST_GNU_CPU)" \
+&& version=$(php -r "echo PHP_MAJOR_VERSION.PHP_MINOR_VERSION;") \
+&& curl -A "Docker" -o /tmp/blackfire-probe.tar.gz -D - -L -s https://blackfire.io/api/v1/releases/probe/php/linux/${ARCH}/$version \
+&& mkdir -p /tmp/blackfire \
+&& tar zxpf /tmp/blackfire-probe.tar.gz -C /tmp/blackfire \
+&& mv /tmp/blackfire/blackfire-*.so $(php -r "echo ini_get('extension_dir');")/blackfire.so \
+&& rm -rf /tmp/blackfire /tmp/blackfire-probe.tar.gz \
+ \
+	&& true
+
+
 # -------------------- Installing PHP Extension: bz2 --------------------
 RUN set -eux \
 	# Installation: Generic
@@ -251,6 +266,23 @@ RUN set -eux \
 	# Installation: Generic
 	# Type:         Built-in extension
 	&& docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) intl \
+	&& true
+
+
+# -------------------- Installing PHP Extension: ioncube --------------------
+RUN set -eux \
+	# Installation: Generic
+	# Type:         Custom extension
+	&& EXTENSION_DIR="$( php -i | grep ^extension_dir | awk -F '=>' '{print $2}' | xargs )" \
+&& if [ ! -d "${EXTENSION_DIR}" ]; then mkdir -p "${EXTENSION_DIR}"; fi \
+&& curl -sS --fail -k https://downloads.ioncube.com/loader_downloads/ioncube_loaders_lin_$(dpkg-architecture --query DEB_HOST_GNU_CPU | sed 's/_/-/g').tar.gz -L -o ioncube.tar.gz \
+&& tar xvfz ioncube.tar.gz \
+&& cd ioncube \
+&& cp "ioncube_loader_lin_8.1.so" "${EXTENSION_DIR}/ioncube.so" \
+&& cd ../ \
+&& rm -rf ioncube \
+&& rm -rf ioncube.tar.gz \
+ \
 	&& true
 
 
@@ -415,7 +447,7 @@ https://yum.oracle.com/repo/OracleLinux/OL7/oracle/instantclient/${ARCH}/getPack
 # -------------------- Installing PHP Extension: opcache --------------------
 RUN set -eux \
 	# Version specific pre-command
-	&& curl -sS https://raw.githubusercontent.com/php/php-src/php-8.0.6/ext/opcache/Optimizer/zend_dfg.h > /usr/local/include/php/Zend/Optimizer/zend_dfg.h \
+	&& curl -sS https://raw.githubusercontent.com/php/php-src/PHP-8.1/Zend/Optimizer/zend_dfg.h > /usr/local/include/php/Zend/Optimizer/zend_dfg.h \
 	# Installation: Version specific
 	# Type:         Built-in extension
 	# Installation

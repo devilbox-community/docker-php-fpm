@@ -164,12 +164,13 @@ extensions_available:
     all:
       type: builtin
   blackfire:
-    disabled: [5.2, 5.3, 5.4, 5.5, 8.1, 8.2, 8.3]
+    disabled: [5.2, 5.3, 5.4, 5.5]
     all:
       type: custom
       command: |
-        version=$(php -r "echo PHP_MAJOR_VERSION.PHP_MINOR_VERSION;") \
-        && curl -A "Docker" -o /tmp/blackfire-probe.tar.gz -D - -L -s https://blackfire.io/api/v1/releases/probe/php/linux/amd64/$version \
+        ARCH="$(dpkg-architecture --query DEB_HOST_GNU_CPU)" \
+        && version=$(php -r "echo PHP_MAJOR_VERSION.PHP_MINOR_VERSION;") \
+        && curl -A "Docker" -o /tmp/blackfire-probe.tar.gz -D - -L -s https://blackfire.io/api/v1/releases/probe/php/linux/${ARCH}/$version \
         && mkdir -p /tmp/blackfire \
         && tar zxpf /tmp/blackfire-probe.tar.gz -C /tmp/blackfire \
         && mv /tmp/blackfire/blackfire-*.so $(php -r "echo ini_get('extension_dir');")/blackfire.so \
@@ -485,7 +486,7 @@ extensions_available:
       type: pecl
       run_dep: [libicu52]
   ioncube:
-    disabled: [5.2, 5.3, 5.4, 8.0, 8.1, 8.2, 8.3]
+    disabled: [5.2, 5.3, 5.4, 8.0, 8.3]
     all:
       type: custom
       command: |
@@ -841,13 +842,13 @@ extensions_available:
       type: builtin
     8.3:
       type: builtin
-      pre: curl -sS https://raw.githubusercontent.com/php/php-src/php-8.0.6/ext/opcache/Optimizer/zend_dfg.h > /usr/local/include/php/Zend/Optimizer/zend_dfg.h
+      pre: curl -sS https://raw.githubusercontent.com/php/php-src/PHP-8.3/Zend/Optimizer/zend_dfg.h > /usr/local/include/php/Zend/Optimizer/zend_dfg.h
     8.2:
       type: builtin
-      pre: curl -sS https://raw.githubusercontent.com/php/php-src/php-8.0.6/ext/opcache/Optimizer/zend_dfg.h > /usr/local/include/php/Zend/Optimizer/zend_dfg.h
+      pre: curl -sS https://raw.githubusercontent.com/php/php-src/PHP-8.2/Zend/Optimizer/zend_dfg.h > /usr/local/include/php/Zend/Optimizer/zend_dfg.h
     8.1:
       type: builtin
-      pre: curl -sS https://raw.githubusercontent.com/php/php-src/php-8.0.6/ext/opcache/Optimizer/zend_dfg.h > /usr/local/include/php/Zend/Optimizer/zend_dfg.h
+      pre: curl -sS https://raw.githubusercontent.com/php/php-src/PHP-8.1/Zend/Optimizer/zend_dfg.h > /usr/local/include/php/Zend/Optimizer/zend_dfg.h
     5.4:
       type: pecl
       command: pecl install zendopcache
@@ -1216,7 +1217,7 @@ extensions_available:
       type: pecl
       version: 5.3.0
   phalcon:
-    disabled: [5.2, 8.2, 8.3]
+    disabled: [5.2]
     all:
       type: git
       git_url: https://github.com/phalcon/cphalcon
@@ -1374,7 +1375,7 @@ extensions_available:
       type: builtin
       build_dep: [libsodium-dev]
   solr:
-    disabled: [5.2, 5.3, 5.4, 5.5, 5.6, 7.0, 8.2, 8.3]
+    disabled: [5.2, 5.3, 5.4, 5.5, 5.6, 7.0]
     all:
       type: pecl
       build_dep: [libxml2-dev, libcurl4-openssl-dev]
@@ -1447,7 +1448,7 @@ extensions_available:
       build_dep: [libzip-dev]
       run_dep: [libzip2]
   swoole:
-    disabled: [5.2, 8.2, 8.3]
+    disabled: [5.2]
     all:
       type: pecl
       # Note: -D is only supported from PHP 7.2+

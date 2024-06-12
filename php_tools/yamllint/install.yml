@@ -7,5 +7,75 @@ all:
   version:
   build_dep: []
   run_dep: []
+  flags:
   # pre:
   # post:
+
+8.3:
+  type: pip
+  flags: --break-system-packages
+
+8.2:
+  type: pip
+  flags: --break-system-packages
+
+8.1:
+  type: pip
+  flags: --break-system-packages
+
+8.0:
+  type: pip
+  flags: --break-system-packages
+
+7.4:
+  type: pip
+  flags: --break-system-packages
+
+7.3:
+  type: pip
+  flags: --break-system-packages
+
+7.2:
+  type: pip
+  pre: |
+    DEB_HOST_ARCH="$( dpkg-architecture --query DEB_HOST_ARCH )" \
+    && if [ "${DEB_HOST_ARCH}" = "arm64" ]; then \
+      pip install --upgrade "pip < 21.0" \
+      && pip install setuptools==44.1.1 --no-build-isolation \
+      && pip install "cython<3.0" --no-build-isolation; \
+    fi \
+  build_dep: [python-pip,python-wheel]
+
+7.1:
+  type: pip
+  pre: |
+    DEB_HOST_ARCH="$( dpkg-architecture --query DEB_HOST_ARCH )" \
+    && if [ "${DEB_HOST_ARCH}" = "arm64" ]; then \
+      pip install --upgrade "pip < 21.0" \
+      && pip install setuptools==44.1.1 --no-build-isolation \
+      && pip install "cython<3.0" --no-build-isolation; \
+    fi \
+  build_dep: [python-pip,python-wheel]
+
+7.0:
+  type: pip
+  pre: |
+    DEB_HOST_ARCH="$( dpkg-architecture --query DEB_HOST_ARCH )" \
+    && if [ "${DEB_HOST_ARCH}" = "arm64" ]; then \
+      pip install --upgrade "pip < 21.0" \
+      && pip install setuptools==44.1.1 --no-build-isolation \
+      && pip install "cython<3.0" --no-build-isolation; \
+    fi \
+  build_dep: [python-pip,python-wheel]
+
+5.6:
+  type: pip
+  flags:
+  pre: |
+    DEB_HOST_ARCH="$( dpkg-architecture --query DEB_HOST_ARCH )" \
+    && if [ "${DEB_HOST_ARCH}" = "arm64" ]; then \
+      pip install --upgrade "pip < 21.0" \
+      && pip install setuptools==44.1.1 --no-build-isolation \
+      && pip install "cython<3.0" --no-build-isolation; \
+    fi \
+  build_dep: [python-pip,python-wheel]

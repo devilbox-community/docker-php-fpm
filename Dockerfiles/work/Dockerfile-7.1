@@ -275,6 +275,8 @@ RUN set -eux \
 		libghc-zlib-dev \
 		libssl-dev \
 		libz-dev \
+		python-pip \
+		python-wheel \
 		ruby-dev \
 		# ---------- run_deps ----------
 		dos2unix \
@@ -650,6 +652,13 @@ RUN set -eux \
 
 # -------------------- (pip) yamllint --------------------
 RUN set -eux \
+	&& DEB_HOST_ARCH="$( dpkg-architecture --query DEB_HOST_ARCH )" \
+	&& if [ "${DEB_HOST_ARCH}" = "arm64" ]; then \
+	  pip install --upgrade "pip < 21.0" \
+	  && pip install setuptools==44.1.1 --no-build-isolation \
+	  && pip install "cython<3.0" --no-build-isolation; \
+	fi \
+	\
 	&& pip install --no-cache-dir --no-compile --force-reinstall yamllint \
 	&& yamllint --version 2>&1 | grep -E '[0-9][.0-9]+' || (yamllint --version; false)	\
 	&& true
