@@ -314,14 +314,6 @@ RUN set -eux \
 	&& ng version 2>&1 | grep -iE 'Angular CLI:\s*[0-9][.0-9]+' || (ng version; false)	\
 	&& true
 
-# -------------------- (composer) asgardcms --------------------
-RUN set -eux \
-	&& COMPOSER_HOME="/usr/local/src/composer" COMPOSER_MEMORY_LIMIT=-1 /usr/local/bin/composer-2 global require --no-interaction --no-cache  asgardcms/asgardcms-installer:dev-master \
-	&& ln -s /usr/local/src/composer/vendor/asgardcms/asgardcms-installer/asgardcms /usr/local/bin/ \
-	&& rm -rf /usr/local/src/composer/cache/* \
-	&& asgardcms --version 2>/dev/null | grep -Ei 'AsgardCMS\sInstaller\s[0-9][.0-9]+' || (asgardcms --version; false)	\
-	&& true
-
 # -------------------- (npm) eslint --------------------
 RUN set -eux \
 	&& su -c '. /opt/nvm/nvm.sh; npm install --location=global eslint' devilbox \
@@ -378,7 +370,8 @@ RUN set -eux \
 
 # -------------------- (custom) deployer --------------------
 RUN set -eux \
-	&& curl -sS -k -L --fail https://deployer.org/releases/v4.3.4/deployer.phar -L -o /usr/local/bin/dep	\
+	&& TAG_VERSION="v4.3.4"	\
+	&& curl -sS -k -L --fail "https://deployer.org/releases/${TAG_VERSION}/deployer.phar" -L -o /usr/local/bin/dep	\
 	&& chmod +x /usr/local/bin/dep	\
 	&& dep --version 2>/dev/null | grep -Ei 'deployer\s*(version\s*)?[0-9][.0-9]+' || (dep --version; false)	\
 	&& true
@@ -418,14 +411,6 @@ RUN set -eux \
 	&& ln -s /usr/local/src/composer/vendor/laravel/installer/laravel /usr/local/bin/ \
 	&& rm -rf /usr/local/src/composer/cache/* \
 	&& laravel --version | grep ^Laravel | grep -E '[0-9]\.[0-9]+' || (laravel --version; false)	\
-	&& true
-
-# -------------------- (composer) laravel-lumen --------------------
-RUN set -eux \
-	&& COMPOSER_HOME="/usr/local/src/composer" COMPOSER_MEMORY_LIMIT=-1 /usr/local/bin/composer-2 global require --no-interaction --no-cache  laravel/lumen-installer \
-	&& ln -s /usr/local/src/composer/vendor/laravel/lumen-installer/lumen /usr/local/bin/ \
-	&& rm -rf /usr/local/src/composer/cache/* \
-	&& lumen --version 2>/dev/null | grep ^Lumen | grep -E '[0-9]\.[0-9]+' || (lumen --version; false)	\
 	&& true
 
 # -------------------- (custom) linkcheck --------------------
@@ -785,11 +770,6 @@ RUN set -eux \
 	&& ng version 2>&1 | grep -iE 'Angular CLI:\s*[0-9][.0-9]+' || (ng version; false)	\
 	&& true
 
-# -------------------- (composer) asgardcms --------------------
-RUN set -eux \
-	&& asgardcms --version 2>/dev/null | grep -Ei 'AsgardCMS\sInstaller\s[0-9][.0-9]+' || (asgardcms --version; false)	\
-	&& true
-
 # -------------------- (npm) eslint --------------------
 RUN set -eux \
 	&& eslint -v | grep -E '[0-9][.0-9]+' || (eslint -v; false)	\
@@ -848,11 +828,6 @@ RUN set -eux \
 # -------------------- (composer) laravel-installer --------------------
 RUN set -eux \
 	&& laravel --version | grep ^Laravel | grep -E '[0-9]\.[0-9]+' || (laravel --version; false)	\
-	&& true
-
-# -------------------- (composer) laravel-lumen --------------------
-RUN set -eux \
-	&& lumen --version 2>/dev/null | grep ^Lumen | grep -E '[0-9]\.[0-9]+' || (lumen --version; false)	\
 	&& true
 
 # -------------------- (custom) linkcheck --------------------

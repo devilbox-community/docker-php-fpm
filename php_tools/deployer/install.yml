@@ -4,20 +4,37 @@ check: dep --version 2>/dev/null | grep -Ei 'deployer\s*(version\s*)?[0-9][.0-9]
 
 all:
   type: custom
-  command: curl -sS -k -L --fail https://deployer.org/deployer.phar -L -o /usr/local/bin/dep
+  pre: |
+    TAG_VERSION="$( \
+      curl -sSL 'https://github.com/deployphp/deployer/releases/latest' \
+      | grep -Eo '/deployphp/deployer/releases/tag/["-.0-9v"]+' \
+      | grep -Eo '[-.0-9v]+' \
+      | head -1 \
+    )" \
+  command: |
+    DEP_URL="https://github.com/deployphp/deployer/releases/download/${TAG_VERSION}/deployer.phar" \
+    && curl -sS -k -L --fail -L -o /usr/local/bin/dep "${DEP_URL}" \
   post: chmod +x /usr/local/bin/dep
+
+7.2:
+  type: custom
+  pre: TAG_VERSION="v6.9.0"
+  command: curl -sS -k -L --fail "https://deployer.org/releases/${TAG_VERSION}/deployer.phar" -L -o /usr/local/bin/dep
 
 7.1:
   type: custom
-  command: curl -sS -k -L --fail https://deployer.org/releases/v6.7.0/deployer.phar -L -o /usr/local/bin/dep
+  pre: TAG_VERSION="v6.7.0"
+  command: curl -sS -k -L --fail "https://deployer.org/releases/${TAG_VERSION}/deployer.phar" -L -o /usr/local/bin/dep
 
 7.0:
   type: custom
-  command: curl -sS -k -L --fail https://deployer.org/releases/v6.7.0/deployer.phar -L -o /usr/local/bin/dep
+  pre: TAG_VERSION="v6.7.0"
+  command: curl -sS -k -L --fail "https://deployer.org/releases/${TAG_VERSION}/deployer.phar" -L -o /usr/local/bin/dep
 
 5.6:
   type: custom
-  command: curl -sS -k -L --fail https://deployer.org/releases/v4.3.4/deployer.phar -L -o /usr/local/bin/dep
+  pre: TAG_VERSION="v4.3.4"
+  command: curl -sS -k -L --fail "https://deployer.org/releases/${TAG_VERSION}/deployer.phar" -L -o /usr/local/bin/dep
 
 5.5:
   type: custom
