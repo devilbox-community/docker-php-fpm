@@ -410,21 +410,36 @@ RUN set -eux \
 RUN set -eux \
 	# Generic pre-command
 	&& ARCH="$(dpkg-architecture --query DEB_HOST_GNU_CPU)" \
-&& ORACLE_HREF="$( \
-    curl -sS https://yum.oracle.com/repo/OracleLinux/OL7/oracle/instantclient/${ARCH}/ \
+&& OL_VERSION="8" \
+&& PHP_VERSION="$(php -v | grep ^PHP | awk '{print $2}' | grep -Eo '[0-9]\.[0-9]')" \
+&& if echo "${PHP_VERSION}" | grep -E '5\.6|7\.0'; then \
+  OL_VERSION="7"; \
+fi; \
+ORACLE_HREF="$( \
+    curl -sS https://yum.oracle.com/repo/OracleLinux/OL${OL_VERSION}/oracle/instantclient/${ARCH}/ \
     | tac \
     | tac \
     | grep -Eo 'href="getPackage/oracle-instantclient.+basiclite.+rpm"' \
+    | sort -V -t - \
     | tail -1 \
+)" \
+&& ORACLE_DEVEL_HREF="$( \
+  curl -sS https://yum.oracle.com/repo/OracleLinux/OL${OL_VERSION}/oracle/instantclient/${ARCH}/ \
+  | tac \
+  | tac \
+  | grep -Eo 'href="getPackage/oracle-instantclient.+devel.+rpm"' \
+  | sort -V -t - \
+  | tail -1 \
 )" \
 && ORACLE_VERSION_MAJOR="$( echo "${ORACLE_HREF}" | grep -Eo 'instantclient[.0-9]+' | sed 's/instantclient//g' )" \
 && ORACLE_VERSION_FULL="$( echo "${ORACLE_HREF}" | grep -Eo 'basiclite-[-.0-9]+' | sed -e 's/basiclite-//g' -e 's/\.$//g' )" \
+&& ORACLE_VERSION_DEVEL_FULL="$( echo "${ORACLE_DEVEL_HREF}" | grep -Eo 'devel-[-.0-9]+' | sed -e 's/devel-//g' -e 's/\.$//g' )" \
 \
-&& rpm --import http://yum.oracle.com/RPM-GPG-KEY-oracle-ol7 \
+&& rpm --import http://yum.oracle.com/RPM-GPG-KEY-oracle-ol${OL_VERSION} \
 && curl -sS -o /tmp/oracle-instantclient${ORACLE_VERSION_MAJOR}-basiclite-${ORACLE_VERSION_FULL}.${ARCH}.rpm \
-https://yum.oracle.com/repo/OracleLinux/OL7/oracle/instantclient/${ARCH}/getPackage/oracle-instantclient${ORACLE_VERSION_MAJOR}-basiclite-${ORACLE_VERSION_FULL}.${ARCH}.rpm \
-&& curl -sS -o /tmp/oracle-instantclient${ORACLE_VERSION_MAJOR}-devel-${ORACLE_VERSION_FULL}.${ARCH}.rpm \
-https://yum.oracle.com/repo/OracleLinux/OL7/oracle/instantclient/${ARCH}/getPackage/oracle-instantclient${ORACLE_VERSION_MAJOR}-devel-${ORACLE_VERSION_FULL}.${ARCH}.rpm \
+https://yum.oracle.com/repo/OracleLinux/OL${OL_VERSION}/oracle/instantclient/${ARCH}/getPackage/oracle-instantclient${ORACLE_VERSION_MAJOR}-basiclite-${ORACLE_VERSION_FULL}.${ARCH}.rpm \
+&& curl -sS -o /tmp/oracle-instantclient${ORACLE_VERSION_MAJOR}-devel-${ORACLE_VERSION_DEVEL_FULL}.${ARCH}.rpm \
+https://yum.oracle.com/repo/OracleLinux/OL${OL_VERSION}/oracle/instantclient/${ARCH}/getPackage/oracle-instantclient${ORACLE_VERSION_MAJOR}-devel-${ORACLE_VERSION_DEVEL_FULL}.${ARCH}.rpm \
 && alien \
   -v \
   --target=$( dpkg --print-architecture ) \
@@ -432,9 +447,9 @@ https://yum.oracle.com/repo/OracleLinux/OL7/oracle/instantclient/${ARCH}/getPack
 && alien \
   -v \
   --target=$( dpkg --print-architecture ) \
-  -i /tmp/oracle-instantclient${ORACLE_VERSION_MAJOR}-devel-${ORACLE_VERSION_FULL}.${ARCH}.rpm \
+  -i /tmp/oracle-instantclient${ORACLE_VERSION_MAJOR}-devel-${ORACLE_VERSION_DEVEL_FULL}.${ARCH}.rpm \
 && rm -f /tmp/oracle-instantclient${ORACLE_VERSION_MAJOR}-basiclite-${ORACLE_VERSION_FULL}.${ARCH}.rpm \
-&& rm -f /tmp/oracle-instantclient${ORACLE_VERSION_MAJOR}-devel-${ORACLE_VERSION_FULL}.${ARCH}.rpm \
+&& rm -f /tmp/oracle-instantclient${ORACLE_VERSION_MAJOR}-devel-${ORACLE_VERSION_DEVEL_FULL}.${ARCH}.rpm \
  \
 	# Installation: Generic
 	# Type:         Built-in extension
@@ -443,15 +458,20 @@ https://yum.oracle.com/repo/OracleLinux/OL7/oracle/instantclient/${ARCH}/getPack
 	&& docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) oci8 \
 	# Generic post-command
 	&& ARCH="$(dpkg-architecture --query DEB_HOST_GNU_CPU)" \
-&& ORACLE_HREF="$( \
-    curl -sS https://yum.oracle.com/repo/OracleLinux/OL7/oracle/instantclient/${ARCH}/ \
+&& OL_VERSION="8" \
+&& PHP_VERSION="$(php -v | grep ^PHP | awk '{print $2}' | grep -Eo '[0-9]\.[0-9]')" \
+&& if echo "${PHP_VERSION}" | grep -E '5\.6|7\.0'; then \
+  OL_VERSION="7"; \
+fi; \
+ORACLE_HREF="$( \
+    curl -sS https://yum.oracle.com/repo/OracleLinux/OL${OL_VERSION}/oracle/instantclient/${ARCH}/ \
     | tac \
     | tac \
     | grep -Eo 'href="getPackage/oracle-instantclient.+basiclite.+rpm"' \
+    | sort -V -t - \
     | tail -1 \
 )" \
 && ORACLE_VERSION_MAJOR="$( echo "${ORACLE_HREF}" | grep -Eo 'instantclient[.0-9]+' | sed 's/instantclient//g' )" \
-&& ORACLE_VERSION_FULL="$( echo "${ORACLE_HREF}" | grep -Eo 'basiclite-[-.0-9]+' | sed -e 's/basiclite-//g' -e 's/\.$//g' )" \
 && (ln -sf /usr/lib/oracle/${ORACLE_VERSION_MAJOR}/client64/lib/*.so* /usr/lib/ || true) \
  \
 	&& true
@@ -1023,15 +1043,20 @@ RUN set -eux \
   \
 	# ---------- oci8 ----------
 	&& ARCH="$(dpkg-architecture --query DEB_HOST_GNU_CPU)" \
-&& ORACLE_HREF="$( \
-    curl -sS https://yum.oracle.com/repo/OracleLinux/OL7/oracle/instantclient/${ARCH}/ \
+&& OL_VERSION="8" \
+&& PHP_VERSION="$(php -v | grep ^PHP | awk '{print $2}' | grep -Eo '[0-9]\.[0-9]')" \
+&& if echo "${PHP_VERSION}" | grep -E '5\.6|7\.0'; then \
+  OL_VERSION="7"; \
+fi; \
+ORACLE_HREF="$( \
+    curl -sS https://yum.oracle.com/repo/OracleLinux/OL${OL_VERSION}/oracle/instantclient/${ARCH}/ \
     | tac \
     | tac \
     | grep -Eo 'href="getPackage/oracle-instantclient.+basiclite.+rpm"' \
+    | sort -V -t - \
     | tail -1 \
 )" \
 && ORACLE_VERSION_MAJOR="$( echo "${ORACLE_HREF}" | grep -Eo 'instantclient[.0-9]+' | sed 's/instantclient//g' )" \
-&& ORACLE_VERSION_FULL="$( echo "${ORACLE_HREF}" | grep -Eo 'basiclite-[-.0-9]+' | sed -e 's/basiclite-//g' -e 's/\.$//g' )" \
 && (ln -sf /usr/lib/oracle/${ORACLE_VERSION_MAJOR}/client64/lib/*.so* /usr/lib/ || true) \
   \
 	&& true

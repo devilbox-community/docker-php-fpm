@@ -9,6 +9,7 @@ set -o pipefail
 SCRIPT_PATH="$(cd -P -- "$(dirname -- "$0")" && pwd -P)"
 SCRIPT_NAME="$(basename "${SCRIPT_PATH}")"
 REPO_PATH="${SCRIPT_PATH}/.."
+UNAME_OUT="$(uname -s)"
 
 ###
 ### This file is being updated
@@ -155,10 +156,10 @@ update_readme() {
 		done < <(echo "${modules_image}")
 
 		if [ "${avail}" = "1" ]; then
-			gsed -i "s|\(<td class=\"ext_${stage}_${module_avail}_${php_version}\">\)\(.*\)\(<\/td>\)|\1✓\3|g" "${README}"
+			sed -i "s|\(<td class=\"ext_${stage}_${module_avail}_${php_version}\">\)\(.*\)\(<\/td>\)|\1✓\3|g" "${README}"
 			echo "[YES] [${stage}] PHP ${php_version}, mod: '${module_avail}'"
 		else
-			gsed -i "s|\(<td class=\"ext_${stage}_${module_avail}_${php_version}\">\)\(.*\)\(<\/td>\)|\1\3|g" "${README}"
+			sed -i "s|\(<td class=\"ext_${stage}_${module_avail}_${php_version}\">\)\(.*\)\(<\/td>\)|\1\3|g" "${README}"
 			echo "[NO]  [${stage}] PHP ${php_version}, mod: '${module_avail}'"
 		fi
 	done < <(echo "${modules_avail}")
