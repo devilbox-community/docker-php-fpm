@@ -8,3 +8,19 @@
 all:
   type: pecl
   build_dep: [libxml2-dev, libcurl4-openssl-dev]
+
+7.3:
+  type: pecl
+  version: 2.6.0
+
+7.2:
+  type: pecl
+  version: 2.6.0
+
+7.1:
+  type: pecl
+  version: 2.6.0
+
+7.0:
+  type: pecl
+  version: 2.6.0

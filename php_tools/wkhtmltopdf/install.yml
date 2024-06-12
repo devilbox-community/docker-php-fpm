@@ -4,14 +4,25 @@ check: wkhtmltopdf --version | grep ^wkhtmltopdf | grep -E '[0-9]\.[0-9]+' | gre
 
 all:
   type: custom
-  pre: OS_RELEASE="bullseye"
+  pre: OS_RELEASE="bookworm"
   command: |
     DEB_HOST_ARCH="$( dpkg-architecture --query DEB_HOST_ARCH )" \
-    && WK_URL="$( \
-      curl -sS -k -L --fail 'https://wkhtmltopdf.org/downloads.html' \
-      | awk -F'"' "/wkhtmltopdf.*${OS_RELEASE}_${DEB_HOST_ARCH}\.deb/{print \$(NF-1)}" \
-      | head -1 \
-    )" \
+    && if [ "${OS_RELEASE}" = "bookworm" ]; then \
+      WK_VERSION="$( \
+        curl -sS 'https://github.com/wkhtmltopdf/packaging/releases' \
+        | grep -Eo '/wkhtmltopdf/packaging/releases/tag/[-.0-9]+' \
+        | grep -Eo '[-.0-9]+' \
+        | sort -V \
+        | tail -1 \
+      )" \
+      && WK_URL="https://github.com/wkhtmltopdf/packaging/releases/download/${WK_VERSION}/wkhtmltox_${WK_VERSION}.${OS_RELEASE}_${DEB_HOST_ARCH}.deb"; \
+    else \
+      WK_URL="$( \
+        curl -sS -k -L --fail 'https://wkhtmltopdf.org/downloads.html' \
+        | awk -F'"' "/wkhtmltopdf.*${OS_RELEASE}_${DEB_HOST_ARCH}\.deb/{print \$(NF-1)}" \
+        | head -1 \
+      )"; \
+    fi \
     && echo "URL: ${WK_URL}" \
     && curl -sS -k -L --fail -o /tmp/wkhtmltopdf.deb "${WK_URL}" \
     && dpkg -i /tmp/wkhtmltopdf.deb \
@@ -25,6 +36,18 @@ all:
     - xfonts-base
     - xfonts-encodings
     - xfonts-utils
+
+8.0:
+  type: custom
+  pre: OS_RELEASE="bullseye"
+
+7.4:
+  type: custom
+  pre: OS_RELEASE="bullseye"
+
+7.3:
+  type: custom
+  pre: OS_RELEASE="bullseye"
 
 7.2:
   type: custom

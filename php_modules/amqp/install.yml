@@ -11,6 +11,26 @@ all:
   build_dep: [librabbitmq-dev]
   run_dep: [librabbitmq4]
 
+7.3:
+  type: pecl
+  version: 1.11.0
+
+7.2:
+  type: pecl
+  version: 1.11.0
+
+7.1:
+  type: pecl
+  version: 1.11.0
+
+7.0:
+  type: pecl
+  version: 1.11.0
+
+5.6:
+  type: pecl
+  version: 1.11.0
+
 5.5:
   type: pecl
   version: 1.9.3

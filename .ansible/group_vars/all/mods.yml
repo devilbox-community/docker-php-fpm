@@ -124,6 +124,21 @@ extensions_available:
       command: echo "/usr" | pecl install amqp
       build_dep: [librabbitmq-dev]
       run_dep: [librabbitmq4]
+    7.3:
+      type: pecl
+      version: 1.11.0
+    7.2:
+      type: pecl
+      version: 1.11.0
+    7.1:
+      type: pecl
+      version: 1.11.0
+    7.0:
+      type: pecl
+      version: 1.11.0
+    5.6:
+      type: pecl
+      version: 1.11.0
     5.5:
       type: pecl
       version: 1.9.3
@@ -247,10 +262,30 @@ extensions_available:
       type: builtin
   ffi:
     disabled: [5.2, 5.3, 5.4, 5.5, 5.6, 7.0, 7.1, 7.2, 7.3]
-    already_avail: [8.0, 8.1, 8.2, 8.3]
     all:
       type: builtin
       build_dep: [libffi-dev]
+      run_dep: [libffi8]
+    8.0:
+      type: builtin
+      run_dep: [libffi7]
+    7.4:
+      type: builtin
+      run_dep: [libffi7]
+    7.3:
+      type: builtin
+      run_dep: [libffi7]
+    7.2:
+      type: builtin
+      run_dep: [libffi7]
+    7.1:
+      type: builtin
+      run_dep: [libffi7]
+    7.0:
+      type: builtin
+      run_dep: [libffi7]
+    5.6:
+      type: builtin
       run_dep: [libffi7]
   fileinfo:
     disabled: []
@@ -263,7 +298,7 @@ extensions_available:
     disabled: []
     already_avail: "{{ php_all_versions }}"
   ftp:
-    disabled: []
+    disabled: [8.2, 8.3]
     already_avail: "{{ php_all_versions }}"
   gd:
     disabled: []
@@ -272,31 +307,35 @@ extensions_available:
       pre: ln -s /usr/lib/$(dpkg-architecture --query DEB_BUILD_GNU_TYPE)/libXpm.* /usr/lib/
       configure: --with-gd --with-vpx-dir=/usr --with-jpeg-dir=/usr --with-png-dir=/usr --with-zlib-dir=/usr --with-xpm-dir=/usr --with-freetype-dir=/usr --enable-gd-native-ttf
       build_dep: [libpng-dev, libjpeg-dev, libxpm-dev, libvpx-dev, zlib1g-dev, libfreetype6-dev, libwebp-dev]
-      run_dep: [libpng16-16, libjpeg62-turbo, libxpm4, libvpx6, libfreetype6, libwebp6]
+      run_dep: [libpng16-16, libjpeg62-turbo, libxpm4, libvpx7, libfreetype6, libwebp7, libavif15]
     8.3:
       type: builtin
       configure: --enable-gd --with-webp --with-jpeg --with-xpm --with-freetype --with-avif
       build_dep: [libpng-dev, libjpeg-dev, libxpm-dev, libvpx-dev, zlib1g-dev, libfreetype6-dev, libwebp-dev, libavif-dev]
-      run_dep: [libpng16-16, libjpeg62-turbo, libxpm4, libvpx6, libfreetype6, libwebp6, libavif9]
+      run_dep: [libpng16-16, libjpeg62-turbo, libxpm4, libvpx7, libfreetype6, libwebp7, libavif15]
     8.2:
       type: builtin
       configure: --enable-gd --with-webp --with-jpeg --with-xpm --with-freetype --with-avif
       build_dep: [libpng-dev, libjpeg-dev, libxpm-dev, libvpx-dev, zlib1g-dev, libfreetype6-dev, libwebp-dev, libavif-dev]
-      run_dep: [libpng16-16, libjpeg62-turbo, libxpm4, libvpx6, libfreetype6, libwebp6, libavif9]
+      run_dep: [libpng16-16, libjpeg62-turbo, libxpm4, libvpx7, libfreetype6, libwebp7, libavif15]
     8.1:
       type: builtin
       configure: --enable-gd --with-webp --with-jpeg --with-xpm --with-freetype --with-avif
       build_dep: [libpng-dev, libjpeg-dev, libxpm-dev, libvpx-dev, zlib1g-dev, libfreetype6-dev, libwebp-dev, libavif-dev]
-      run_dep: [libpng16-16, libjpeg62-turbo, libxpm4, libvpx6, libfreetype6, libwebp6, libavif9]
+      run_dep: [libpng16-16, libjpeg62-turbo, libxpm4, libvpx7, libfreetype6, libwebp7, libavif15]
     8.0:
       type: builtin
       configure: --enable-gd --with-webp --with-jpeg --with-xpm --with-freetype
+      build_dep: [libpng-dev, libjpeg-dev, libxpm-dev, libvpx-dev, zlib1g-dev, libfreetype6-dev, libwebp-dev]
+      run_dep: [libpng16-16, libjpeg62-turbo, libxpm4, libvpx6, libfreetype6, libwebp6]
     7.4:
       type: builtin
       configure: --enable-gd --with-webp --with-jpeg --with-xpm --with-freetype
+      run_dep: [libpng16-16, libjpeg62-turbo, libxpm4, libvpx6, libfreetype6, libwebp6]
     7.3:
       type: builtin
       configure: --with-gd --with-webp-dir=/usr --with-jpeg-dir=/usr --with-png-dir=/usr --with-zlib-dir=/usr --with-xpm-dir=/usr --with-freetype-dir=/usr
+      run_dep: [libpng16-16, libjpeg62-turbo, libxpm4, libvpx6, libfreetype6, libwebp6]
     7.2:
       type: builtin
       configure: --with-gd --with-webp-dir=/usr --with-jpeg-dir=/usr --with-png-dir=/usr --with-zlib-dir=/usr --with-xpm-dir=/usr --with-freetype-dir=/usr
@@ -395,7 +434,7 @@ extensions_available:
     all:
       type: pecl
       build_dep: [libmagickwand-dev, libwebp-dev, ghostscript]
-      run_dep: [libmagickwand-6.q16-6, libwebp6, ghostscript]
+      run_dep: [libmagickwand-6.q16-6, libwebp7, ghostscript]
       # https://bugs.php.net/bug.php?id=77683
       # https://github.com/Imagick/imagick/issues/262 (policy prevents PDF from being read)
       post: |
@@ -460,6 +499,15 @@ extensions_available:
     all:
       type: builtin
       build_dep: [libicu-dev]
+      run_dep: [libicu72]
+    8.0:
+      type: builtin
+      run_dep: [libicu67]
+    7.4:
+      type: builtin
+      run_dep: [libicu67]
+    7.3:
+      type: builtin
       run_dep: [libicu67]
     7.2:
       type: builtin
@@ -703,6 +751,12 @@ extensions_available:
     all:
       type: pecl
       build_dep: [libssl-dev, libsasl2-dev]
+    7.3:
+      type: pecl
+      version: 1.16.2
+    7.2:
+      type: pecl
+      version: 1.16.2
     7.1:
       type: pecl
       version: 1.11.1
@@ -984,6 +1038,12 @@ extensions_available:
       type: pecl
       build_dep: [unixodbc-dev]
       run_dep: [unixodbc]
+    8.0:
+      type: pecl
+      version: 5.11.1
+    7.4:
+      type: pecl
+      version: 5.10.1
     7.3:
       type: pecl
       version: 5.9.0
@@ -1204,6 +1264,12 @@ extensions_available:
       type: pecl
       build_dep: [unixodbc-dev]
       run_dep: [unixodbc]
+    8.0:
+      type: pecl
+      version: 5.11.1
+    7.4:
+      type: pecl
+      version: 5.10.1
     7.3:
       type: pecl
       version: 5.9.0
@@ -1379,6 +1445,18 @@ extensions_available:
     all:
       type: pecl
       build_dep: [libxml2-dev, libcurl4-openssl-dev]
+    7.3:
+      type: pecl
+      version: 2.6.0
+    7.2:
+      type: pecl
+      version: 2.6.0
+    7.1:
+      type: pecl
+      version: 2.6.0
+    7.0:
+      type: pecl
+      version: 2.6.0
   spl:
     disabled: []
     already_avail: "{{ php_all_versions }}"

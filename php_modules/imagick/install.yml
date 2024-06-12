@@ -8,7 +8,7 @@
 all:
   type: pecl
   build_dep: [libmagickwand-dev, libwebp-dev, ghostscript]
-  run_dep: [libmagickwand-6.q16-6, libwebp6, ghostscript]
+  run_dep: [libmagickwand-6.q16-6, libwebp7, ghostscript]
   # https://bugs.php.net/bug.php?id=77683
   # https://github.com/Imagick/imagick/issues/262 (policy prevents PDF from being read)
   post: |

@@ -22,6 +22,7 @@ RUN set -eux \
         libenchant-2-dev \
         libevent-dev \
         libfbclient2 \
+        libffi-dev \
         libfreetype6-dev \
         libgmp-dev \
         libib-util \
@@ -180,6 +181,14 @@ RUN set -eux \
 	# Installation: Generic
 	# Type:         Built-in extension
 	&& docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) exif \
+	&& true
+
+
+# -------------------- Installing PHP Extension: ffi --------------------
+RUN set -eux \
+	# Installation: Generic
+	# Type:         Built-in extension
+	&& docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) ffi \
 	&& true
 
 
@@ -911,15 +920,15 @@ RUN set -eux \
     ghostscript \
     libaio1 \
     libaspell15 \
-    libavif9 \
+    libavif15 \
     libc-ares2 \
     libc-client2007e \
     libenchant-2-2 \
     libevent-2.1-7 \
     libfbclient2 \
-    libffi7 \
+    libffi8 \
     libfreetype6 \
-    libicu67 \
+    libicu72 \
     libjpeg62-turbo \
     liblz4-1 \
     liblzf1 \
@@ -933,8 +942,8 @@ RUN set -eux \
     librdkafka1 \
     libsybdb5 \
     libtidy5deb1 \
-    libvpx6 \
-    libwebp6 \
+    libvpx7 \
+    libwebp7 \
     libxpm4 \
     libxslt1.1 \
     libyaml-0-2 \
@@ -1044,8 +1053,6 @@ RUN set -eux \
     && php-fpm -m | grep -oiE '^fileinfo$' \
     && php -m | grep -oiE '^filter$' \
     && php-fpm -m | grep -oiE '^filter$' \
-    && php -m | grep -oiE '^ftp$' \
-    && php-fpm -m | grep -oiE '^ftp$' \
     && php -m | grep -oiE '^gd$' \
     && php-fpm -m | grep -oiE '^gd$' \
     && php -m | grep -oiE '^gettext$' \

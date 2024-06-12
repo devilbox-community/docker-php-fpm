@@ -5,9 +5,35 @@
 # * {{ php_all_versions }}:  Array of all PHP versions
 
 
-already_avail: [8.0, 8.1, 8.2, 8.3]
-
 all:
   type: builtin
   build_dep: [libffi-dev]
+  run_dep: [libffi8]
+
+8.0:
+  type: builtin
+  run_dep: [libffi7]
+
+7.4:
+  type: builtin
+  run_dep: [libffi7]
+
+7.3:
+  type: builtin
+  run_dep: [libffi7]
+
+7.2:
+  type: builtin
+  run_dep: [libffi7]
+
+7.1:
+  type: builtin
+  run_dep: [libffi7]
+
+7.0:
+  type: builtin
+  run_dep: [libffi7]
+
+5.6:
+  type: builtin
   run_dep: [libffi7]

@@ -169,6 +169,7 @@ help_software_available:
     check: pip --version
     all:
       type: custom
+      pre: rm -rf /usr/lib/python3.*/EXTERNALLY-MANAGED
       command: |
         curl -sS -L --fail https://bootstrap.pypa.io/get-pip.py | python3 \
       # Cleanup

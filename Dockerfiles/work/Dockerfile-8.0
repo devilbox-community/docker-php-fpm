@@ -88,6 +88,7 @@ RUN set -eux \
 
 # -------------------- pip --------------------
 RUN set -eux \
+	&& rm -rf /usr/lib/python3.*/EXTERNALLY-MANAGED	\
 	&& curl -sS -L --fail https://bootstrap.pypa.io/get-pip.py | python3 \
 	\
 	&& /bin/ls -1 /usr/local/lib/ | grep ^python | while read -r version; do \
@@ -438,7 +439,7 @@ RUN set -eux \
 # -------------------- (apt) mupdf-tools --------------------
 RUN set -eux \
 	&& PHP_VERSION="$(php -v | grep ^PHP | awk '{print $2}' | grep -Eo '[0-9]\.[0-9]')" \
-	&& if echo "${PHP_VERSION}" | grep -E '5\.2|5\.3|5\.4|5\.5'; then \
+	&& if echo "${PHP_VERSION}" | grep -E '5\.2|5\.3|5\.4|5\.5|5.\6|7.\0'; then \
 	  mutool 2>&1 | grep ^usage; \
 	else \
 	  echo test > test.txt \
@@ -464,7 +465,7 @@ RUN set -eux \
 	  echo "extension=psr.so" > /usr/local/etc/php/conf.d/docker-php-ext-psr.ini; \
 	fi \
 	\
-	&& COMPOSER_HOME="/usr/local/src/composer" COMPOSER_MEMORY_LIMIT=-1 /usr/local/bin/composer-2 global require --no-interaction --no-cache  phalcon/devtools \
+	&& COMPOSER_HOME="/usr/local/src/composer" COMPOSER_MEMORY_LIMIT=-1 /usr/local/bin/composer-2 global require --no-interaction --no-cache  phalcon/devtools:5.0.x-dev -W \
 	&& ln -s /usr/local/src/composer/vendor/phalcon/devtools/phalcon /usr/local/bin/ \
 	&& rm -rf /usr/local/src/composer/cache/* \
 	&& if [ -f /usr/local/etc/php/conf.d/docker-php-ext-phalcon.ini ]; then \
@@ -527,7 +528,7 @@ RUN set -eux \
 
 # -------------------- (custom) phpunit --------------------
 RUN set -eux \
-	&& PHP_UNIT_VERSION=""	\
+	&& PHP_UNIT_VERSION="9"	\
 	&& if [ -n "${PHP_UNIT_VERSION}" ]; then \
 	  PHP_UNIT_URL="https://phar.phpunit.de/phpunit-${PHP_UNIT_VERSION}.phar"; \
 	else \
@@ -628,11 +629,22 @@ RUN set -eux \
 RUN set -eux \
 	&& OS_RELEASE="bullseye"	\
 	&& DEB_HOST_ARCH="$( dpkg-architecture --query DEB_HOST_ARCH )" \
-	&& WK_URL="$( \
-	  curl -sS -k -L --fail 'https://wkhtmltopdf.org/downloads.html' \
-	  | awk -F'"' "/wkhtmltopdf.*${OS_RELEASE}_${DEB_HOST_ARCH}\.deb/{print \$(NF-1)}" \
-	  | head -1 \
-	)" \
+	&& if [ "${OS_RELEASE}" = "bookworm" ]; then \
+	  WK_VERSION="$( \
+	    curl -sS 'https://github.com/wkhtmltopdf/packaging/releases' \
+	    | grep -Eo '/wkhtmltopdf/packaging/releases/tag/[-.0-9]+' \
+	    | grep -Eo '[-.0-9]+' \
+	    | sort -V \
+	    | tail -1 \
+	  )" \
+	  && WK_URL="https://github.com/wkhtmltopdf/packaging/releases/download/${WK_VERSION}/wkhtmltox_${WK_VERSION}.${OS_RELEASE}_${DEB_HOST_ARCH}.deb"; \
+	else \
+	  WK_URL="$( \
+	    curl -sS -k -L --fail 'https://wkhtmltopdf.org/downloads.html' \
+	    | awk -F'"' "/wkhtmltopdf.*${OS_RELEASE}_${DEB_HOST_ARCH}\.deb/{print \$(NF-1)}" \
+	    | head -1 \
+	  )"; \
+	fi \
 	&& echo "URL: ${WK_URL}" \
 	&& curl -sS -k -L --fail -o /tmp/wkhtmltopdf.deb "${WK_URL}" \
 	&& dpkg -i /tmp/wkhtmltopdf.deb \
@@ -851,7 +863,7 @@ RUN set -eux \
 # -------------------- (apt) mupdf-tools --------------------
 RUN set -eux \
 	&& PHP_VERSION="$(php -v | grep ^PHP | awk '{print $2}' | grep -Eo '[0-9]\.[0-9]')" \
-	&& if echo "${PHP_VERSION}" | grep -E '5\.2|5\.3|5\.4|5\.5'; then \
+	&& if echo "${PHP_VERSION}" | grep -E '5\.2|5\.3|5\.4|5\.5|5.\6|7.\0'; then \
 	  mutool 2>&1 | grep ^usage; \
 	else \
 	  echo test > test.txt \

@@ -8,6 +8,18 @@
 all:
   type: builtin
   build_dep: [libicu-dev]
+  run_dep: [libicu72]
+
+8.0:
+  type: builtin
+  run_dep: [libicu67]
+
+7.4:
+  type: builtin
+  run_dep: [libicu67]
+
+7.3:
+  type: builtin
   run_dep: [libicu67]
 
 7.2:
