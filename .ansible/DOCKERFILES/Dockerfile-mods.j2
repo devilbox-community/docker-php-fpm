@@ -1,6 +1,6 @@
 # vi: ft=dockerfile
 {{ edit_comment_mods }}
-FROM devilboxcommunity/php-fpm:{{ php_version }}-base as builder
+FROM {{ docker_user }}/php-fpm:{{ php_version }}-base as builder
 
 
 {#
@@ -330,7 +330,7 @@ RUN set -eux \
 
 
 {{ edit_comment_mods }}
-FROM devilbox/php-fpm:{{ php_version }}-base as final
+FROM {{ docker_user }}/php-fpm:{{ php_version }}-base as final
 MAINTAINER "cytopia" <cytopia@everythingcli.org>
 
 ###

@@ -119,7 +119,7 @@ RUN set -eux \
 ###
 ### Copies all cli tools required to run Devilbox and its intranet into a clean image
 ###
-FROM devilbox/php-fpm:7.0-slim as devilbox-work-help
+FROM devilboxcommunity/php-fpm:7.0-slim as devilbox-work-help
 
 ###
 ### Install run_dep

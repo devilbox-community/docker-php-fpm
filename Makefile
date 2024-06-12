@@ -25,9 +25,10 @@ DOCKER_PULL_BASE_IMAGES_IGNORE = devilbox-slim-base devilbox-work-help devilbox-
 TAG        = latest
 
 # Makefile.docker overwrites
+ORG_USER   = devilboxcommunity
 NAME       = PHP
 #VERSION    = 5.6
-IMAGE      = devilboxcommunity/php-fpm
+IMAGE      = $(DOCKER_USER)/php-fpm
 #FLAVOUR    = debian
 #STAGE      = base
 FILE       = Dockerfile-$(VERSION)
@@ -261,6 +262,7 @@ gen-dockerfiles:
 		-w /data/.ansible \
 		cytopia/ansible:2.12-tools ansible-playbook generate.yml \
 			-e ansible_python_interpreter=/usr/bin/python3 \
+			-e docker_user=$(ORG_USER) \
 			-e \"{build_fail_fast: $(FAIL_FAST)}\" \
 			--forks 50 \
 			--diff $(ARGS)
