@@ -17,7 +17,7 @@ Tags |
 
 ### Docker Tags
 
-[![](https://img.shields.io/docker/pulls/devilbox/php-fpm.svg)](https://hub.docker.com/r/devilbox/php-fpm)
+[![](https://img.shields.io/docker/pulls/devilboxcommunity/php-fpm.svg)](https://hub.docker.com/r/devilboxcommunity/php-fpm)
 
 #### Tagging Idea
 
@@ -84,273 +84,223 @@ The following table shows a more complete overview about the offered Docker imag
  <tbody>
 
   <tr>
-   <td rowspan="13"><strong>base</strong></td>
-   <td><code>devilbox/php-fpm:5.2-base</code></td>
-   <td><code>devilbox/php-fpm:5.2-base-&lt;git-tag&gt;</code></td>
+   <td rowspan="11"><strong>base</strong></td>
   </tr>
   <tr>
-   <td><code>devilbox/php-fpm:5.3-base</code></td>
-   <td><code>devilbox/php-fpm:5.3-base-&lt;git-tag&gt;</code></td>
+   <td><code>devilboxcommunity/php-fpm:5.6-base</code></td>
+   <td><code>devilboxcommunity/php-fpm:5.6-base-&lt;git-tag&gt;</code></td>
   </tr>
   <tr>
-   <td><code>devilbox/php-fpm:5.4-base</code></td>
-   <td><code>devilbox/php-fpm:5.4-base-&lt;git-tag&gt;</code></td>
+   <td><code>devilboxcommunity/php-fpm:7.0-base</code></td>
+   <td><code>devilboxcommunity/php-fpm:7.0-base-&lt;git-tag&gt;</code></td>
   </tr>
   <tr>
-   <td><code>devilbox/php-fpm:5.5-base</code></td>
-   <td><code>devilbox/php-fpm:5.5-base-&lt;git-tag&gt;</code></td>
+   <td><code>devilboxcommunity/php-fpm:7.1-base</code></td>
+   <td><code>devilboxcommunity/php-fpm:7.1-base-&lt;git-tag&gt;</code></td>
   </tr>
   <tr>
-   <td><code>devilbox/php-fpm:5.6-base</code></td>
-   <td><code>devilbox/php-fpm:5.6-base-&lt;git-tag&gt;</code></td>
+   <td><code>devilboxcommunity/php-fpm:7.2-base</code></td>
+   <td><code>devilboxcommunity/php-fpm:7.2-base-&lt;git-tag&gt;</code></td>
   </tr>
   <tr>
-   <td><code>devilbox/php-fpm:7.0-base</code></td>
-   <td><code>devilbox/php-fpm:7.0-base-&lt;git-tag&gt;</code></td>
+   <td><code>devilboxcommunity/php-fpm:7.3-base</code></td>
+   <td><code>devilboxcommunity/php-fpm:7.3-base-&lt;git-tag&gt;</code></td>
   </tr>
   <tr>
-   <td><code>devilbox/php-fpm:7.1-base</code></td>
-   <td><code>devilbox/php-fpm:7.1-base-&lt;git-tag&gt;</code></td>
+   <td><code>devilboxcommunity/php-fpm:7.4-base</code></td>
+   <td><code>devilboxcommunity/php-fpm:7.4-base-&lt;git-tag&gt;</code></td>
   </tr>
   <tr>
-   <td><code>devilbox/php-fpm:7.2-base</code></td>
-   <td><code>devilbox/php-fpm:7.2-base-&lt;git-tag&gt;</code></td>
+   <td><code>devilboxcommunity/php-fpm:8.0-base</code></td>
+   <td><code>devilboxcommunity/php-fpm:8.0-base-&lt;git-tag&gt;</code></td>
   </tr>
   <tr>
-   <td><code>devilbox/php-fpm:7.3-base</code></td>
-   <td><code>devilbox/php-fpm:7.3-base-&lt;git-tag&gt;</code></td>
+   <td><code>devilboxcommunity/php-fpm:8.1-base</code></td>
+   <td><code>devilboxcommunity/php-fpm:8.1-base-&lt;git-tag&gt;</code></td>
   </tr>
   <tr>
-   <td><code>devilbox/php-fpm:7.4-base</code></td>
-   <td><code>devilbox/php-fpm:7.4-base-&lt;git-tag&gt;</code></td>
+   <td><code>devilboxcommunity/php-fpm:8.2-base</code></td>
+   <td><code>devilboxcommunity/php-fpm:8.2-base-&lt;git-tag&gt;</code></td>
   </tr>
   <tr>
-   <td><code>devilbox/php-fpm:8.0-base</code></td>
-   <td><code>devilbox/php-fpm:8.0-base-&lt;git-tag&gt;</code></td>
-  </tr>
-  <tr>
-   <td><code>devilbox/php-fpm:8.1-base</code></td>
-   <td><code>devilbox/php-fpm:8.1-base-&lt;git-tag&gt;</code></td>
-  </tr>
-  <tr>
-   <td><code>devilbox/php-fpm:8.2-base</code></td>
-   <td><code>devilbox/php-fpm:8.2-base-&lt;git-tag&gt;</code></td>
+   <td><code>devilboxcommunity/php-fpm:8.3-base</code></td>
+   <td><code>devilboxcommunity/php-fpm:8.3-base-&lt;git-tag&gt;</code></td>
   </tr>
 
   <tr>
-   <td rowspan="13"><strong>mods</strong></td>
-   <td><code>devilbox/php-fpm:5.2-mods</code></td>
-   <td><code>devilbox/php-fpm:5.2-mods-&lt;git-tag&gt;</code></td>
+   <td rowspan="11"><strong>mods</strong></td>
   </tr>
   <tr>
-   <td><code>devilbox/php-fpm:5.3-mods</code></td>
-   <td><code>devilbox/php-fpm:5.3-mods-&lt;git-tag&gt;</code></td>
+   <td><code>devilboxcommunity/php-fpm:5.6-mods</code></td>
+   <td><code>devilboxcommunity/php-fpm:5.6-mods-&lt;git-tag&gt;</code></td>
   </tr>
   <tr>
-   <td><code>devilbox/php-fpm:5.4-mods</code></td>
-   <td><code>devilbox/php-fpm:5.4-mods-&lt;git-tag&gt;</code></td>
+   <td><code>devilboxcommunity/php-fpm:7.0-mods</code></td>
+   <td><code>devilboxcommunity/php-fpm:7.0-mods-&lt;git-tag&gt;</code></td>
   </tr>
   <tr>
-   <td><code>devilbox/php-fpm:5.5-mods</code></td>
-   <td><code>devilbox/php-fpm:5.5-mods-&lt;git-tag&gt;</code></td>
+   <td><code>devilboxcommunity/php-fpm:7.1-mods</code></td>
+   <td><code>devilboxcommunity/php-fpm:7.1-mods-&lt;git-tag&gt;</code></td>
   </tr>
   <tr>
-   <td><code>devilbox/php-fpm:5.6-mods</code></td>
-   <td><code>devilbox/php-fpm:5.6-mods-&lt;git-tag&gt;</code></td>
+   <td><code>devilboxcommunity/php-fpm:7.2-mods</code></td>
+   <td><code>devilboxcommunity/php-fpm:7.2-mods-&lt;git-tag&gt;</code></td>
   </tr>
   <tr>
-   <td><code>devilbox/php-fpm:7.0-mods</code></td>
-   <td><code>devilbox/php-fpm:7.0-mods-&lt;git-tag&gt;</code></td>
+   <td><code>devilboxcommunity/php-fpm:7.3-mods</code></td>
+   <td><code>devilboxcommunity/php-fpm:7.3-mods-&lt;git-tag&gt;</code></td>
   </tr>
   <tr>
-   <td><code>devilbox/php-fpm:7.1-mods</code></td>
-   <td><code>devilbox/php-fpm:7.1-mods-&lt;git-tag&gt;</code></td>
+   <td><code>devilboxcommunity/php-fpm:7.4-mods</code></td>
+   <td><code>devilboxcommunity/php-fpm:7.4-mods-&lt;git-tag&gt;</code></td>
   </tr>
   <tr>
-   <td><code>devilbox/php-fpm:7.2-mods</code></td>
-   <td><code>devilbox/php-fpm:7.2-mods-&lt;git-tag&gt;</code></td>
+   <td><code>devilboxcommunity/php-fpm:8.0-mods</code></td>
+   <td><code>devilboxcommunity/php-fpm:8.0-mods-&lt;git-tag&gt;</code></td>
   </tr>
   <tr>
-   <td><code>devilbox/php-fpm:7.3-mods</code></td>
-   <td><code>devilbox/php-fpm:7.3-mods-&lt;git-tag&gt;</code></td>
+   <td><code>devilboxcommunity/php-fpm:8.1-mods</code></td>
+   <td><code>devilboxcommunity/php-fpm:8.1-mods-&lt;git-tag&gt;</code></td>
   </tr>
   <tr>
-   <td><code>devilbox/php-fpm:7.4-mods</code></td>
-   <td><code>devilbox/php-fpm:7.4-mods-&lt;git-tag&gt;</code></td>
+   <td><code>devilboxcommunity/php-fpm:8.2-mods</code></td>
+   <td><code>devilboxcommunity/php-fpm:8.2-mods-&lt;git-tag&gt;</code></td>
   </tr>
   <tr>
-   <td><code>devilbox/php-fpm:8.0-mods</code></td>
-   <td><code>devilbox/php-fpm:8.0-mods-&lt;git-tag&gt;</code></td>
-  </tr>
-  <tr>
-   <td><code>devilbox/php-fpm:8.1-mods</code></td>
-   <td><code>devilbox/php-fpm:8.1-mods-&lt;git-tag&gt;</code></td>
-  </tr>
-  <tr>
-   <td><code>devilbox/php-fpm:8.2-mods</code></td>
-   <td><code>devilbox/php-fpm:8.2-mods-&lt;git-tag&gt;</code></td>
+   <td><code>devilboxcommunity/php-fpm:8.3-mods</code></td>
+   <td><code>devilboxcommunity/php-fpm:8.3-mods-&lt;git-tag&gt;</code></td>
   </tr>
 
   <tr>
-   <td rowspan="13"><strong>prod</strong></td>
-   <td><code>devilbox/php-fpm:5.2-prod</code></td>
-   <td><code>devilbox/php-fpm:5.2-prod-&lt;git-tag&gt;</code></td>
+   <td rowspan="11"><strong>prod</strong></td>
   </tr>
   <tr>
-   <td><code>devilbox/php-fpm:5.3-prod</code></td>
-   <td><code>devilbox/php-fpm:5.3-prod-&lt;git-tag&gt;</code></td>
+   <td><code>devilboxcommunity/php-fpm:5.6-prod</code></td>
+   <td><code>devilboxcommunity/php-fpm:5.6-prod-&lt;git-tag&gt;</code></td>
   </tr>
   <tr>
-   <td><code>devilbox/php-fpm:5.4-prod</code></td>
-   <td><code>devilbox/php-fpm:5.4-prod-&lt;git-tag&gt;</code></td>
+   <td><code>devilboxcommunity/php-fpm:7.0-prod</code></td>
+   <td><code>devilboxcommunity/php-fpm:7.0-prod-&lt;git-tag&gt;</code></td>
   </tr>
   <tr>
-   <td><code>devilbox/php-fpm:5.5-prod</code></td>
-   <td><code>devilbox/php-fpm:5.5-prod-&lt;git-tag&gt;</code></td>
+   <td><code>devilboxcommunity/php-fpm:7.1-prod</code></td>
+   <td><code>devilboxcommunity/php-fpm:7.1-prod-&lt;git-tag&gt;</code></td>
   </tr>
   <tr>
-   <td><code>devilbox/php-fpm:5.6-prod</code></td>
-   <td><code>devilbox/php-fpm:5.6-prod-&lt;git-tag&gt;</code></td>
+   <td><code>devilboxcommunity/php-fpm:7.2-prod</code></td>
+   <td><code>devilboxcommunity/php-fpm:7.2-prod-&lt;git-tag&gt;</code></td>
   </tr>
   <tr>
-   <td><code>devilbox/php-fpm:7.0-prod</code></td>
-   <td><code>devilbox/php-fpm:7.0-prod-&lt;git-tag&gt;</code></td>
+   <td><code>devilboxcommunity/php-fpm:7.3-prod</code></td>
+   <td><code>devilboxcommunity/php-fpm:7.3-prod-&lt;git-tag&gt;</code></td>
   </tr>
   <tr>
-   <td><code>devilbox/php-fpm:7.1-prod</code></td>
-   <td><code>devilbox/php-fpm:7.1-prod-&lt;git-tag&gt;</code></td>
+   <td><code>devilboxcommunity/php-fpm:7.4-prod</code></td>
+   <td><code>devilboxcommunity/php-fpm:7.4-prod-&lt;git-tag&gt;</code></td>
   </tr>
   <tr>
-   <td><code>devilbox/php-fpm:7.2-prod</code></td>
-   <td><code>devilbox/php-fpm:7.2-prod-&lt;git-tag&gt;</code></td>
+   <td><code>devilboxcommunity/php-fpm:8.0-prod</code></td>
+   <td><code>devilboxcommunity/php-fpm:8.0-prod-&lt;git-tag&gt;</code></td>
   </tr>
   <tr>
-   <td><code>devilbox/php-fpm:7.3-prod</code></td>
-   <td><code>devilbox/php-fpm:7.3-prod-&lt;git-tag&gt;</code></td>
+   <td><code>devilboxcommunity/php-fpm:8.1-prod</code></td>
+   <td><code>devilboxcommunity/php-fpm:8.1-prod-&lt;git-tag&gt;</code></td>
   </tr>
   <tr>
-   <td><code>devilbox/php-fpm:7.4-prod</code></td>
-   <td><code>devilbox/php-fpm:7.4-prod-&lt;git-tag&gt;</code></td>
+   <td><code>devilboxcommunity/php-fpm:8.2-prod</code></td>
+   <td><code>devilboxcommunity/php-fpm:8.2-prod-&lt;git-tag&gt;</code></td>
   </tr>
   <tr>
-   <td><code>devilbox/php-fpm:8.0-prod</code></td>
-   <td><code>devilbox/php-fpm:8.0-prod-&lt;git-tag&gt;</code></td>
-  </tr>
-  <tr>
-   <td><code>devilbox/php-fpm:8.1-prod</code></td>
-   <td><code>devilbox/php-fpm:8.1-prod-&lt;git-tag&gt;</code></td>
-  </tr>
-  <tr>
-   <td><code>devilbox/php-fpm:8.2-prod</code></td>
-   <td><code>devilbox/php-fpm:8.2-prod-&lt;git-tag&gt;</code></td>
+   <td><code>devilboxcommunity/php-fpm:8.3-prod</code></td>
+   <td><code>devilboxcommunity/php-fpm:8.3-prod-&lt;git-tag&gt;</code></td>
   </tr>
 
   <tr>
-   <td rowspan="13"><strong>slim</strong></td>
-   <td><code>devilbox/php-fpm:5.2-slim</code></td>
-   <td><code>devilbox/php-fpm:5.2-slim-&lt;git-tag&gt;</code></td>
+   <td rowspan="11"><strong>slim</strong></td>
   </tr>
   <tr>
-   <td><code>devilbox/php-fpm:5.3-slim</code></td>
-   <td><code>devilbox/php-fpm:5.3-slim-&lt;git-tag&gt;</code></td>
+   <td><code>devilboxcommunity/php-fpm:5.6-slim</code></td>
+   <td><code>devilboxcommunity/php-fpm:5.6-slim-&lt;git-tag&gt;</code></td>
   </tr>
   <tr>
-   <td><code>devilbox/php-fpm:5.4-slim</code></td>
-   <td><code>devilbox/php-fpm:5.4-slim-&lt;git-tag&gt;</code></td>
+   <td><code>devilboxcommunity/php-fpm:7.0-slim</code></td>
+   <td><code>devilboxcommunity/php-fpm:7.0-slim-&lt;git-tag&gt;</code></td>
   </tr>
   <tr>
-   <td><code>devilbox/php-fpm:5.5-slim</code></td>
-   <td><code>devilbox/php-fpm:5.5-slim-&lt;git-tag&gt;</code></td>
+   <td><code>devilboxcommunity/php-fpm:7.1-slim</code></td>
+   <td><code>devilboxcommunity/php-fpm:7.1-slim-&lt;git-tag&gt;</code></td>
   </tr>
   <tr>
-   <td><code>devilbox/php-fpm:5.6-slim</code></td>
-   <td><code>devilbox/php-fpm:5.6-slim-&lt;git-tag&gt;</code></td>
+   <td><code>devilboxcommunity/php-fpm:7.2-slim</code></td>
+   <td><code>devilboxcommunity/php-fpm:7.2-slim-&lt;git-tag&gt;</code></td>
   </tr>
   <tr>
-   <td><code>devilbox/php-fpm:7.0-slim</code></td>
-   <td><code>devilbox/php-fpm:7.0-slim-&lt;git-tag&gt;</code></td>
+   <td><code>devilboxcommunity/php-fpm:7.3-slim</code></td>
+   <td><code>devilboxcommunity/php-fpm:7.3-slim-&lt;git-tag&gt;</code></td>
   </tr>
   <tr>
-   <td><code>devilbox/php-fpm:7.1-slim</code></td>
-   <td><code>devilbox/php-fpm:7.1-slim-&lt;git-tag&gt;</code></td>
+   <td><code>devilboxcommunity/php-fpm:7.4-slim</code></td>
+   <td><code>devilboxcommunity/php-fpm:7.4-slim-&lt;git-tag&gt;</code></td>
   </tr>
   <tr>
-   <td><code>devilbox/php-fpm:7.2-slim</code></td>
-   <td><code>devilbox/php-fpm:7.2-slim-&lt;git-tag&gt;</code></td>
+   <td><code>devilboxcommunity/php-fpm:8.0-slim</code></td>
+   <td><code>devilboxcommunity/php-fpm:8.0-slim-&lt;git-tag&gt;</code></td>
   </tr>
   <tr>
-   <td><code>devilbox/php-fpm:7.3-slim</code></td>
-   <td><code>devilbox/php-fpm:7.3-slim-&lt;git-tag&gt;</code></td>
+   <td><code>devilboxcommunity/php-fpm:8.1-slim</code></td>
+   <td><code>devilboxcommunity/php-fpm:8.1-slim-&lt;git-tag&gt;</code></td>
   </tr>
   <tr>
-   <td><code>devilbox/php-fpm:7.4-slim</code></td>
-   <td><code>devilbox/php-fpm:7.4-slim-&lt;git-tag&gt;</code></td>
+   <td><code>devilboxcommunity/php-fpm:8.2-slim</code></td>
+   <td><code>devilboxcommunity/php-fpm:8.2-slim-&lt;git-tag&gt;</code></td>
   </tr>
   <tr>
-   <td><code>devilbox/php-fpm:8.0-slim</code></td>
-   <td><code>devilbox/php-fpm:8.0-slim-&lt;git-tag&gt;</code></td>
-  </tr>
-  <tr>
-   <td><code>devilbox/php-fpm:8.1-slim</code></td>
-   <td><code>devilbox/php-fpm:8.1-slim-&lt;git-tag&gt;</code></td>
-  </tr>
-  <tr>
-   <td><code>devilbox/php-fpm:8.2-slim</code></td>
-   <td><code>devilbox/php-fpm:8.2-slim-&lt;git-tag&gt;</code></td>
+   <td><code>devilboxcommunity/php-fpm:8.3-slim</code></td>
+   <td><code>devilboxcommunity/php-fpm:8.3-slim-&lt;git-tag&gt;</code></td>
   </tr>
 
   <tr>
-   <td rowspan="13"><strong>work</strong></td>
-   <td><code>devilbox/php-fpm:5.2-work</code></td>
-   <td><code>devilbox/php-fpm:5.2-work-&lt;git-tag&gt;</code></td>
+   <td rowspan="11"><strong>work</strong></td>
   </tr>
   <tr>
-   <td><code>devilbox/php-fpm:5.3-work</code></td>
-   <td><code>devilbox/php-fpm:5.3-work-&lt;git-tag&gt;</code></td>
+   <td><code>devilboxcommunity/php-fpm:5.6-work</code></td>
+   <td><code>devilboxcommunity/php-fpm:5.6-work-&lt;git-tag&gt;</code></td>
   </tr>
   <tr>
-   <td><code>devilbox/php-fpm:5.4-work</code></td>
-   <td><code>devilbox/php-fpm:5.4-work-&lt;git-tag&gt;</code></td>
+   <td><code>devilboxcommunity/php-fpm:7.0-work</code></td>
+   <td><code>devilboxcommunity/php-fpm:7.0-work-&lt;git-tag&gt;</code></td>
   </tr>
   <tr>
-   <td><code>devilbox/php-fpm:5.5-work</code></td>
-   <td><code>devilbox/php-fpm:5.5-work-&lt;git-tag&gt;</code></td>
+   <td><code>devilboxcommunity/php-fpm:7.1-work</code></td>
+   <td><code>devilboxcommunity/php-fpm:7.1-work-&lt;git-tag&gt;</code></td>
   </tr>
   <tr>
-   <td><code>devilbox/php-fpm:5.6-work</code></td>
-   <td><code>devilbox/php-fpm:5.6-work-&lt;git-tag&gt;</code></td>
+   <td><code>devilboxcommunity/php-fpm:7.2-work</code></td>
+   <td><code>devilboxcommunity/php-fpm:7.2-work-&lt;git-tag&gt;</code></td>
   </tr>
   <tr>
-   <td><code>devilbox/php-fpm:7.0-work</code></td>
-   <td><code>devilbox/php-fpm:7.0-work-&lt;git-tag&gt;</code></td>
+   <td><code>devilboxcommunity/php-fpm:7.3-work</code></td>
+   <td><code>devilboxcommunity/php-fpm:7.3-work-&lt;git-tag&gt;</code></td>
   </tr>
   <tr>
-   <td><code>devilbox/php-fpm:7.1-work</code></td>
-   <td><code>devilbox/php-fpm:7.1-work-&lt;git-tag&gt;</code></td>
+   <td><code>devilboxcommunity/php-fpm:7.4-work</code></td>
+   <td><code>devilboxcommunity/php-fpm:7.4-work-&lt;git-tag&gt;</code></td>
   </tr>
   <tr>
-   <td><code>devilbox/php-fpm:7.2-work</code></td>
-   <td><code>devilbox/php-fpm:7.2-work-&lt;git-tag&gt;</code></td>
+   <td><code>devilboxcommunity/php-fpm:8.0-work</code></td>
+   <td><code>devilboxcommunity/php-fpm:8.0-work-&lt;git-tag&gt;</code></td>
   </tr>
   <tr>
-   <td><code>devilbox/php-fpm:7.3-work</code></td>
-   <td><code>devilbox/php-fpm:7.3-work-&lt;git-tag&gt;</code></td>
+   <td><code>devilboxcommunity/php-fpm:8.1-work</code></td>
+   <td><code>devilboxcommunity/php-fpm:8.1-work-&lt;git-tag&gt;</code></td>
   </tr>
   <tr>
-   <td><code>devilbox/php-fpm:7.4-work</code></td>
-   <td><code>devilbox/php-fpm:7.4-work-&lt;git-tag&gt;</code></td>
+   <td><code>devilboxcommunity/php-fpm:8.2-work</code></td>
+   <td><code>devilboxcommunity/php-fpm:8.2-work-&lt;git-tag&gt;</code></td>
   </tr>
   <tr>
-   <td><code>devilbox/php-fpm:8.0-work</code></td>
-   <td><code>devilbox/php-fpm:8.0-work-&lt;git-tag&gt;</code></td>
-  </tr>
-  <tr>
-   <td><code>devilbox/php-fpm:8.1-work</code></td>
-   <td><code>devilbox/php-fpm:8.1-work-&lt;git-tag&gt;</code></td>
-  </tr>
-  <tr>
-   <td><code>devilbox/php-fpm:8.2-work</code></td>
-   <td><code>devilbox/php-fpm:8.2-work-&lt;git-tag&gt;</code></td>
+   <td><code>devilboxcommunity/php-fpm:8.3-work</code></td>
+   <td><code>devilboxcommunity/php-fpm:8.3-work-&lt;git-tag&gt;</code></td>
   </tr>
 
  </tbody>

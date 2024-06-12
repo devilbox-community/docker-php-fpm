@@ -43,7 +43,7 @@ What you need to do, is to:
 
 With this you will be all set, you can however decide to build the `prod` flavour on top of your custom `mods` image as it adds a lot of configurable environment variables to dynamically alter the startup behaviour.
 
-In case you plan to use your custom image for the **[Devilbox](https://github.com/cytopia/devilbox)**, you must also go ahead and built the `work` flavour on top of the `prod` flavour.
+In case you plan to use your custom image for the **[Devilbox](https://github.com/devilbox-community/devilbox)**, you must also go ahead and built the `work` flavour on top of the `prod` flavour.
 
 
 #### Generate your custom Dockerfile

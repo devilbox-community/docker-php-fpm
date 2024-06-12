@@ -87,6 +87,7 @@ The following PHP modules are available on the `base` flavour:
   <td class="ext_base_dom_7.4">✓</td>
   <td class="ext_base_dom_8.0">✓</td>
   <td class="ext_base_dom_8.1">✓</td>
+  <td class="ext_base_dom_8.2">✓</td>
   <td class="ext_base_dom_8.3">✓</td>
  </tr>
  <tr>
@@ -112,8 +113,8 @@ The following PHP modules are available on the `base` flavour:
   <td class="ext_base_ffi_7.4"></td>
   <td class="ext_base_ffi_8.0">✓</td>
   <td class="ext_base_ffi_8.1"></td>
-  <td class="ext_base_ffi_8.2">✓</td>
-  <td class="ext_base_ffi_8.3">✓</td>
+  <td class="ext_base_ffi_8.2"></td>
+  <td class="ext_base_ffi_8.3"></td>
  </tr>
  <tr>
   <td><a href="../php_modules/fileinfo">fileinfo</a></td>
@@ -151,8 +152,8 @@ The following PHP modules are available on the `base` flavour:
   <td class="ext_base_ftp_7.4">✓</td>
   <td class="ext_base_ftp_8.0">✓</td>
   <td class="ext_base_ftp_8.1">✓</td>
-  <td class="ext_base_ftp_8.2">✓</td>
-  <td class="ext_base_ftp_8.3">✓</td>
+  <td class="ext_base_ftp_8.2"></td>
+  <td class="ext_base_ftp_8.3"></td>
  </tr>
  <tr>
   <td><a href="../php_modules/hash">hash</a></td>

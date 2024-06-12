@@ -1,10 +1,10 @@
 # PHP-FPM Docker images
 
-[![Release](https://img.shields.io/github/release/devilbox/docker-php-fpm.svg?colorB=orange)](https://github.com/devilbox/docker-php-fpm/releases)
-[![](https://img.shields.io/badge/github-devilbox%2Fdocker--php--fpm-red.svg)](https://github.com/devilbox/docker-php-fpm "github.com/devilbox/docker-php-fpm")
-[![lint](https://github.com/devilbox/docker-php-fpm/workflows/lint/badge.svg)](https://github.com/devilbox/docker-php-fpm/actions?workflow=lint)
-[![build](https://github.com/devilbox/docker-php-fpm/workflows/build/badge.svg)](https://github.com/devilbox/docker-php-fpm/actions?workflow=build)
-[![nightly](https://github.com/devilbox/docker-php-fpm/workflows/nightly/badge.svg)](https://github.com/devilbox/docker-php-fpm/actions?workflow=nightly)
+[![Release](https://img.shields.io/github/release/devilbox-community/docker-php-fpm.svg?colorB=orange)](https://github.com/devilbox-community/docker-php-fpm/releases)
+[![](https://img.shields.io/badge/github-devilbox--community%2Fdocker--php--fpm-red.svg)](https://github.com/devilbox-community/docker-php-fpm "github.com/devilbox-community/docker-php-fpm")
+[![lint](https://github.com/devilbox-community/docker-php-fpm/workflows/lint/badge.svg)](https://github.com/devilbox-community/docker-php-fpm/actions?workflow=lint)
+[![build](https://github.com/devilbox-community/docker-php-fpm/actions/workflows/action.yml/badge.svg)](https://github.com/devilbox-community/docker-php-fpm/actions/workflows/action.yml)
+[![🕛 Nightly master](https://github.com/devilbox-community/docker-php-fpm/actions/workflows/action-schedule_master.yml/badge.svg)](https://github.com/devilbox-community/docker-php-fpm/actions/workflows/action-schedule_master.yml)
 [![License](https://img.shields.io/badge/license-MIT-%233DA639.svg)](https://opensource.org/licenses/MIT)
 
 [![Discord](https://img.shields.io/discord/1051541389256704091?color=8c9eff&label=Discord&logo=discord)](https://discord.gg/2wP3V6kBj4)
@@ -12,7 +12,7 @@
 
 **Available Architectures:**  `amd64`, `arm64`
 
-[![](https://img.shields.io/docker/pulls/devilbox/php-fpm.svg)](https://hub.docker.com/r/devilbox/php-fpm)
+[![](https://img.shields.io/docker/pulls/devilboxcommunity/php-fpm.svg)](https://hub.docker.com/r/devilboxcommunity/php-fpm)
 
 This repository will provide you fully functional PHP-FPM Docker images in different flavours,
 versions and packed with different types of integrated PHP modules. It also solves the problem of **[syncronizing file permissions](doc/syncronize-file-permissions.md)** of mounted volumes between the host and the container.
@@ -22,26 +22,26 @@ versions and packed with different types of integrated PHP modules. It also solv
 This repository also allows you to quickly generate and **build your own custom PHP-FPM Docker image** with whatever PHP extension your desire for whatever PHP version you want and for any platform you're on (`amd64` or `arm64`). Jump to **[#Build your own image](#build-your-own-image)**.
 
 
-| PHP-FPM          | Reference Implementation |
-|:----------------:|:------------------------:|
-| <a title="Docker PHP-FPM" href="https://github.com/devilbox/docker-php-fpm" ><img height="82px" src="https://raw.githubusercontent.com/devilbox/artwork/master/submissions_banner/cytopia/02/png/banner_256_trans.png" /></a> | <a title="Devilbox" href="https://github.com/cytopia/devilbox" ><img height="82px" src="https://raw.githubusercontent.com/devilbox/artwork/master/submissions_banner/cytopia/01/png/banner_256_trans.png" /></a> |
-| Streamlined [PHP-FPM](https://github.com/devilbox/docker-php-fpm) images | The [Devilbox](https://github.com/cytopia/devilbox) |
+|                                                                                                                 PHP-FPM                                                                                                                 |                                                                                             Reference Implementation                                                                                             |
+|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+| <a title="Docker PHP-FPM" href="https://github.com/devilbox-community/docker-php-fpm" ><img height="82px" src="https://raw.githubusercontent.com/devilbox/artwork/master/submissions_banner/cytopia/02/png/banner_256_trans.png" /></a> | <a title="Devilbox" href="https://github.com/cytopia/devilbox" ><img height="82px" src="https://raw.githubusercontent.com/devilbox/artwork/master/submissions_banner/cytopia/01/png/banner_256_trans.png" /></a> |
+|                                                                           Streamlined [PHP-FPM](https://github.com/devilbox-community/docker-php-fpm) images                                                                            |                                                                          The [Devilbox](https://github.com/devilbox-community/devilbox)                                                                          |
 
 
 
 <h2><img id="docker-tags" width="20" src="https://github.com/devilbox/artwork/raw/master/submissions_logo/cytopia/01/png/logo_64_trans.png"> Docker Tags</h2>
 
-[![](https://img.shields.io/docker/pulls/devilbox/php-fpm.svg)](https://hub.docker.com/r/devilbox/php-fpm)
+[![](https://img.shields.io/docker/pulls/devilboxcommunity/php-fpm.svg)](https://hub.docker.com/r/devilboxcommunity/php-fpm)
 
 ```bash
-docker pull devilbox/php-fpm:<tag>
+docker pull devilboxcommunity/php-fpm:<tag>
 ```
 
-* [`5.2-base`](Dockerfiles/base/Dockerfile-5.2), [`5.3-base`](Dockerfiles/base/Dockerfile-5.3), [`5.4-base`](Dockerfiles/base/Dockerfile-5.4), [`5.5-base`](Dockerfiles/base/Dockerfile-5.5), [`5.6-base`](Dockerfiles/base/Dockerfile-5.6), [`7.0-base`](Dockerfiles/base/Dockerfile-7.0), [`7.1-base`](Dockerfiles/base/Dockerfile-7.1), [`7.2-base`](Dockerfiles/base/Dockerfile-7.2), [`7.3-base`](Dockerfiles/base/Dockerfile-7.3), [`7.4-base`](Dockerfiles/base/Dockerfile-7.4), [`8.0-base`](Dockerfiles/base/Dockerfile-8.0), [`8.1-base`](Dockerfiles/base/Dockerfile-8.1), [`8.2-base`](Dockerfiles/base/Dockerfile-8.2), [`8.3-base`](Dockerfiles/base/Dockerfile-8.3)
-* [`5.2-mods`](Dockerfiles/mods/Dockerfile-5.2), [`5.3-mods`](Dockerfiles/mods/Dockerfile-5.3), [`5.4-mods`](Dockerfiles/mods/Dockerfile-5.4), [`5.5-mods`](Dockerfiles/mods/Dockerfile-5.5), [`5.6-mods`](Dockerfiles/mods/Dockerfile-5.6), [`7.0-mods`](Dockerfiles/mods/Dockerfile-7.0), [`7.1-mods`](Dockerfiles/mods/Dockerfile-7.1), [`7.2-mods`](Dockerfiles/mods/Dockerfile-7.2), [`7.3-mods`](Dockerfiles/mods/Dockerfile-7.3), [`7.4-mods`](Dockerfiles/mods/Dockerfile-7.4), [`8.0-mods`](Dockerfiles/mods/Dockerfile-8.0), [`8.1-mods`](Dockerfiles/mods/Dockerfile-8.1), [`8.2-mods`](Dockerfiles/mods/Dockerfile-8.2), [`8.3-mods`](Dockerfiles/mods/Dockerfile-8.3)
-* [`5.2-prod`](Dockerfiles/prod/Dockerfile-5.2), [`5.3-prod`](Dockerfiles/prod/Dockerfile-5.3), [`5.4-prod`](Dockerfiles/prod/Dockerfile-5.4), [`5.5-prod`](Dockerfiles/prod/Dockerfile-5.5), [`5.6-prod`](Dockerfiles/prod/Dockerfile-5.6), [`7.0-prod`](Dockerfiles/prod/Dockerfile-7.0), [`7.1-prod`](Dockerfiles/prod/Dockerfile-7.1), [`7.2-prod`](Dockerfiles/prod/Dockerfile-7.2), [`7.3-prod`](Dockerfiles/prod/Dockerfile-7.3), [`7.4-prod`](Dockerfiles/prod/Dockerfile-7.4), [`8.0-prod`](Dockerfiles/prod/Dockerfile-8.0), [`8.1-prod`](Dockerfiles/prod/Dockerfile-8.1), [`8.2-prod`](Dockerfiles/prod/Dockerfile-8.2), [`8.3-prod`](Dockerfiles/prod/Dockerfile-8.3)
-* [`5.2-slim`](Dockerfiles/slim/Dockerfile-5.2), [`5.3-slim`](Dockerfiles/slim/Dockerfile-5.3), [`5.4-slim`](Dockerfiles/slim/Dockerfile-5.4), [`5.5-slim`](Dockerfiles/slim/Dockerfile-5.5), [`5.6-slim`](Dockerfiles/slim/Dockerfile-5.6), [`7.0-slim`](Dockerfiles/slim/Dockerfile-7.0), [`7.1-slim`](Dockerfiles/slim/Dockerfile-7.1), [`7.2-slim`](Dockerfiles/slim/Dockerfile-7.2), [`7.3-slim`](Dockerfiles/slim/Dockerfile-7.3), [`7.4-slim`](Dockerfiles/slim/Dockerfile-7.4), [`8.0-slim`](Dockerfiles/slim/Dockerfile-8.0), [`8.1-slim`](Dockerfiles/slim/Dockerfile-8.1), [`8.2-slim`](Dockerfiles/slim/Dockerfile-8.2), [`8.3-slim`](Dockerfiles/slim/Dockerfile-8.3)
-* [`5.2-work`](Dockerfiles/work/Dockerfile-5.2), [`5.3-work`](Dockerfiles/work/Dockerfile-5.3), [`5.4-work`](Dockerfiles/work/Dockerfile-5.4), [`5.5-work`](Dockerfiles/work/Dockerfile-5.5), [`5.6-work`](Dockerfiles/work/Dockerfile-5.6), [`7.0-work`](Dockerfiles/work/Dockerfile-7.0), [`7.1-work`](Dockerfiles/work/Dockerfile-7.1), [`7.2-work`](Dockerfiles/work/Dockerfile-7.2), [`7.3-work`](Dockerfiles/work/Dockerfile-7.3), [`7.4-work`](Dockerfiles/work/Dockerfile-7.4), [`8.0-work`](Dockerfiles/work/Dockerfile-8.0), [`8.1-work`](Dockerfiles/work/Dockerfile-8.1), [`8.2-work`](Dockerfiles/work/Dockerfile-8.2), [`8.3-work`](Dockerfiles/work/Dockerfile-8.3)
+* [`5.6-base`](Dockerfiles/base/Dockerfile-5.6), [`7.0-base`](Dockerfiles/base/Dockerfile-7.0), [`7.1-base`](Dockerfiles/base/Dockerfile-7.1), [`7.2-base`](Dockerfiles/base/Dockerfile-7.2), [`7.3-base`](Dockerfiles/base/Dockerfile-7.3), [`7.4-base`](Dockerfiles/base/Dockerfile-7.4), [`8.0-base`](Dockerfiles/base/Dockerfile-8.0), [`8.1-base`](Dockerfiles/base/Dockerfile-8.1), [`8.2-base`](Dockerfiles/base/Dockerfile-8.2), [`8.3-base`](Dockerfiles/base/Dockerfile-8.3)
+* [`5.6-mods`](Dockerfiles/mods/Dockerfile-5.6), [`7.0-mods`](Dockerfiles/mods/Dockerfile-7.0), [`7.1-mods`](Dockerfiles/mods/Dockerfile-7.1), [`7.2-mods`](Dockerfiles/mods/Dockerfile-7.2), [`7.3-mods`](Dockerfiles/mods/Dockerfile-7.3), [`7.4-mods`](Dockerfiles/mods/Dockerfile-7.4), [`8.0-mods`](Dockerfiles/mods/Dockerfile-8.0), [`8.1-mods`](Dockerfiles/mods/Dockerfile-8.1), [`8.2-mods`](Dockerfiles/mods/Dockerfile-8.2), [`8.3-mods`](Dockerfiles/mods/Dockerfile-8.3)
+* [`5.6-prod`](Dockerfiles/prod/Dockerfile-5.6), [`7.0-prod`](Dockerfiles/prod/Dockerfile-7.0), [`7.1-prod`](Dockerfiles/prod/Dockerfile-7.1), [`7.2-prod`](Dockerfiles/prod/Dockerfile-7.2), [`7.3-prod`](Dockerfiles/prod/Dockerfile-7.3), [`7.4-prod`](Dockerfiles/prod/Dockerfile-7.4), [`8.0-prod`](Dockerfiles/prod/Dockerfile-8.0), [`8.1-prod`](Dockerfiles/prod/Dockerfile-8.1), [`8.2-prod`](Dockerfiles/prod/Dockerfile-8.2), [`8.3-prod`](Dockerfiles/prod/Dockerfile-8.3)
+* [`5.6-slim`](Dockerfiles/slim/Dockerfile-5.6), [`7.0-slim`](Dockerfiles/slim/Dockerfile-7.0), [`7.1-slim`](Dockerfiles/slim/Dockerfile-7.1), [`7.2-slim`](Dockerfiles/slim/Dockerfile-7.2), [`7.3-slim`](Dockerfiles/slim/Dockerfile-7.3), [`7.4-slim`](Dockerfiles/slim/Dockerfile-7.4), [`8.0-slim`](Dockerfiles/slim/Dockerfile-8.0), [`8.1-slim`](Dockerfiles/slim/Dockerfile-8.1), [`8.2-slim`](Dockerfiles/slim/Dockerfile-8.2), [`8.3-slim`](Dockerfiles/slim/Dockerfile-8.3)
+* [`5.6-work`](Dockerfiles/work/Dockerfile-5.6), [`7.0-work`](Dockerfiles/work/Dockerfile-7.0), [`7.1-work`](Dockerfiles/work/Dockerfile-7.1), [`7.2-work`](Dockerfiles/work/Dockerfile-7.2), [`7.3-work`](Dockerfiles/work/Dockerfile-7.3), [`7.4-work`](Dockerfiles/work/Dockerfile-7.4), [`8.0-work`](Dockerfiles/work/Dockerfile-8.0), [`8.1-work`](Dockerfiles/work/Dockerfile-8.1), [`8.2-work`](Dockerfiles/work/Dockerfile-8.2), [`8.3-work`](Dockerfiles/work/Dockerfile-8.3)
 
 :information_source: For details see **[Documentation: Docker Tags](doc/docker-tags.md)**<br/>
 :information_source: For details see **[Documentation: Supported Architectures](doc/supported-architectures.md)**
@@ -52,7 +52,7 @@ docker pull devilbox/php-fpm:<tag>
 
 The following PHP versions are provided by this repository.
 
-* `PHP 5.2`, `PHP 5.3`, `PHP 5.4`, `PHP 5.5`, `PHP 5.6`
+* `PHP 5.6`
 * `PHP 7.0`, `PHP 7.1`, `PHP 7.2`, `PHP 7.3`, `PHP 7.4`
 * `PHP 8.0`, `PHP 8.1`, `PHP 8.2`, `PHP 8.3`
 
@@ -352,7 +352,7 @@ Apart from the provided tools, you will also be able to use the container simila
 ```shell
 docker run -d -it \
     -p 127.0.0.1:9000:9000 \
-    devilbox/php-fpm:7.2-prod
+    devilboxcommunity/php-fpm:7.2-prod
 ```
 
 #### Alter PHP-FPM and system timezone
@@ -360,7 +360,7 @@ docker run -d -it \
 docker run -d -it \
     -p 127.0.0.1:9000:9000 \
     -e TIMEZONE=Europe/Berlin \
-    devilbox/php-fpm:7.2-prod
+    devilboxcommunity/php-fpm:7.2-prod
 ```
 
 #### Load custom PHP configuration
@@ -378,7 +378,7 @@ echo "xdebug.mode = debug" > config/xdebug.ini
 docker run -d -it \
     -p 127.0.0.1:9000:9000 \
     -v config:/etc/php-custom.d \
-    devilbox/php-fpm:7.2-prod
+    devilboxcommunity/php-fpm:7.2-prod
 ```
 
 #### MySQL connect via 127.0.0.1 (via port-forward)
@@ -388,7 +388,7 @@ Forward MySQL Port from `172.168.0.30` (or any other IP address/hostname) and Po
 docker run -d -it \
     -p 127.0.0.1:9000:9000 \
     -e FORWARD_PORTS_TO_LOCALHOST='3306:172.168.0.30:3306' \
-    devilbox/php-fpm:7.2-prod
+    devilboxcommunity/php-fpm:7.2-prod
 ```
 
 #### MySQL and Redis connect via 127.0.0.1 (via port-forward)
@@ -398,7 +398,7 @@ Forward MySQL Port from `172.168.0.30:3306` and Redis port from `redis:6379` to 
 docker run -d -it \
     -p 127.0.0.1:9000:9000 \
     -e FORWARD_PORTS_TO_LOCALHOST='3306:172.168.0.30:3306, 6379:redis:6379' \
-    devilbox/php-fpm:7.2-prod
+    devilboxcommunity/php-fpm:7.2-prod
 ```
 
 #### Launch Postfix for mail-catching
@@ -409,7 +409,7 @@ docker run -d -it \
     -p 127.0.0.1:9000:9000 \
     -v /tmp/mail:/var/mail \
     -e ENABLE_MAIL=2 \
-    devilbox/php-fpm:7.2-prod
+    devilboxcommunity/php-fpm:7.2-prod
 ```
 
 #### Webserver and PHP-FPM
@@ -420,7 +420,7 @@ docker run -d -it \
 docker run -d -it \
     -v ~/my-host-www:/var/www/default/htdocs \
     --name php \
-    devilbox/php-fpm:7.2-prod
+    devilboxcommunity/php-fpm:7.2-prod
 
 # Start webserver and link with PHP-FPM
 docker run -d -it \
@@ -447,7 +447,7 @@ docker run -d -it \
     -e MYSQL_BACKUP_HOST=mysql \
     -v ~/backups:/shared/backups \
     --name php \
-    devilbox/php-fpm:7.2-work
+    devilboxcommunity/php-fpm:7.2-work
 
 # Run database dump
 docker exec -it php mysqldump-secure
@@ -457,17 +457,17 @@ docker exec -it php mysqldump-secure
 
 If you want a fully functional Docker Compose setup, which allows to switch PHP versions easily, comes with web servers, database servers and much more, then head over to the **[Devilbox](https://github.com/cytopia/devilbox)** rerefence implementation :
 
-| Reference Implementation |
-|--------------------------|
-| <a title="Devilbox" href="https://github.com/cytopia/devilbox" ><img title="Devilbox" height="82px" src="https://raw.githubusercontent.com/devilbox/artwork/master/submissions_banner/cytopia/01/png/banner_256_trans.png" /></a> |
+| Reference Implementation                                                                                                                                                                                                                     |
+|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| <a title="Devilbox" href="https://github.com/devilbox-community/devilbox" ><img title="Devilbox" height="82px" src="https://raw.githubusercontent.com/devilbox/artwork/master/submissions_banner/cytopia/01/png/banner_256_trans.png" /></a> |
 
 
 
 <h2><img id="automated-builds" width="20" src="https://github.com/devilbox/artwork/raw/master/submissions_logo/cytopia/01/png/logo_64_trans.png"> Automated builds</h2>
 
-[![nightly](https://github.com/devilbox/docker-php-fpm/workflows/nightly/badge.svg)](https://github.com/devilbox/docker-php-fpm/actions?workflow=nightly)
+[![🕛 Nightly master](https://github.com/devilbox-community/docker-php-fpm/actions/workflows/action-schedule_master.yml/badge.svg)](https://github.com/devilbox-community/docker-php-fpm/actions/workflows/action-schedule_master.yml)
 
-Docker images are built and tested every night by **[GitHub Actions](https://github.com/devilbox/docker-php-fpm/actions?workflow=nightly)** and pushed to **[Docker hub](https://hub.docker.com/r/devilbox/php-fpm/)** on success. This is all done automatically to ensure that sources as well as base images are always fresh and in case of security updates always have the latest patches.
+Docker images are built and tested every night by **[GitHub Actions](https://github.com/devilbox/docker-php-fpm/actions?workflow=nightly)** and pushed to **[Docker hub](https://hub.docker.com/r/devilboxcommunity/php-fpm/)** on success. This is all done automatically to ensure that sources as well as base images are always fresh and in case of security updates always have the latest patches.
 
 
 
@@ -531,7 +531,7 @@ Show some love for the following sister projects.
  </tr>
  <tr>
   <td><a title="Devilbox" href="https://github.com/cytopia/devilbox" ><img width="256px" src="https://raw.githubusercontent.com/devilbox/artwork/master/submissions_banner/cytopia/01/png/banner_256_trans.png" /></a></td>
-  <td><a href="https://github.com/cytopia/devilbox"><code>Devilbox</code></a></td>
+  <td><a href="https://github.com/devilbox-community/devilbox"><code>Devilbox</code></a></td>
   <td></td>
  </tr>
  <tr>
