@@ -13,11 +13,11 @@ PHP Mods: `install.yml`
 
 ## Top level defines
 
-| Yaml key        | Description |
-|-----------------|-------------|
+| Yaml key        | Description                                                                                                      |
+|-----------------|------------------------------------------------------------------------------------------------------------------|
 | `already_avail` | Array of PHP versions for which we don't have to install the module as it is already present via its FROM image. |
-| `all`           | Is generic for all PHP versions and will be used whenever no specific version is defined. |
-| `7.2`           | A version specific block for PHP 7.2. Its child keys will overwrite what has been defined in `all`. |
+| `all`           | Is generic for all PHP versions and will be used whenever no specific version is defined.                        |
+| `7.2`           | A version specific block for PHP 7.2. Its child keys will overwrite what has been defined in `all`.              |
 
 **Example:** Using `already_avail`
 ```yaml
@@ -52,13 +52,13 @@ all:
 
 The following keys can be added below: `all`, `8.2`, `8.1`, `8.0`, `7.4`, ...
 
-| Yaml key    | Required | Supports<br/>Shell code | Description |
-|-------------|----------|-------------------------|-------------|
-| `pre`       | No       | Yes | Specify a shell command to be run before module installation. |
-| `post`      | No       | Yes | Specify a shell command to be run after module installation. |
-| `build_dep` | No       | No  | Array Debian packages required to build the module (they won't be present in the final image - only used to built the module) If you don't need any, assign it an empty array: `build_dep: []`. |
-| `run_dep`   | No       | No  | Array Debian packages required for the module run-time (they won't be present during the build stage - only in the final image). If you don't need any, assign it an empty array: `run_dep: []`. |
-| `type`      | **Yes**  | No  | On of the following types to build the module: `builtin`, `pecl`, `git` or `custom`. |
+| Yaml key    | Required | Supports<br/>Shell code | Description                                                                                                                                                                                      |
+|-------------|----------|-------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `pre`       | No       | Yes                     | Specify a shell command to be run before module installation.                                                                                                                                    |
+| `post`      | No       | Yes                     | Specify a shell command to be run after module installation.                                                                                                                                     |
+| `build_dep` | No       | No                      | Array Debian packages required to build the module (they won't be present in the final image - only used to built the module) If you don't need any, assign it an empty array: `build_dep: []`.  |
+| `run_dep`   | No       | No                      | Array Debian packages required for the module run-time (they won't be present during the build stage - only in the final image). If you don't need any, assign it an empty array: `run_dep: []`. |
+| `type`      | **Yes**  | No                      | On of the following types to build the module: `builtin`, `pecl`, `git` or `custom`.                                                                                                             |
 
 **Example:**
 ```yaml
@@ -80,8 +80,8 @@ all:
 
 ## Second level defines for `type: builtin`
 
-| Yaml key    | Required | Supports<br/>Shell code | Description |
-|-------------|----------|-------------------------|-------------|
+| Yaml key    | Required | Supports<br/>Shell code | Description                                                                 |
+|-------------|----------|-------------------------|-----------------------------------------------------------------------------|
 | `configure` | No       | Yes                     | Add `./configure` arguments. E.g.:<br/> `configure: --with-jpeg --with-png` |
 
 **Example:**
@@ -101,10 +101,10 @@ all:
 
 ## Second level defines for `type: pecl`
 
-| Yaml key    | Required | Supports<br/>Shell code | Description |
-|-------------|----------|-------------------------|-------------|
-| `version`   | No       | Yes                     | Pecl packet version |
-| `command`   | No       | Yes                     | Overwrite pecl command (default: `pecl install <ext>`) |
+| Yaml key  | Required | Supports<br/>Shell code | Description                                            |
+|-----------|----------|-------------------------|--------------------------------------------------------|
+| `version` | No       | Yes                     | Pecl packet version                                    |
+| `command` | No       | Yes                     | Overwrite pecl command (default: `pecl install <ext>`) |
 
 **Example:**
 ```yaml
@@ -123,11 +123,12 @@ all:
 
 ## Second level defines for `type: git`
 
-| Yaml key    | Required | Supports<br/>Shell code | Description |
-|-------------|----------|-------------------------|-------------|
-| `git_url`   | **Yes**  | Yes                     | Git repository URL |
-| `git_ref`   | No       | Yes                     | Tag, branch, commit to check out (shell code supported to dynamically checkout) |
-| `configure` | No       | Yes                     | Add `./configure` arguments. |
+| Yaml key    | Required | Supports<br/>Shell code | Description                                                                          |
+|-------------|----------|-------------------------|--------------------------------------------------------------------------------------|
+| `git_url`   | **Yes**  | Yes                     | Git repository URL                                                                   |
+| `git_ref`   | No       | Yes                     | Tag, branch, commit to check out (shell code supported to dynamically checkout)      |
+| `flag`      | No       | Yes                     | Options for `git clone` to checkout                                                  |
+| `configure` | No       | Yes                     | Add `./configure` arguments.                                                         |
 | `command`   | No       | Yes                     | Overwrite default command (default: `phpize && ./configure && make && make install`) |
 
 **Example:**
@@ -155,9 +156,9 @@ all:
 
 ## Second level defines for `type: custom`
 
-| Yaml key    | Required | Supports<br/>Shell code | Description |
-|-------------|----------|-------------------------|-------------|
-| `command`   | **Yes**  | Yes                     | Custom command to install and enable a module |
+| Yaml key  | Required | Supports<br/>Shell code | Description                                   |
+|-----------|----------|-------------------------|-----------------------------------------------|
+| `command` | **Yes**  | Yes                     | Custom command to install and enable a module |
 
 **Example:**
 ```yaml

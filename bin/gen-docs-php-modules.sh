@@ -169,10 +169,6 @@ update_readme() {
 #echo "<table>"
 #echo " <tr>"
 #echo "   <th>Ext</th>"
-#echo "   <th>PHP 5.2</th>"
-#echo "   <th>PHP 5.3</th>"
-#echo "   <th>PHP 5.4</th>"
-#echo "   <th>PHP 5.5</th>"
 #echo "   <th>PHP 5.6</th>"
 #echo "   <th>PHP 7.0</th>"
 #echo "   <th>PHP 7.1</th>"
@@ -190,10 +186,6 @@ update_readme() {
 #	MOD_LOWER="$( echo "${MOD_NAME}" | tr '[:upper:]' '[:lower:]' )"
 #	echo " <tr>"
 #	echo "  <td><a href=\"php_modules/${MOD_LOWER}\">${MOD_NAME}</a></td>"
-#	echo "  <td class=\"ext_mods_${MOD_LOWER}_5.2\">✓</td>"
-#	echo "  <td class=\"ext_mods_${MOD_LOWER}_5.3\">✓</td>"
-#	echo "  <td class=\"ext_mods_${MOD_LOWER}_5.4\">✓</td>"
-#	echo "  <td class=\"ext_mods_${MOD_LOWER}_5.5\">✓</td>"
 #	echo "  <td class=\"ext_mods_${MOD_LOWER}_5.6\">✓</td>"
 #	echo "  <td class=\"ext_mods_${MOD_LOWER}_7.0\">✓</td>"
 #	echo "  <td class=\"ext_mods_${MOD_LOWER}_7.1\">✓</td>"
@@ -240,10 +232,6 @@ update() {
 ###
 if [ "${VERSION}" = "" ]; then
 	# Update PHP modules for all versions at once
-	update "5.2"
-	update "5.3"
-	update "5.4"
-	update "5.5"
 	update "5.6"
 	update "7.0"
 	update "7.1"
@@ -255,11 +243,7 @@ if [ "${VERSION}" = "" ]; then
 	update "8.2"
 	update "8.3"
 else
-	if [ "${VERSION}" != "5.2" ] \
-	&& [ "${VERSION}" != "5.3" ] \
-	&& [ "${VERSION}" != "5.4" ] \
-	&& [ "${VERSION}" != "5.5" ] \
-	&& [ "${VERSION}" != "5.6" ] \
+	if [ "${VERSION}" != "5.6" ] \
 	&& [ "${VERSION}" != "7.0" ] \
 	&& [ "${VERSION}" != "7.1" ] \
 	&& [ "${VERSION}" != "7.2" ] \

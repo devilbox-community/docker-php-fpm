@@ -96,8 +96,14 @@ tools_available:
     disabled: []
     check: git --version 2>&1 | grep -E '[0-9][.0-9]+' || (git --version; false)
     all:
-      type: apt
-      package: git
+      type: custom
+      build_dep: [libssl-dev, libz-dev, libcurl4-gnutls-dev, libexpat1-dev, libghc-zlib-dev, gettext]
+      command: |
+        git clone --depth=1 --single-branch https://github.com/git/git /tmp/git \
+        && cd /tmp/git \
+        && make prefix=/usr/local all \
+        && make prefix=/usr/local install \
+        && cd / && rm -rf /tmp/git \
   jsonlint:
     disabled: []
     check: jsonlint --version | grep -E '[0-9][.0-9]+' || (jsonlint --version; false)
@@ -218,7 +224,7 @@ tools_available:
     all:
       type: custom
       command: |
-        git clone https://github.com/petervanderdoes/gitflow-avh /tmp/gitflow \
+        git clone --depth=1 --single-branch https://github.com/CJ-Systems/gitflow-cjs /tmp/gitflow \
         && cd /tmp/gitflow \
         && make install \
         && cd / && rm -rf /tmp/gitflow \

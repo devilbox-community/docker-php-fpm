@@ -14,7 +14,7 @@ all:
 8.3:
   type: git
   git_url: https://github.com/php-memcached-dev/php-memcached
-  git_ref: master
+  flags: --depth=1 --single-branch --branch=master
   command: |
     true \
     # FIXME: This is a work-around to mitigate compile error with PHP 8.3
@@ -27,7 +27,7 @@ all:
 8.2:
   type: git
   git_url: https://github.com/php-memcached-dev/php-memcached
-  git_ref: master
+  flags: --depth=1 --single-branch --branch=master
   command: |
     true \
     # FIXME: This is a work-around to mitigate compile error with PHP 8.2

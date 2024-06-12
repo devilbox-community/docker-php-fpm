@@ -8,61 +8,60 @@
 all:
   type: git
   git_url: https://github.com/phalcon/cphalcon
-  git_ref: |
-    $(git for-each-ref --format='%(*creatordate:raw)%(creatordate:raw) %(refname)' refs/tags \
-      | sort -V \
+  flags: |
+    --depth=1 --single-branch --branch=$(git ls-remote --tags https://github.com/phalcon/cphalcon \
       | sed 's/^.*tags\///g' \
       | grep -E '^v[.0-9]+$' \
-      | tail -1 \
+      | tr '-' '~' | sort -V | tail -1 \
     ) \
   command: cd build && ./install
   build_dep: [libpcre3-dev, re2c]
   run_dep: []
 
+7.4:
+  type: git
+  git_url: https://github.com/phalcon/cphalcon
+  flags: --depth=1 --single-branch --branch=v5.4.0
+  command: cd build && ./install
+
 7.3:
   type: git
   git_url: https://github.com/phalcon/cphalcon
-  git_ref: v4.1.2
+  flags: --depth=1 --single-branch --branch=v4.1.2
   command: cd build && ./install
 
 7.2:
   type: git
   git_url: https://github.com/phalcon/cphalcon
-  git_ref: v4.1.1
+  flags: --depth=1 --single-branch --branch=v4.1.1
   command: cd build && ./install
 
 7.1:
   type: git
   git_url: https://github.com/phalcon/cphalcon
-  git_ref: v3.4.4
+  flags: --depth=1 --single-branch --branch=v3.4.4
   command: cd build && ./install
 
 7.0:
   type: git
   git_url: https://github.com/phalcon/cphalcon
-  git_ref: v3.4.4
+  flags: --depth=1 --single-branch --branch=v3.4.4
   command: cd build && ./install
 
 5.6:
   type: git
   git_url: https://github.com/phalcon/cphalcon
-  git_ref: v3.4.4
-  command: cd build && ./install
-
-5.5:
-  type: git
-  git_url: https://github.com/phalcon/cphalcon
-  git_ref: v3.4.4
+  flags: --depth=1 --single-branch --branch=v3.4.4
   command: cd build && ./install
 
 5.4:
   type: git
   git_url: https://github.com/phalcon/cphalcon
-  git_ref: phalcon-v2.0.13
+  flags: --depth=1 --single-branch --branch=v2.0.13
   command: cd build && ./install
 
 5.3:
   type: git
   git_url: https://github.com/phalcon/cphalcon
-  git_ref: phalcon-v2.0.9
+  flags: --depth=1 --single-branch --branch=v2.0.9
   command: cd build && ./install

@@ -93,21 +93,23 @@ run-name: ${{ inputs.run-name }} 🚀
 
 
 jobs:
-  # (1/10) Determine env
+  # -----------------------------------------------------------------------------------------------
+  # (0/9) Determine environment
+  # -----------------------------------------------------------------------------------------------
   set-env:
     name: Compute env
     runs-on: ubuntu-latest
     outputs:
       versions: ${{ env.VERSIONS }}
       refs: ${{ env.REFS }}
-#      versions: ${{ steps.variables.outputs.versions }}
+      #versions: ${{ steps.variables.outputs.versions }}
     steps:
       - name: Print inputs passed to the reusable workflow
         id: variables
         if: false
         run: echo
-#        run: |
-#          echo "versions=${{ env.VERSIONS }}" >> $GITHUB_OUTPUT
+        #run: |
+          #echo "versions=${{ env.VERSIONS }}" >> $GITHUB_OUTPUT
   # -----------------------------------------------------------------------------------------------
   # (1/9) Determine parameter settings
   # -----------------------------------------------------------------------------------------------

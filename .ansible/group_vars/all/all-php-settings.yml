@@ -17,7 +17,7 @@ php_settings_ini:
   # ---- Sane default ----
   base:
     # Memory
-    memory_limit:               512M
+    memory_limit:               768M
     # Timeouts
     max_execution_time:         "{{ php_timeout }}"
     max_input_time:             "{{ php_timeout }}"

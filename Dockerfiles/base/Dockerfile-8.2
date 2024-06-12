@@ -1,6 +1,6 @@
 # vi: ft=dockerfile
 # Auto-generated via Ansible: edit ./ansible/DOCKERFILES/Dockerfile-base.j2 instead.
-FROM devilbox/php-fpm-8.2
+FROM php:8.2-fpm
 MAINTAINER "Toan Nguyen" <devilbox@nntoan.com>
 
 
@@ -27,41 +27,41 @@ LABEL "org.opencontainers.image.description"="PHP-FPM 8.2-base"
 ### Envs
 ###
 ENV MY_USER="devilbox" \
-	MY_GROUP="devilbox" \
-	MY_UID="1000" \
-	MY_GID="1000" \
-	PHP_VERSION="8.2"
+    MY_GROUP="devilbox" \
+    MY_UID="1000" \
+    MY_GID="1000" \
+    PHP_VERSION="8.2"
 
 
 ###
 ### User/Group
 ###
 RUN set -eux \
-	&& groupadd -g ${MY_GID} -r ${MY_GROUP} \
-	&& useradd -u ${MY_UID} -m -s /bin/bash -g ${MY_GROUP} ${MY_USER}
+    && groupadd -g ${MY_GID} -r ${MY_GROUP} \
+    && useradd -u ${MY_UID} -m -s /bin/bash -g ${MY_GROUP} ${MY_USER}
 
 
 ###
 ### Upgrade (install ps)
 ###
 RUN set -eux \
-	&& DEBIAN_FRONTEND=noninteractive apt-get update \
-	&& DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends --no-install-suggests \
-		dpkg-dev \
-		procps \
-	&& rm -rf /var/lib/apt/lists/*
+    && DEBIAN_FRONTEND=noninteractive apt-get update \
+    && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends --no-install-suggests \
+        dpkg-dev \
+        procps \
+    && rm -rf /var/lib/apt/lists/*
 
 
 ###
 ### Configure
 ###
 RUN set -eux \
-	&& rm -rf /usr/local/etc/php-fpm.d \
-	&& mkdir -p /usr/local/etc/php-fpm.d \
-	&& mkdir -p /var/lib/php/session \
-	&& mkdir -p /var/lib/php/wsdlcache \
-	&& chown -R devilbox:devilbox /var/lib/php/session \
-	&& chown -R devilbox:devilbox /var/lib/php/wsdlcache
+    && rm -rf /usr/local/etc/php-fpm.d \
+    && mkdir -p /usr/local/etc/php-fpm.d \
+    && mkdir -p /var/lib/php/session \
+    && mkdir -p /var/lib/php/wsdlcache \
+    && chown -R devilbox:devilbox /var/lib/php/session \
+    && chown -R devilbox:devilbox /var/lib/php/wsdlcache
 
 
 ###
@@ -78,20 +78,20 @@ COPY ./data/docker-entrypoint.d /docker-entrypoint.d
 ### Verify
 ###
 RUN set -eux \
-	&& echo "date.timezone=UTC" > /usr/local/etc/php/php.ini \
-	&& php -v | grep -oE 'PHP\s[.0-9]+' | grep -oE '[.0-9]+' | grep '^8.2' \
-	&& /usr/local/sbin/php-fpm --test \
-	\
-	&& PHP_ERROR="$( php -v 2>&1 1>/dev/null )" \
-	&& if [ -n "${PHP_ERROR}" ]; then echo "${PHP_ERROR}"; false; fi \
-	&& PHP_ERROR="$( php -i 2>&1 1>/dev/null )" \
-	&& if [ -n "${PHP_ERROR}" ]; then echo "${PHP_ERROR}"; false; fi \
-	\
-	&& PHP_FPM_ERROR="$( php-fpm -v 2>&1 1>/dev/null )" \
-	&& if [ -n "${PHP_FPM_ERROR}" ]; then echo "${PHP_FPM_ERROR}"; false; fi \
-	&& PHP_FPM_ERROR="$( php-fpm -i 2>&1 1>/dev/null )" \
-	&& if [ -n "${PHP_FPM_ERROR}" ]; then echo "${PHP_FPM_ERROR}"; false; fi \
-	&& rm -f /usr/local/etc/php/php.ini
+    && echo "date.timezone=UTC" > /usr/local/etc/php/php.ini \
+    && php -v | grep -oE 'PHP\s[.0-9]+' | grep -oE '[.0-9]+' | grep '^8.2' \
+    && /usr/local/sbin/php-fpm --test \
+    \
+    && PHP_ERROR="$( php -v 2>&1 1>/dev/null )" \
+    && if [ -n "${PHP_ERROR}" ]; then echo "${PHP_ERROR}"; false; fi \
+    && PHP_ERROR="$( php -i 2>&1 1>/dev/null )" \
+    && if [ -n "${PHP_ERROR}" ]; then echo "${PHP_ERROR}"; false; fi \
+    \
+    && PHP_FPM_ERROR="$( php-fpm -v 2>&1 1>/dev/null )" \
+    && if [ -n "${PHP_FPM_ERROR}" ]; then echo "${PHP_FPM_ERROR}"; false; fi \
+    && PHP_FPM_ERROR="$( php-fpm -i 2>&1 1>/dev/null )" \
+    && if [ -n "${PHP_FPM_ERROR}" ]; then echo "${PHP_FPM_ERROR}"; false; fi \
+    && rm -f /usr/local/etc/php/php.ini
 
 
 ###

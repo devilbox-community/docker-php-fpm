@@ -18,18 +18,18 @@ FROM devilboxcommunity/php-fpm:7.1-slim as devilbox-work-help-builder
 ### Install build_dep
 ###
 RUN set -eux \
-	&& DEBIAN_FRONTEND=noninteractive apt-get update \
-	&& DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends --no-install-suggests \
-		libpython-dev \
-	&& rm -rf /var/lib/apt/lists/*
+    && DEBIAN_FRONTEND=noninteractive apt-get update \
+    && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends --no-install-suggests \
+        libpython-dev \
+    && rm -rf /var/lib/apt/lists/*
 ###
 ### Install run_dep
 ###
 RUN set -eux \
-	&& DEBIAN_FRONTEND=noninteractive apt-get update \
-	&& DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends --no-install-suggests \
-		unzip \
-	&& rm -rf /var/lib/apt/lists/*
+    && DEBIAN_FRONTEND=noninteractive apt-get update \
+    && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends --no-install-suggests \
+        unzip \
+    && rm -rf /var/lib/apt/lists/*
 ###
 ### Devilbox required helper tools from group_vars (work-help.yml)
 ###
@@ -125,10 +125,10 @@ FROM devilbox/php-fpm:7.1-slim as devilbox-work-help
 ### Install run_dep
 ###
 RUN set -eux \
-	&& DEBIAN_FRONTEND=noninteractive apt-get update \
-	&& DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends --no-install-suggests \
-		unzip \
-	&& rm -rf /var/lib/apt/lists/*
+    && DEBIAN_FRONTEND=noninteractive apt-get update \
+    && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends --no-install-suggests \
+        unzip \
+    && rm -rf /var/lib/apt/lists/*
 
 ###
 ### Copy nvm
@@ -150,32 +150,32 @@ COPY --from=devilbox-work-help-builder /usr/local/lib /usr/local/lib
 ### Configure Bash (composer, node yarn)
 ###
 RUN set -eux \
-	&& { \
-		#echo 'PATH="${PATH}:/usr/local/bin:/usr/local/sbin"'; \
-		echo; \
-		echo "# [Devilbox] Ensure yarn, composer and node are in PATH"; \
-		echo 'PATH="${HOME}/.yarn/bin:${PATH}"'; \
-		echo 'PATH="${HOME}/.composer/vendor/bin:${PATH}"'; \
-		echo 'PATH="/opt/nvm/versions/node/$(node --version)/bin:${PATH}"'; \
-		echo "export PATH"; \
-		echo; \
-		echo "# [Devilbox] Ensure to load nvm"; \
-		echo 'export NVM_DIR="/opt/nvm"'; \
-		echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm'; \
-		echo '[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion'; \
-		#echo; \
-		#echo ". /etc/bash-devilbox"; \
-		#echo; \
-		#echo "if [ -d /etc/bashrc-devilbox.d/ ]; then"; \
-		#echo "    for f in /etc/bashrc-devilbox.d/*.sh ; do"; \
-		#echo "        if [ -r \"\${f}\" ]; then"; \
-		#echo "            . \"\${f}\""; \
-		#echo "        fi"; \
-		#echo "    done"; \
-		#echo "    unset f"; \
-		#echo "fi"; \
-	} | tee -a /home/${MY_USER}/.bashrc /root/.bashrc \
-	&& chown ${MY_USER}:${MY_GROUP} /home/${MY_USER}/.bashrc
+    && { \
+        #echo 'PATH="${PATH}:/usr/local/bin:/usr/local/sbin"'; \
+        echo; \
+        echo "# [Devilbox] Ensure yarn, composer and node are in PATH"; \
+        echo 'PATH="${HOME}/.yarn/bin:${PATH}"'; \
+        echo 'PATH="${HOME}/.composer/vendor/bin:${PATH}"'; \
+        echo 'PATH="/opt/nvm/versions/node/$(node --version)/bin:${PATH}"'; \
+        echo "export PATH"; \
+        echo; \
+        echo "# [Devilbox] Ensure to load nvm"; \
+        echo 'export NVM_DIR="/opt/nvm"'; \
+        echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm'; \
+        echo '[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion'; \
+        #echo; \
+        #echo ". /etc/bash-devilbox"; \
+        #echo; \
+        #echo "if [ -d /etc/bashrc-devilbox.d/ ]; then"; \
+        #echo "    for f in /etc/bashrc-devilbox.d/*.sh ; do"; \
+        #echo "        if [ -r \"\${f}\" ]; then"; \
+        #echo "            . \"\${f}\""; \
+        #echo "        fi"; \
+        #echo "    done"; \
+        #echo "    unset f"; \
+        #echo "fi"; \
+    } | tee -a /home/${MY_USER}/.bashrc /root/.bashrc \
+    && chown ${MY_USER}:${MY_GROUP} /home/${MY_USER}/.bashrc
 
 
 
@@ -218,34 +218,34 @@ RUN set -eux \
 ### Re-activate modules which have been deactivated in mods (for testing).
 ###
 RUN set -eux \
-	&& if find /usr/local/lib/php/extensions/ -name phalcon.so | grep phalcon; then \
-		echo "extension=phalcon.so" > /usr/local/etc/php/conf.d/docker-php-ext-phalcon.ini; \
-	fi \
-	&& if find /usr/local/lib/php/extensions/ -name psr.so | grep psr; then \
-		echo "extension=psr.so" > /usr/local/etc/php/conf.d/docker-php-ext-psr.ini; \
-	fi \
-	&& if find /usr/local/lib/php/extensions/ -name xhprof.so | grep xhprof; then \
-		echo "extension=xhprof.so" > /usr/local/etc/php/conf.d/docker-php-ext-xhprof.ini; \
-	fi
+    && if find /usr/local/lib/php/extensions/ -name phalcon.so | grep phalcon; then \
+        echo "extension=phalcon.so" > /usr/local/etc/php/conf.d/docker-php-ext-phalcon.ini; \
+    fi \
+    && if find /usr/local/lib/php/extensions/ -name psr.so | grep psr; then \
+        echo "extension=psr.so" > /usr/local/etc/php/conf.d/docker-php-ext-psr.ini; \
+    fi \
+    && if find /usr/local/lib/php/extensions/ -name xhprof.so | grep xhprof; then \
+        echo "extension=xhprof.so" > /usr/local/etc/php/conf.d/docker-php-ext-xhprof.ini; \
+    fi
 
 ###
 ### Check if PHP still works
 ###
 RUN set -eux \
-	&& echo "date.timezone=UTC" > /usr/local/etc/php/php.ini \
-	&& php -v | grep -oE 'PHP\s[.0-9]+' | grep -oE '[.0-9]+' | grep '^7.1' \
-	&& /usr/local/sbin/php-fpm --test \
-	\
-	&& PHP_ERROR="$( php -v 2>&1 1>/dev/null )" \
-	&& if [ -n "${PHP_ERROR}" ]; then echo "${PHP_ERROR}"; false; fi \
-	&& PHP_ERROR="$( php -i 2>&1 1>/dev/null )" \
-	&& if [ -n "${PHP_ERROR}" ]; then echo "${PHP_ERROR}"; false; fi \
-	\
-	&& PHP_FPM_ERROR="$( php-fpm -v 2>&1 1>/dev/null )" \
-	&& if [ -n "${PHP_FPM_ERROR}" ]; then echo "${PHP_FPM_ERROR}"; false; fi \
-	&& PHP_FPM_ERROR="$( php-fpm -i 2>&1 1>/dev/null )" \
-	&& if [ -n "${PHP_FPM_ERROR}" ]; then echo "${PHP_FPM_ERROR}"; false; fi \
-	&& rm -f /usr/local/etc/php/php.ini
+    && echo "date.timezone=UTC" > /usr/local/etc/php/php.ini \
+    && php -v | grep -oE 'PHP\s[.0-9]+' | grep -oE '[.0-9]+' | grep '^7.1' \
+    && /usr/local/sbin/php-fpm --test \
+    \
+    && PHP_ERROR="$( php -v 2>&1 1>/dev/null )" \
+    && if [ -n "${PHP_ERROR}" ]; then echo "${PHP_ERROR}"; false; fi \
+    && PHP_ERROR="$( php -i 2>&1 1>/dev/null )" \
+    && if [ -n "${PHP_ERROR}" ]; then echo "${PHP_ERROR}"; false; fi \
+    \
+    && PHP_FPM_ERROR="$( php-fpm -v 2>&1 1>/dev/null )" \
+    && if [ -n "${PHP_FPM_ERROR}" ]; then echo "${PHP_FPM_ERROR}"; false; fi \
+    && PHP_FPM_ERROR="$( php-fpm -i 2>&1 1>/dev/null )" \
+    && if [ -n "${PHP_FPM_ERROR}" ]; then echo "${PHP_FPM_ERROR}"; false; fi \
+    && rm -f /usr/local/etc/php/php.ini
 
 
 
@@ -266,9 +266,15 @@ FROM devilbox-work-help as devilbox-work-tools-builder
 ### Install build_dep, run_dep or tools type: apt
 ###
 RUN set -eux \
-	&& DEBIAN_FRONTEND=noninteractive apt-get update \
-	&& DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends --no-install-suggests \
+    && DEBIAN_FRONTEND=noninteractive apt-get update \
+    && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends --no-install-suggests \
 		# ---------- build_deps ----------
+		gettext \
+		libcurl4-gnutls-dev \
+		libexpat1-dev \
+		libghc-zlib-dev \
+		libssl-dev \
+		libz-dev \
 		ruby-dev \
 		# ---------- run_deps ----------
 		dos2unix \
@@ -285,7 +291,6 @@ RUN set -eux \
 		xfonts-encodings \
 		xfonts-utils \
 		# ---------- type: apt ----------
-		git \
 		jq \
 		mupdf-tools \
 		net-tools \
@@ -324,8 +329,14 @@ RUN set -eux \
 	&& eslint -v | grep -E '[0-9][.0-9]+' || (eslint -v; false)	\
 	&& true
 
-# -------------------- (apt) git --------------------
+# -------------------- (custom) git --------------------
 RUN set -eux \
+	&& git clone --depth=1 --single-branch https://github.com/git/git /tmp/git \
+	&& cd /tmp/git \
+	&& make prefix=/usr/local all \
+	&& make prefix=/usr/local install \
+	&& cd / && rm -rf /tmp/git \
+	\
 	&& git --version 2>&1 | grep -E '[0-9][.0-9]+' || (git --version; false)	\
 	&& true
 
@@ -374,7 +385,7 @@ RUN set -eux \
 
 # -------------------- (custom) git-flow --------------------
 RUN set -eux \
-	&& git clone https://github.com/petervanderdoes/gitflow-avh /tmp/gitflow \
+	&& git clone --depth=1 --single-branch https://github.com/CJ-Systems/gitflow-cjs /tmp/gitflow \
 	&& cd /tmp/gitflow \
 	&& make install \
 	&& cd / && rm -rf /tmp/gitflow \
@@ -673,9 +684,9 @@ RUN set -eux \
 ### Post fixes
 ###
 RUN set -eux \
-	&& if [ ! -d "/var/lib/gems" ]; then \
-		mkdir "/var/lib/gems"; \
-	fi
+    && if [ ! -d "/var/lib/gems" ]; then \
+        mkdir "/var/lib/gems"; \
+    fi
 
 
 
@@ -696,8 +707,8 @@ FROM devilbox-work-help as devilbox-work-tools
 ### Install run_dep or tools type: apt
 ###
 RUN set -eux \
-	&& DEBIAN_FRONTEND=noninteractive apt-get update \
-	&& DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends --no-install-suggests \
+    && DEBIAN_FRONTEND=noninteractive apt-get update \
+    && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends --no-install-suggests \
 		# ---------- run_deps ----------
 		dos2unix \
 		file \
@@ -713,7 +724,6 @@ RUN set -eux \
 		xfonts-encodings \
 		xfonts-utils \
 		# ---------- type: apt ----------
-		git \
 		jq \
 		mupdf-tools \
 		net-tools \
@@ -785,7 +795,7 @@ RUN set -eux \
 	&& eslint -v | grep -E '[0-9][.0-9]+' || (eslint -v; false)	\
 	&& true
 
-# -------------------- (apt) git --------------------
+# -------------------- (custom) git --------------------
 RUN set -eux \
 	&& git --version 2>&1 | grep -E '[0-9][.0-9]+' || (git --version; false)	\
 	&& true
@@ -1026,34 +1036,34 @@ RUN set -eux \
 ### Re-activate modules which have been deactivated in mods (for testing).
 ###
 RUN set -eux \
-	&& if find /usr/local/lib/php/extensions/ -name phalcon.so | grep phalcon; then \
-		echo "extension=phalcon.so" > /usr/local/etc/php/conf.d/docker-php-ext-phalcon.ini; \
-	fi \
-	&& if find /usr/local/lib/php/extensions/ -name psr.so | grep psr; then \
-		echo "extension=psr.so" > /usr/local/etc/php/conf.d/docker-php-ext-psr.ini; \
-	fi \
-	&& if find /usr/local/lib/php/extensions/ -name xhprof.so | grep xhprof; then \
-		echo "extension=xhprof.so" > /usr/local/etc/php/conf.d/docker-php-ext-xhprof.ini; \
-	fi
+    && if find /usr/local/lib/php/extensions/ -name phalcon.so | grep phalcon; then \
+        echo "extension=phalcon.so" > /usr/local/etc/php/conf.d/docker-php-ext-phalcon.ini; \
+    fi \
+    && if find /usr/local/lib/php/extensions/ -name psr.so | grep psr; then \
+        echo "extension=psr.so" > /usr/local/etc/php/conf.d/docker-php-ext-psr.ini; \
+    fi \
+    && if find /usr/local/lib/php/extensions/ -name xhprof.so | grep xhprof; then \
+        echo "extension=xhprof.so" > /usr/local/etc/php/conf.d/docker-php-ext-xhprof.ini; \
+    fi
 
 ###
 ### Check if PHP still works
 ###
 RUN set -eux \
-	&& echo "date.timezone=UTC" > /usr/local/etc/php/php.ini \
-	&& php -v | grep -oE 'PHP\s[.0-9]+' | grep -oE '[.0-9]+' | grep '^7.1' \
-	&& /usr/local/sbin/php-fpm --test \
-	\
-	&& PHP_ERROR="$( php -v 2>&1 1>/dev/null )" \
-	&& if [ -n "${PHP_ERROR}" ]; then echo "${PHP_ERROR}"; false; fi \
-	&& PHP_ERROR="$( php -i 2>&1 1>/dev/null )" \
-	&& if [ -n "${PHP_ERROR}" ]; then echo "${PHP_ERROR}"; false; fi \
-	\
-	&& PHP_FPM_ERROR="$( php-fpm -v 2>&1 1>/dev/null )" \
-	&& if [ -n "${PHP_FPM_ERROR}" ]; then echo "${PHP_FPM_ERROR}"; false; fi \
-	&& PHP_FPM_ERROR="$( php-fpm -i 2>&1 1>/dev/null )" \
-	&& if [ -n "${PHP_FPM_ERROR}" ]; then echo "${PHP_FPM_ERROR}"; false; fi \
-	&& rm -f /usr/local/etc/php/php.ini
+    && echo "date.timezone=UTC" > /usr/local/etc/php/php.ini \
+    && php -v | grep -oE 'PHP\s[.0-9]+' | grep -oE '[.0-9]+' | grep '^7.1' \
+    && /usr/local/sbin/php-fpm --test \
+    \
+    && PHP_ERROR="$( php -v 2>&1 1>/dev/null )" \
+    && if [ -n "${PHP_ERROR}" ]; then echo "${PHP_ERROR}"; false; fi \
+    && PHP_ERROR="$( php -i 2>&1 1>/dev/null )" \
+    && if [ -n "${PHP_ERROR}" ]; then echo "${PHP_ERROR}"; false; fi \
+    \
+    && PHP_FPM_ERROR="$( php-fpm -v 2>&1 1>/dev/null )" \
+    && if [ -n "${PHP_FPM_ERROR}" ]; then echo "${PHP_FPM_ERROR}"; false; fi \
+    && PHP_FPM_ERROR="$( php-fpm -i 2>&1 1>/dev/null )" \
+    && if [ -n "${PHP_FPM_ERROR}" ]; then echo "${PHP_FPM_ERROR}"; false; fi \
+    && rm -f /usr/local/etc/php/php.ini
 
 
 
@@ -1069,7 +1079,7 @@ RUN set -eux \
 ### Prepare final base image (STAGE: work)
 ###
 FROM devilbox-work-tools as work
-MAINTAINER "cytopia" <cytopia@everythingcli.org>
+MAINTAINER "Toan Nguyen" <devilbox@nntoan.com>
 
 ###
 ### Labels
@@ -1078,11 +1088,11 @@ MAINTAINER "cytopia" <cytopia@everythingcli.org>
 #LABEL "org.opencontainers.image.created"=""
 #LABEL "org.opencontainers.image.version"=""
 #LABEL "org.opencontainers.image.revision"=""
-LABEL "maintainer"="cytopia <cytopia@everythingcli.org>"
-LABEL "org.opencontainers.image.authors"="cytopia <cytopia@everythingcli.org>"
-LABEL "org.opencontainers.image.url"="https://github.com/devilbox/docker-php-fpm"
-LABEL "org.opencontainers.image.documentation"="https://github.com/devilbox/docker-php-fpm"
-LABEL "org.opencontainers.image.source"="https://github.com/devilbox/docker-php-fpm"
+LABEL "maintainer"="Toan Nguyen <devilbox@nntoan.com>"
+LABEL "org.opencontainers.image.authors"="cytopia <cytopia@everythingcli.org>, Toan Nguyen <devilbox@nntoan.com>"
+LABEL "org.opencontainers.image.url"="https://github.com/devilbox-community/docker-php-fpm"
+LABEL "org.opencontainers.image.documentation"="https://github.com/devilbox-community/docker-php-fpm"
+LABEL "org.opencontainers.image.source"="https://github.com/devilbox-community/docker-php-fpm"
 LABEL "org.opencontainers.image.vendor"="devilbox"
 LABEL "org.opencontainers.image.licenses"="MIT"
 LABEL "org.opencontainers.image.ref.name"="7.1-work"

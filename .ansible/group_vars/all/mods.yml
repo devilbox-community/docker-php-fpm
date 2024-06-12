@@ -407,6 +407,30 @@ extensions_available:
         && sed -i'' 's|.*<policy domain="coder".*"XPS".*||g' /etc/ImageMagick-6/policy.xml \
         && sed -i'' 's|.*<policy domain="coder".*"PS".*||g' /etc/ImageMagick-6/policy.xml \
         && sed -i'' 's|.*<policy domain="delegate".*pattern="gs".*||g' /etc/ImageMagick-6/policy.xml \
+    8.3:
+      type: git
+      git_url: https://github.com/Imagick/imagick/
+      flags: --depth=1 --single-branch --branch=master
+      command: |
+        phpize \
+        && ./configure \
+        && make -j$(getconf _NPROCESSORS_ONLN) \
+        && make install \
+    8.0:
+      type: pecl
+      run_dep: [libmagickwand-6.q16-6, libwebp6, ghostscript]
+    7.4:
+      type: pecl
+      run_dep: [libmagickwand-6.q16-6, libwebp6, ghostscript]
+    7.3:
+      type: pecl
+      run_dep: [libmagickwand-6.q16-6, libwebp6, ghostscript]
+    7.2:
+      type: pecl
+      run_dep: [libmagickwand-6.q16-6, libwebp6, ghostscript]
+    7.1:
+      type: pecl
+      run_dep: [libmagickwand-6.q16-6, libwebp6, ghostscript]
     7.0:
       type: pecl
       run_dep: [libmagickwand-6.q16-3, libwebp6, ghostscript]
@@ -489,7 +513,12 @@ extensions_available:
     all:
       type: git
       git_url: https://github.com/kjdev/php-ext-lz4
-      git_ref: $(git tag | grep -E '^[.0-9]+$' | sort -V | tail -1)
+      flags: |
+        --depth=1 --single-branch --branch=$(git ls-remote --tags https://github.com/kjdev/php-ext-lz4 \
+          | sed 's/^.*tags\///g' \
+          | grep -E '^[.0-9]+$' \
+          | tr '-' '~' | sort -V | tail -1 \
+        ) \
       configure: --enable-lz4 --with-lz4-includedir=/usr
       build_dep: [liblz4-dev]
       run_dep: [liblz4-1]
@@ -603,7 +632,7 @@ extensions_available:
     8.3:
       type: git
       git_url: https://github.com/php-memcached-dev/php-memcached
-      git_ref: master
+      flags: --depth=1 --single-branch --branch=master
       command: |
         true \
         # FIXME: This is a work-around to mitigate compile error with PHP 8.3
@@ -615,7 +644,7 @@ extensions_available:
     8.2:
       type: git
       git_url: https://github.com/php-memcached-dev/php-memcached
-      git_ref: master
+      flags: --depth=1 --single-branch --branch=master
       command: |
         true \
         # FIXME: This is a work-around to mitigate compile error with PHP 8.2
@@ -999,7 +1028,12 @@ extensions_available:
     all:
       type: git
       git_url: https://github.com/kjdev/php-ext-zstd
-      git_ref: $(git tag | grep -E '^[.0-9]+$' | sort -V | tail -1)
+      flags: |
+        --depth=1 --single-branch --branch=$(git ls-remote --tags https://github.com/kjdev/php-ext-zstd \
+          | sed 's/^.*tags\///g' \
+          | grep -E '^[.0-9]+$' \
+          | tr '-' '~' | sort -V | tail -1 \
+        ) \
       configure: --enable-zstd --with-libzstd
       build_dep: [libzstd-dev]
       run_dep: [libzstd1]
@@ -1012,7 +1046,12 @@ extensions_available:
     all:
       type: git
       git_url: https://github.com/phpredis/phpredis
-      git_ref: $(git tag | grep -E '^[.0-9]+$' | sort -V | tail -1)
+      flags: |
+        --depth=1 --single-branch --branch=$(git ls-remote --tags https://github.com/phpredis/phpredis \
+          | sed 's/^.*tags\///g' \
+          | grep -E '^[.0-9]+$' \
+          | tr '-' '~' | sort -V | tail -1 \
+        ) \
       pre: |
         if [ -f /usr/include/liblzf/lzf.h ]; then \
           ln -s /usr/include/liblzf/lzf.h /usr/include/; \
@@ -1049,7 +1088,12 @@ extensions_available:
     7.2:
       type: git
       git_url: https://github.com/phpredis/phpredis
-      git_ref: $(git tag | grep -E '^[.0-9]+$' | sort -V | tail -1)
+      flags: |
+        --depth=1 --single-branch --branch=$(git ls-remote --tags https://github.com/phpredis/phpredis \
+          | sed 's/^.*tags\///g' \
+          | grep -E '^[.0-9]+$' \
+          | tr '-' '~' | sort -V | tail -1 \
+        ) \
       command: |
         REDIS_ARGS=""; \
         if php -m | grep -q "igbinary"; then \
@@ -1077,7 +1121,7 @@ extensions_available:
     7.1:
       type: git
       git_url: https://github.com/phpredis/phpredis
-      git_ref: $(git tag | grep -E '^[.0-9]+$' | sort -V | tail -1)
+      flags: --depth=1 --single-branch --branch=5.3.7
       command: |
         REDIS_ARGS=""; \
         if php -m | grep -q "igbinary"; then \
@@ -1105,7 +1149,7 @@ extensions_available:
     7.0:
       type: git
       git_url: https://github.com/phpredis/phpredis
-      git_ref: $(git tag | grep -E '^[.0-9]+$' | sort -V | tail -1)
+      flags: --depth=1 --single-branch --branch=5.3.7
       command: |
         REDIS_ARGS=""; \
         if php -m | grep -q "igbinary"; then \
@@ -1176,55 +1220,54 @@ extensions_available:
     all:
       type: git
       git_url: https://github.com/phalcon/cphalcon
-      git_ref: |
-        $(git for-each-ref --format='%(*creatordate:raw)%(creatordate:raw) %(refname)' refs/tags \
-          | sort -V \
+      flags: |
+        --depth=1 --single-branch --branch=$(git ls-remote --tags https://github.com/phalcon/cphalcon \
           | sed 's/^.*tags\///g' \
           | grep -E '^v[.0-9]+$' \
-          | tail -1 \
+          | tr '-' '~' | sort -V | tail -1 \
         ) \
       command: cd build && ./install
       build_dep: [libpcre3-dev, re2c]
       run_dep: []
+    7.4:
+      type: git
+      git_url: https://github.com/phalcon/cphalcon
+      flags: --depth=1 --single-branch --branch=v5.4.0
+      command: cd build && ./install
     7.3:
       type: git
       git_url: https://github.com/phalcon/cphalcon
-      git_ref: v4.1.2
+      flags: --depth=1 --single-branch --branch=v4.1.2
       command: cd build && ./install
     7.2:
       type: git
       git_url: https://github.com/phalcon/cphalcon
-      git_ref: v4.1.1
+      flags: --depth=1 --single-branch --branch=v4.1.1
       command: cd build && ./install
     7.1:
       type: git
       git_url: https://github.com/phalcon/cphalcon
-      git_ref: v3.4.4
+      flags: --depth=1 --single-branch --branch=v3.4.4
       command: cd build && ./install
     7.0:
       type: git
       git_url: https://github.com/phalcon/cphalcon
-      git_ref: v3.4.4
+      flags: --depth=1 --single-branch --branch=v3.4.4
       command: cd build && ./install
     5.6:
       type: git
       git_url: https://github.com/phalcon/cphalcon
-      git_ref: v3.4.4
-      command: cd build && ./install
-    5.5:
-      type: git
-      git_url: https://github.com/phalcon/cphalcon
-      git_ref: v3.4.4
+      flags: --depth=1 --single-branch --branch=v3.4.4
       command: cd build && ./install
     5.4:
       type: git
       git_url: https://github.com/phalcon/cphalcon
-      git_ref: phalcon-v2.0.13
+      flags: --depth=1 --single-branch --branch=v2.0.13
       command: cd build && ./install
     5.3:
       type: git
       git_url: https://github.com/phalcon/cphalcon
-      git_ref: phalcon-v2.0.9
+      flags: --depth=1 --single-branch --branch=v2.0.9
       command: cd build && ./install
   phar:
     disabled: []
@@ -1411,6 +1454,9 @@ extensions_available:
       command: pecl install -D 'enable-sockets="no" enable-openssl="yes" enable-http2="yes" enable-mysqlnd="yes" enable-swoole-json="no" enable-swoole-curl="yes" enable-cares="yes" with-postgres="yes"' swoole
       build_dep: [libc-ares-dev, libnghttp2-dev, libssl-dev, libcurl4-openssl-dev]
       run_dep: [libc-ares2, libnghttp2-14]
+    8.3:
+      type: pecl
+      command: pecl install -D 'enable-sockets="no" enable-openssl="yes" enable-http2="yes" enable-mysqlnd="yes" enable-swoole-json="no" enable-swoole-curl=" " enable-cares="yes" with-postgres="yes"' swoole
     7.4:
       type: pecl
       version: 4.8.12
@@ -1422,13 +1468,13 @@ extensions_available:
       version: 4.8.12
     7.1:
       type: pecl
-      version: 4.4.26
+      version: 4.5.11
     7.0:
       type: pecl
-      version: 4.2.13
+      version: 4.3.5
     5.6:
       type: pecl
-      version: 1.9.23
+      version: 2.0.10
     5.5:
       type: pecl
       version: 1.9.23
