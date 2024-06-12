@@ -8,6 +8,7 @@
 
 ### Added
 - Added PHP 8.3
+- Removed unsupported PHP versions: 5.2, 5.3, 5.4, 5.5
 
 
 ## Release 0.151

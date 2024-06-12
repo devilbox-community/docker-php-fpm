@@ -16,4 +16,4 @@ jobs:
         with:
           publish: false
         env:
-          GITHUB_TOKEN: ${{ secrets.RELEASE_DRAFTER_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

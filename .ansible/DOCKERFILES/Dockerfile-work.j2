@@ -13,7 +13,7 @@
 ###
 ### Installs all cli tools required to install custom tools
 ###
-FROM devilbox/php-fpm:{{ php_version }}-slim as devilbox-work-help-builder
+FROM devilboxcommunity/php-fpm:{{ php_version }}-slim as devilbox-work-help-builder
 
 {% set build_deps = [] -%}
 {%- for ext in help_software_enabled -%}

@@ -1,6 +1,6 @@
 # vi: ft=dockerfile
 # Auto-generated via Ansible: edit ./ansible/DOCKERFILES/Dockerfile-mods.j2 instead.
-FROM devilbox/php-fpm:7.0-base as builder
+FROM devilboxcommunity/php-fpm:7.0-base as builder
 
 
 ###

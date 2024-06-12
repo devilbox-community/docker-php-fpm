@@ -12,7 +12,7 @@
 ###
 ### Installs all cli tools required to run Devilbox and its intranet
 ###
-FROM devilbox/php-fpm:7.0-prod as devilbox-slim-base-builder
+FROM devilboxcommunity/php-fpm:7.0-prod as devilbox-slim-base-builder
 
 ###
 ### Install apt Tools
