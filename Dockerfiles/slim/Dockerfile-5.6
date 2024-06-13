@@ -106,6 +106,23 @@ RUN set -eux \
 	\
 	&& true
 
+# -------------------- msmtp --------------------
+RUN set -eux \
+	&& apt-get update \
+	\
+	&& DEB_HOST_ARCH="$( dpkg-architecture --query DEB_HOST_ARCH )" \
+	&& if [ "${DEB_HOST_ARCH}" = "amd64" ] || [ "${DEB_HOST_ARCH}" = "arm64" ]; then \
+	  apt-get install -y --no-install-recommends --no-install-suggests \
+	  msmtp; \
+	else \
+	  printf '%s\n%s\n%s\n' '#!/bin/sh' 'echo "Not available for this platform."' 'exit 1' > /usr/local/bin/msmtp \
+	  && chmod +x /usr/local/bin/msmtp; \
+	fi \
+	\
+	&& rm -rf /var/lib/apt/lists/*	\
+	&& msmtp --version 2>&1 | grep -E 'version [0-9]+\.[0-9]+'	\
+	&& true
+
 # -------------------- mhsendmail --------------------
 RUN set -eux \
 	&& DEB_HOST_ARCH="$( dpkg-architecture --query DEB_HOST_ARCH )" \
@@ -142,7 +159,7 @@ RUN set -eux \
 	  mongofiles --version; \
 	fi \
 	\
-	&& if echo '5.6' | grep -E '^(5.2|5.3|5.4|5.5)$' >/dev/null; then \
+	&& if echo '5.6' | grep -E '^(5.2|5.3|5.4|5.5|5.6|7.0)$' >/dev/null; then \
 	  if [ "$(dpkg-architecture --query DEB_BUILD_ARCH)" = "amd64" ]; then \
 	    mongo --version; \
 	  fi \
@@ -497,6 +514,11 @@ RUN set -eux \
 	\
 	&& true
 
+# -------------------- msmtp --------------------
+RUN set -eux \
+	&& msmtp --version 2>&1 | grep -E 'version [0-9]+\.[0-9]+'	\
+	&& true
+
 # -------------------- mhsendmail --------------------
 RUN set -eux \
 	&& mhsendmail -h 2>&1 | grep 'Usage'	\
@@ -512,7 +534,7 @@ RUN set -eux \
 	  mongofiles --version; \
 	fi \
 	\
-	&& if echo '5.6' | grep -E '^(5.2|5.3|5.4|5.5)$' >/dev/null; then \
+	&& if echo '5.6' | grep -E '^(5.2|5.3|5.4|5.5|5.6|7.0)$' >/dev/null; then \
 	  if [ "$(dpkg-architecture --query DEB_BUILD_ARCH)" = "amd64" ]; then \
 	    mongo --version; \
 	  fi \

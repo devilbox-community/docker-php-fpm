@@ -83,6 +83,7 @@ base_software_enabled:
   - ping    # required by Devilbox Intranet
   - sudo    # required by /etc/sudoers.d/devilbox config file
   - blackfire
+  - msmtp
   - mhsendmail
   - mongo_client
   - mysqldumpsecure
@@ -97,7 +98,7 @@ base_software_enabled:
 # 7.2: is specific version of defines
 # disabled: [optional] Array of PHP versions for which to disable this module
 #
-# all, 7.2, 7.1, 7.0, 5.6, 5.5, 5.4:
+# all, 7.2, 7.1, 7.0, 5.6:
 #   deb:       Deb line to add to sources list
 #   key:       [optional] Key id to add for repository
 #   pre:       [optional] Run custom command to add gpg key for repository
@@ -111,7 +112,7 @@ base_apt_repositories_available:
     # [Bookworm]
     all:
       type: repo
-      pre: apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 648ACFD622F3D138
+      pre: apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 648ACFD622F3D138 6A26B1AE64C3C388
       deb: deb http://ftp.debian.org/debian {{ os_release['all'].debian }}-backports main contrib non-free
     # [Bullseye]
     8.0:
@@ -391,7 +392,7 @@ base_software_available:
         mongofiles --version; \
       fi \
       \
-      && if echo '{{ php_version }}' | grep -E '^(5.2|5.3|5.4|5.5)$' >/dev/null; then \
+      && if echo '{{ php_version }}' | grep -E '^(5.2|5.3|5.4|5.5|5.6|7.0)$' >/dev/null; then \
         if [ "$(dpkg-architecture --query DEB_BUILD_ARCH)" = "amd64" ]; then \
           mongo --version; \
         fi \
@@ -401,8 +402,8 @@ base_software_available:
     all:
       type: custom
       pre: |
-        APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1 apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 20691EEC35216C63CAF66CE1656408E390CFB1F5 \
-        && echo "deb http://repo.mongodb.org/apt/ubuntu {{ os_release[php_version].ubuntu }}/mongodb-org/4.4 multiverse" > /etc/apt/sources.list.d/mongo.list \
+        APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1 apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv E162F504A20CDF15827F718D4B7C549A058F8B6B \
+        && echo "deb http://repo.mongodb.org/apt/ubuntu {{ os_release[php_version].ubuntu }}/mongodb-org/6.0 multiverse" > /etc/apt/sources.list.d/mongo.list \
         && apt-get update \
       command: |
         apt-get install -y --no-install-recommends --no-install-suggests \
@@ -497,7 +498,7 @@ base_software_available:
         && rm -rf /usr/local/src/mysqldump-secure \
 
   ###
-  ### PostgrSQL Command line client
+  ### PostgreSQL Command line client
   ###
   # 8.3: (amd64, arm64)
   # 8.2: (amd64, arm64)
