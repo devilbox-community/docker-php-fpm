@@ -99,7 +99,7 @@ The following PHP modules are available on the `base` flavour:
   <td class="ext_base_ereg_7.3"></td>
   <td class="ext_base_ereg_7.4"></td>
   <td class="ext_base_ereg_8.0"></td>
-  <td class="ext_base_ereg_8.1">✓</td>
+  <td class="ext_base_ereg_8.1"></td>
   <td class="ext_base_ereg_8.2"></td>
   <td class="ext_base_ereg_8.3"></td>
  </tr>
