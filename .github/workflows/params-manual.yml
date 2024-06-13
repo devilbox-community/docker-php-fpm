@@ -1,0 +1,84 @@
+---
+
+# -------------------------------------------------------------------------------------------------
+# Job Name
+# -------------------------------------------------------------------------------------------------
+name: params-manual
+
+
+# -------------------------------------------------------------------------------------------------
+# Custom Variables
+# -------------------------------------------------------------------------------------------------
+env:
+  VERSIONS: >
+    [
+      {
+        "NAME":    "PHP",
+        "VERSION": ["8.1", "8.2", "8.3"],
+        "FLAVOUR": ["default"],
+        "ARCH":    ["linux/amd64", "linux/arm64"]
+      }
+    ]
+  REFS: >
+    {
+        "DEFAULT_BRANCH": "master",
+        "BRANCHES": "",
+        "NUM_LATEST_TAGS": 0
+    }
+
+
+# -------------------------------------------------------------------------------------------------
+# When to run
+# -------------------------------------------------------------------------------------------------
+on:
+  workflow_call:
+    ###
+    ### OUTPUTS
+    ###
+    outputs:
+      versions:
+        description: "JSON string for versions. Use via: fromJson(needs.params.versions)"
+        value: ${{ jobs.params.outputs.versions }}
+      refs:
+        description: "JSON string for refs. Use via: fromJson(needs.params.refs)"
+        value: ${{ jobs.params.outputs.refs }}
+    inputs:
+      versions:
+        description: 'The version build versions as JSON string ( list of objects: [{NAME, VERSION[], ARCH[]}] ).'
+        required: false
+        type: string
+      refs:
+        description: 'The ref build matrix as JSON string (list of git refs to build/deploy: {BRANCH, NUM_LATEST_TAGS}).'
+        required: false
+        type: string
+
+jobs:
+  params:
+    runs-on: ubuntu-latest
+
+    outputs:
+      versions: ${{ steps.set-versions.outputs.versions }}
+      refs: ${{ steps.set-refs.outputs.refs }}
+
+    steps:
+      - name: "[DEBUG] Workflow Inputs"
+        shell: bash
+        run: |
+          echo 'versions: ${{ inputs.versions }} '
+          echo 'refs: ${{ inputs.refs }} '
+
+      - name: "[Set-Output] jsonify VERSIONS"
+        id: set-versions
+        env:
+          VERSIONS: ${{ inputs.versions || env.VERSIONS }}
+        run: |
+          VERSIONS="$( echo '${{ env.VERSIONS }}' | jq -M -c )"
+          echo "versions=${VERSIONS}" >> $GITHUB_OUTPUT
+
+      - name: "[Set-Output] jsonify REFS"
+        id: set-refs
+        env:
+          REFS: ${{ inputs.refs || env.REFS }}
+        run: |
+          REFS="$( echo '${{ env.REFS }}' | jq -M -c )"
+          echo "refs=${REFS}" >> $GITHUB_OUTPUT
