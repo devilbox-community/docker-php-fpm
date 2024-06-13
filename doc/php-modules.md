@@ -604,9 +604,9 @@ The following PHP modules are available on the `mods`, `prod`, `slim` and `work`
   <td class="ext_mods_blackfire_7.3">✓</td>
   <td class="ext_mods_blackfire_7.4">✓</td>
   <td class="ext_mods_blackfire_8.0">✓</td>
-  <td class="ext_mods_blackfire_8.1"></td>
-  <td class="ext_mods_blackfire_8.2"></td>
-  <td class="ext_mods_blackfire_8.3"></td>
+  <td class="ext_mods_blackfire_8.1">✓</td>
+  <td class="ext_mods_blackfire_8.2">✓</td>
+  <td class="ext_mods_blackfire_8.3">✓</td>
  </tr>
  <tr>
   <td><a href="../php_modules/bz2">bz2</a></td>
@@ -649,10 +649,6 @@ The following PHP modules are available on the `mods`, `prod`, `slim` and `work`
  </tr>
  <tr>
   <td><a href="../php_modules/curl">curl</a></td>
-  <td class="ext_mods_curl_5.2">✓</td>
-  <td class="ext_mods_curl_5.3">✓</td>
-  <td class="ext_mods_curl_5.4">✓</td>
-  <td class="ext_mods_curl_5.5">✓</td>
   <td class="ext_mods_curl_5.6">✓</td>
   <td class="ext_mods_curl_7.0">✓</td>
   <td class="ext_mods_curl_7.1">✓</td>
@@ -662,6 +658,7 @@ The following PHP modules are available on the `mods`, `prod`, `slim` and `work`
   <td class="ext_mods_curl_8.0">✓</td>
   <td class="ext_mods_curl_8.1">✓</td>
   <td class="ext_mods_curl_8.2">✓</td>
+  <td class="ext_mods_curl_8.3">✓</td>
  </tr>
  <tr>
   <td><a href="../php_modules/date">date</a></td>
@@ -790,8 +787,8 @@ The following PHP modules are available on the `mods`, `prod`, `slim` and `work`
   <td class="ext_mods_ftp_7.4">✓</td>
   <td class="ext_mods_ftp_8.0">✓</td>
   <td class="ext_mods_ftp_8.1">✓</td>
-  <td class="ext_mods_ftp_8.2">✓</td>
-  <td class="ext_mods_ftp_8.3">✓</td>
+  <td class="ext_mods_ftp_8.2"></td>
+  <td class="ext_mods_ftp_8.3"></td>
  </tr>
  <tr>
   <td><a href="../php_modules/gd">gd</a></td>
@@ -932,8 +929,8 @@ The following PHP modules are available on the `mods`, `prod`, `slim` and `work`
   <td class="ext_mods_ioncube_7.3">✓</td>
   <td class="ext_mods_ioncube_7.4">✓</td>
   <td class="ext_mods_ioncube_8.0"></td>
-  <td class="ext_mods_ioncube_8.1"></td>
-  <td class="ext_mods_ioncube_8.2"></td>
+  <td class="ext_mods_ioncube_8.1">✓</td>
+  <td class="ext_mods_ioncube_8.2">✓</td>
   <td class="ext_mods_ioncube_8.3"></td>
  </tr>
  <tr>
@@ -1349,8 +1346,8 @@ The following PHP modules are available on the `mods`, `prod`, `slim` and `work`
   <td class="ext_mods_phalcon_7.4">✓</td>
   <td class="ext_mods_phalcon_8.0">✓</td>
   <td class="ext_mods_phalcon_8.1">✓</td>
-  <td class="ext_mods_phalcon_8.2"></td>
-  <td class="ext_mods_phalcon_8.3"></td>
+  <td class="ext_mods_phalcon_8.2">✓</td>
+  <td class="ext_mods_phalcon_8.3">✓</td>
  </tr>
  <tr>
   <td><a href="../php_modules/phar">Phar</a></td>
@@ -1583,8 +1580,8 @@ The following PHP modules are available on the `mods`, `prod`, `slim` and `work`
   <td class="ext_mods_solr_7.4">✓</td>
   <td class="ext_mods_solr_8.0">✓</td>
   <td class="ext_mods_solr_8.1">✓</td>
-  <td class="ext_mods_solr_8.2"></td>
-  <td class="ext_mods_solr_8.3"></td>
+  <td class="ext_mods_solr_8.2">✓</td>
+  <td class="ext_mods_solr_8.3">✓</td>
  </tr>
  <tr>
   <td><a href="../php_modules/spl">SPL</a></td>
@@ -1661,8 +1658,8 @@ The following PHP modules are available on the `mods`, `prod`, `slim` and `work`
   <td class="ext_mods_swoole_7.4">✓</td>
   <td class="ext_mods_swoole_8.0">✓</td>
   <td class="ext_mods_swoole_8.1">✓</td>
-  <td class="ext_mods_swoole_8.2"></td>
-  <td class="ext_mods_swoole_8.3"></td>
+  <td class="ext_mods_swoole_8.2">✓</td>
+  <td class="ext_mods_swoole_8.3">✓</td>
  </tr>
  <tr>
   <td><a href="../php_modules/sysvmsg">sysvmsg</a></td>
