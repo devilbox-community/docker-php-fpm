@@ -146,10 +146,10 @@ RUN set -eux \
 	\
 	&& apt-get install -y --no-install-recommends --no-install-suggests \
 	  mongodb-org-tools \
-	  mongodb-org-shell \
+	  mongodb-mongosh \
 	\
 	&& rm -rf /var/lib/apt/lists/*	\
-	&& if echo '7.4' | grep -E '^(5.2|5.3|5.4|5.5|5.6|7.0)$' >/dev/null; then \
+	&& if echo '7.4' | grep -E '^(5.6|7.0)$' >/dev/null; then \
 	  if [ "$(dpkg-architecture --query DEB_BUILD_ARCH)" = "amd64" ]; then \
 	    mongofiles --version; \
 	  fi \
@@ -157,12 +157,10 @@ RUN set -eux \
 	  mongofiles --version; \
 	fi \
 	\
-	&& if echo '7.4' | grep -E '^(5.2|5.3|5.4|5.5|5.6|7.0)$' >/dev/null; then \
-	  if [ "$(dpkg-architecture --query DEB_BUILD_ARCH)" = "amd64" ]; then \
-	    mongo --version; \
-	  fi \
-	else \
+	&& if echo '7.4' | grep -E '^(5.6|7.0)$' >/dev/null; then \
 	  mongo --version; \
+	else \
+	  mongosh --version; \
 	fi \
 	\
 	&& true
@@ -203,7 +201,7 @@ RUN set -eux \
 	  postgresql-client \
 	\
 	&& rm -rf /var/lib/apt/lists/*	\
-	&& if echo '7.4' | grep -E '^(5.2|5.3|5.4|5.5|5.6|7.0)$' >/dev/null; then \
+	&& if echo '7.4' | grep -E '^(5.6|7.0)$' >/dev/null; then \
 	  if [ "$(dpkg-architecture --query DEB_BUILD_ARCH)" = "amd64" ]; then \
 	    pg_isready --version; \
 	  fi \
@@ -520,7 +518,7 @@ RUN set -eux \
 
 # -------------------- mongo_client --------------------
 RUN set -eux \
-	&& if echo '7.4' | grep -E '^(5.2|5.3|5.4|5.5|5.6|7.0)$' >/dev/null; then \
+	&& if echo '7.4' | grep -E '^(5.6|7.0)$' >/dev/null; then \
 	  if [ "$(dpkg-architecture --query DEB_BUILD_ARCH)" = "amd64" ]; then \
 	    mongofiles --version; \
 	  fi \
@@ -528,12 +526,10 @@ RUN set -eux \
 	  mongofiles --version; \
 	fi \
 	\
-	&& if echo '7.4' | grep -E '^(5.2|5.3|5.4|5.5|5.6|7.0)$' >/dev/null; then \
-	  if [ "$(dpkg-architecture --query DEB_BUILD_ARCH)" = "amd64" ]; then \
-	    mongo --version; \
-	  fi \
-	else \
+	&& if echo '7.4' | grep -E '^(5.6|7.0)$' >/dev/null; then \
 	  mongo --version; \
+	else \
+	  mongosh --version; \
 	fi \
 	\
 	&& true
@@ -545,7 +541,7 @@ RUN set -eux \
 
 # -------------------- pgsql_client --------------------
 RUN set -eux \
-	&& if echo '7.4' | grep -E '^(5.2|5.3|5.4|5.5|5.6|7.0)$' >/dev/null; then \
+	&& if echo '7.4' | grep -E '^(5.6|7.0)$' >/dev/null; then \
 	  if [ "$(dpkg-architecture --query DEB_BUILD_ARCH)" = "amd64" ]; then \
 	    pg_isready --version; \
 	  fi \
