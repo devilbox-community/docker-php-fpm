@@ -4,7 +4,7 @@
 name: imagick
 
 # Exclude module build/installation for the following PHP versions
-exclude: [5.2, 5.3, 5.4]  # Only available since 5.3. 5.3 and 5.4 segfaults
+exclude: []
 
 # In order for this module to built correctly against all dependencies,
 # the following modules must have been built first.

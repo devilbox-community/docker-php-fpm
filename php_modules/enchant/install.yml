@@ -25,21 +25,3 @@ all:
 5.6:
   build_dep: [libenchant-dev]
   run_dep: [libenchant1c2a]
-
-5.5:
-  build_dep: [libenchant-dev]
-  run_dep: [libenchant1c2a]
-
-5.4:
-  build_dep: [libenchant-dev]
-  run_dep: [libenchant1c2a]
-
-5.3:
-  build_dep: [libenchant-dev]
-  run_dep: [libenchant1c2a]
-
-5.2:
-  type: pecl
-  command: echo "/usr" | pecl install enchant
-  build_dep: [libenchant-dev]
-  run_dep: [libenchant1c2a]

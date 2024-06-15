@@ -26,15 +26,3 @@ all:
 
 5.6:
   type: builtin
-
-5.5:
-  type: builtin
-
-5.4:
-  type: builtin
-
-5.3:
-  type: builtin
-
-5.2:
-  type: builtin

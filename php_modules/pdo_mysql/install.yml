@@ -20,23 +20,3 @@ all:
   type: builtin
   run_dep: [libmariadbclient18]
   build_dep: [zlib1g-dev, libmariadbclient-dev]
-
-5.5:
-  type: builtin
-  run_dep: [libmysqlclient18]
-  build_dep: [zlib1g-dev, libmysqlclient-dev]
-
-5.4:
-  type: builtin
-  run_dep: [libmysqlclient18]
-  build_dep: [zlib1g-dev, libmysqlclient-dev]
-
-5.3:
-  type: builtin
-  run_dep: [libmysqlclient18]
-  build_dep: [zlib1g-dev, libmysqlclient-dev]
-
-5.2:
-  type: builtin
-  run_dep: [libmysqlclient18]
-  build_dep: [zlib1g-dev, libmysqlclient-dev]

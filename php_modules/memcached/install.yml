@@ -56,23 +56,3 @@ all:
   type: pecl
   version: 2.2.0
   run_dep: [libmemcachedutil2, libevent-2.0-5]
-
-5.5:
-  type: pecl
-  version: 2.2.0
-  run_dep: [libmemcachedutil2, libevent-2.0-5]
-
-5.4:
-  type: pecl
-  version: 2.2.0
-  run_dep: [libmemcachedutil2, libevent-2.0-5]
-
-5.3:
-  type: pecl
-  version: 2.2.0
-  run_dep: [libmemcachedutil2, libevent-2.0-5]
-
-5.2:
-  type: pecl
-  version: 2.1.0
-  run_dep: [libmemcachedutil2, libevent-2.0-5]

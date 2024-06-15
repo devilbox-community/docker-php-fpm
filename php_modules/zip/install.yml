@@ -40,27 +40,3 @@ all:
   configure: --enable-zip --with-zlib-dir=/usr --with-pcre-dir=/usr --with-libzip=/usr
   build_dep: [libzip-dev, zlib1g-dev]
   run_dep: [libzip4, zlib1g]
-
-5.5:
-  type: builtin
-  configure: --enable-zip --with-zlib-dir=/usr --with-pcre-dir=/usr
-  build_dep: [libzip-dev, zlib1g-dev]
-  run_dep: [libzip2, zlib1g]
-
-5.4:
-  type: builtin
-  configure: --enable-zip --with-zlib-dir=/usr --with-pcre-dir=/usr
-  build_dep: [libzip-dev, zlib1g-dev]
-  run_dep: [libzip2, zlib1g]
-
-5.3:
-  type: builtin
-  configure: --enable-zip --with-zlib-dir=/usr --with-pcre-dir=/usr
-  build_dep: [libzip-dev, zlib1g-dev]
-  run_dep: [libzip2, zlib1g]
-
-5.2:
-  type: builtin
-  configure: --enable-zip
-  build_dep: [libzip-dev]
-  run_dep: [libzip2]

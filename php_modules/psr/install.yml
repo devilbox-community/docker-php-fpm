@@ -23,11 +23,3 @@ all:
 5.6:
   type: pecl
   version: 0.6.0  # NOTE: 0.6.1 fails with: Package "psr" Version "0.6.1" does not have REST xml available
-
-5.5:
-  type: pecl
-  version: 0.5.1
-
-5.4:
-  type: pecl
-  version: 0.5.1

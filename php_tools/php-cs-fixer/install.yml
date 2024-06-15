@@ -27,15 +27,3 @@ all:
 5.6:
   type: custom
   pre: PHP_CS_FIXER_URL="https://cs.symfony.com/download/php-cs-fixer-v2.phar"
-
-5.5:
-  type: custom
-  pre: PHP_CS_FIXER_URL="https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/v2.2.19/php-cs-fixer.phar"
-
-5.4:
-  type: custom
-  pre: PHP_CS_FIXER_URL="https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/v2.2.19/php-cs-fixer.phar"
-
-5.3:
-  type: custom
-  pre: PHP_CS_FIXER_URL="https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/v2.2.19/php-cs-fixer.phar"

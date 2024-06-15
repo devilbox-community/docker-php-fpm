@@ -19,15 +19,3 @@ all:
 8.1:
   type: builtin
   pre: curl -sS https://raw.githubusercontent.com/php/php-src/PHP-8.1/Zend/Optimizer/zend_dfg.h > /usr/local/include/php/Zend/Optimizer/zend_dfg.h
-
-5.4:
-  type: pecl
-  command: pecl install zendopcache
-
-5.3:
-  type: pecl
-  command: pecl install zendopcache
-
-5.2:
-  type: pecl
-  command: pecl install zendopcache

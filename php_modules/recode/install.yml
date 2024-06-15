@@ -5,7 +5,7 @@
 # * {{ php_all_versions }}:  Array of all PHP versions
 
 
-already_avail: [5.2, 5.3, 5.4, 5.5]
+already_avail: []
 
 all:
   type: builtin

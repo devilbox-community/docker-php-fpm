@@ -9,7 +9,3 @@ all:
   type: pecl
   command: yes yes | pecl install mongo
   build_dep: [libssl-dev, libsasl2-dev]
-
-5.2:
-  type: pecl
-  command: yes yes | pecl install mongo-1.5.8

@@ -47,15 +47,3 @@ all:
 5.6:
   type: custom
   pre: PHP_UNIT_VERSION="5"
-
-5.5:
-  type: custom
-  pre: PHP_UNIT_VERSION="4"
-
-5.4:
-  type: custom
-  pre: PHP_UNIT_VERSION="4"
-
-5.3:
-  type: custom
-  pre: PHP_UNIT_VERSION="4"

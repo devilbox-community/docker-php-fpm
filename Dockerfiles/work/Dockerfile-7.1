@@ -270,12 +270,6 @@ RUN set -eux \
     && DEBIAN_FRONTEND=noninteractive apt-get update \
     && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends --no-install-suggests \
 		# ---------- build_deps ----------
-		gettext \
-		libcurl4-gnutls-dev \
-		libexpat1-dev \
-		libghc-zlib-dev \
-		libssl-dev \
-		libz-dev \
 		python-pip \
 		python-wheel \
 		ruby-dev \
@@ -294,6 +288,7 @@ RUN set -eux \
 		xfonts-encodings \
 		xfonts-utils \
 		# ---------- type: apt ----------
+		git \
 		jq \
 		mupdf-tools \
 		net-tools \
@@ -324,14 +319,8 @@ RUN set -eux \
 	&& eslint -v | grep -E '[0-9][.0-9]+' || (eslint -v; false)	\
 	&& true
 
-# -------------------- (custom) git --------------------
+# -------------------- (apt) git --------------------
 RUN set -eux \
-	&& git clone --depth=1 --single-branch https://github.com/git/git /tmp/git \
-	&& cd /tmp/git \
-	&& make prefix=/usr/local all \
-	&& make prefix=/usr/local install \
-	&& cd / && rm -rf /tmp/git \
-	\
 	&& git --version 2>&1 | grep -E '[0-9][.0-9]+' || (git --version; false)	\
 	&& true
 
@@ -433,7 +422,7 @@ RUN set -eux \
 # -------------------- (apt) mupdf-tools --------------------
 RUN set -eux \
 	&& PHP_VERSION="$(php -v | grep ^PHP | awk '{print $2}' | grep -Eo '[0-9]\.[0-9]')" \
-	&& if echo "${PHP_VERSION}" | grep -E '5\.2|5\.3|5\.4|5\.5|5.\6|7.\0'; then \
+	&& if echo "${PHP_VERSION}" | grep -E '5\.6|7\.0'; then \
 	  mutool 2>&1 | grep ^usage; \
 	else \
 	  echo test > test.txt \
@@ -591,7 +580,7 @@ RUN set -eux \
 
 # -------------------- (custom) taskfile --------------------
 RUN set -eux \
-	&& sh -c "$(curl -sS -K --fail -k https://taskfile.dev/install.sh)" -- -d -b /usr/local/bin/	\
+	&& sh -c "$(curl -sS --fail -k https://taskfile.dev/install.sh)" -- -d -b /usr/local/bin/	\
 	&& task --version | grep -E '[0-9][.0-9]+' || (task --version; false)	\
 	&& true
 
@@ -730,6 +719,7 @@ RUN set -eux \
 		xfonts-encodings \
 		xfonts-utils \
 		# ---------- type: apt ----------
+		git \
 		jq \
 		mupdf-tools \
 		net-tools \
@@ -796,7 +786,7 @@ RUN set -eux \
 	&& eslint -v | grep -E '[0-9][.0-9]+' || (eslint -v; false)	\
 	&& true
 
-# -------------------- (custom) git --------------------
+# -------------------- (apt) git --------------------
 RUN set -eux \
 	&& git --version 2>&1 | grep -E '[0-9][.0-9]+' || (git --version; false)	\
 	&& true
@@ -864,7 +854,7 @@ RUN set -eux \
 # -------------------- (apt) mupdf-tools --------------------
 RUN set -eux \
 	&& PHP_VERSION="$(php -v | grep ^PHP | awk '{print $2}' | grep -Eo '[0-9]\.[0-9]')" \
-	&& if echo "${PHP_VERSION}" | grep -E '5\.2|5\.3|5\.4|5\.5|5.\6|7.\0'; then \
+	&& if echo "${PHP_VERSION}" | grep -E '5\.6|7\.0'; then \
 	  mutool 2>&1 | grep ^usage; \
 	else \
 	  echo test > test.txt \

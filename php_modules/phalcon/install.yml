@@ -53,15 +53,3 @@ all:
   git_url: https://github.com/phalcon/cphalcon
   flags: --depth=1 --single-branch --branch=v3.4.4
   command: cd build && ./install
-
-5.4:
-  type: git
-  git_url: https://github.com/phalcon/cphalcon
-  flags: --depth=1 --single-branch --branch=v2.0.13
-  command: cd build && ./install
-
-5.3:
-  type: git
-  git_url: https://github.com/phalcon/cphalcon
-  flags: --depth=1 --single-branch --branch=v2.0.9
-  command: cd build && ./install

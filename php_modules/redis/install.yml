@@ -53,12 +53,6 @@ all:
 7.2:
   type: git
   git_url: https://github.com/phpredis/phpredis
-  flags: |
-    --depth=1 --single-branch --branch=$(git ls-remote --tags https://github.com/phpredis/phpredis \
-      | sed 's/^.*tags\///g' \
-      | grep -E '^[.0-9]+$' \
-      | tr '-' '~' | sort -V | tail -1 \
-    ) \
   command: |
     REDIS_ARGS=""; \
     if php -m | grep -q "igbinary"; then \
@@ -145,29 +139,5 @@ all:
 5.6:
   type: pecl
   version: 4.3.0
-  build_dep: []
-  run_dep: []
-
-5.5:
-  type: pecl
-  version: 4.3.0
-  build_dep: []
-  run_dep: []
-
-5.4:
-  type: pecl
-  version: 4.3.0
-  build_dep: []
-  run_dep: []
-
-5.3:
-  type: pecl
-  version: 4.3.0
-  build_dep: []
-  run_dep: []
-
-5.2:
-  type: pecl
-  version: 2.2.7
   build_dep: []
   run_dep: []
