@@ -4,6 +4,13 @@
 ## Unreleased
 
 
+## Release 0.153
+
+### Changed
+- Resolve issue /usr/local/bin/msmtp missing inside container
+- Removed unsupported PHP versions: 5.2, 5.3, 5.4, 5.5
+
+
 ## Release 0.152
 
 ### Added

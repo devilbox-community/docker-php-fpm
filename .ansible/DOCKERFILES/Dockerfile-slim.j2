@@ -301,6 +301,11 @@ COPY --from=devilbox-slim-base-builder /usr/bin/blackfire* /usr/bin/
 COPY --from=devilbox-slim-base-builder /var/log/blackfire /var/log/blackfire
 
 ###
+### Copy msmtp
+###
+COPY --from=devilbox-slim-base-builder /usr/local/bin/msmtp /usr/local/bin/
+
+###
 ### Copy mhsendmail
 ###
 COPY --from=devilbox-slim-base-builder /usr/local/bin/mhsendmail /usr/local/bin/
