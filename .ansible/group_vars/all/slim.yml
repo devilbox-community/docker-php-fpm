@@ -289,8 +289,8 @@ base_software_available:
           apt-get install -y --no-install-recommends --no-install-suggests \
           msmtp; \
         else \
-          printf '%s\n%s\n%s\n' '#!/bin/sh' 'echo "Not available for this platform."' 'exit 1' > /usr/local/bin/msmtp \
-          && chmod +x /usr/local/bin/msmtp; \
+          printf '%s\n%s\n%s\n' '#!/bin/sh' 'echo "Not available for this platform."' 'exit 1' > /usr/bin/msmtp \
+          && chmod +x /usr/bin/msmtp; \
         fi \
       post: rm -rf /var/lib/apt/lists/*
 

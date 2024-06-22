@@ -303,7 +303,7 @@ COPY --from=devilbox-slim-base-builder /var/log/blackfire /var/log/blackfire
 ###
 ### Copy msmtp
 ###
-COPY --from=devilbox-slim-base-builder /usr/local/bin/msmtp /usr/local/bin/
+COPY --from=devilbox-slim-base-builder /usr/bin/msmtp /usr/local/bin/
 
 ###
 ### Copy mhsendmail
