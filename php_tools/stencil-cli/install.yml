@@ -1,0 +1,13 @@
+---
+
+check: stencil --version | grep -E '[0-9][.0-9]+' || (stencil --version; false)
+
+all:
+  type: npm
+  package: "@bigcommerce/stencil-cli"
+  binary: stencil-cli
+  version:
+  build_dep: []
+  run_dep: []
+  pre:
+  post:

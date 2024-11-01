@@ -102,7 +102,7 @@ help_software_available:
         && curl -o- "https://raw.githubusercontent.com/nvm-sh/nvm/${NVM_VERSION}/install.sh" \
           | NVM_DIR="{{ nvm_home }}" bash \
         \
-        && chown -R devilbox:devilbox "{{ nvm_home }}" \
+        && chown -Rf devilbox:devilbox "{{ nvm_home }}" \
       # Install latest and LTS version and yarn
       post: |
         su  -c ". {{ nvm_home }}/nvm.sh; nvm install ${NODE_VERSION}" devilbox \
