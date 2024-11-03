@@ -1,0 +1,9 @@
+---
+
+check: magerun --version
+
+all:
+  type: custom
+  command: curl -sS -k -L --fail -L "${MAGERUN_URL}" -o /usr/local/bin/magerun
+  pre: MAGERUN_URL="https://files.magerun.net/n98-magerun2-latest.phar"
+  post: chmod +x /usr/local/bin/magerun

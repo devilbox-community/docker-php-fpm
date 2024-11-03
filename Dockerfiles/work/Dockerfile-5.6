@@ -63,7 +63,7 @@ RUN set -eux \
 	&& curl -o- "https://raw.githubusercontent.com/nvm-sh/nvm/${NVM_VERSION}/install.sh" \
 	  | NVM_DIR="/opt/nvm" bash \
 	\
-	&& chown -R devilbox:devilbox "/opt/nvm" \
+	&& chown -Rf devilbox:devilbox "/opt/nvm" \
 	\
 	&& su  -c ". /opt/nvm/nvm.sh; nvm install ${NODE_VERSION}" devilbox \
 	&& su  -c ". /opt/nvm/nvm.sh; nvm use ${NODE_VERSION}" devilbox \
@@ -274,14 +274,11 @@ RUN set -eux \
 		python-wheel \
 		ruby-dev \
 		# ---------- run_deps ----------
-		dos2unix \
-		file \
 		fontconfig \
 		less \
 		libfontenc1 \
 		libxfont1 \
 		libxrender1 \
-		moreutils \
 		ruby \
 		xfonts-75dpi \
 		xfonts-base \
@@ -294,9 +291,6 @@ RUN set -eux \
 		net-tools \
 		openssh-client \
 		rsync \
-		shellcheck \
-		subversion \
-		tig \
 		vim \
 		zsh \
 	&& rm -rf /var/lib/apt/lists/*
@@ -304,13 +298,6 @@ RUN set -eux \
 ###
 ### Install defined php_tools
 ###
-
-# -------------------- (npm) angular-cli --------------------
-RUN set -eux \
-	&& su -c '. /opt/nvm/nvm.sh; npm install --location=global @angular/cli@16' devilbox \
-	&& ln -s /opt/nvm/versions/node/$(su -c '. /opt/nvm/nvm.sh; node --version' devilbox)/bin/ng /usr/local/bin/ \
-	&& ng version 2>&1 | grep -iE 'Angular CLI:\s*[0-9][.0-9]+' || (ng version; false)	\
-	&& true
 
 # -------------------- (npm) eslint --------------------
 RUN set -eux \
@@ -339,43 +326,12 @@ RUN set -eux \
 	&& mdl --version | grep -E '[.0-9]+' || (mdl --version; false)	\
 	&& true
 
-# -------------------- (custom) awesome-ci --------------------
-RUN set -eux \
-	&& git clone https://github.com/cytopia/awesome-ci.git /tmp/awesome-ci \
-	&& cd /tmp/awesome-ci \
-	&& git checkout $(git describe --abbrev=0 --tags) \
-	&& ./configure --prefix=/usr/local \
-	&& make install \
-	&& cd / \
-	&& rm -rf /tmp/awesome-ci \
-	\
-	&& regex-grep --version | grep -E '[0-9][.0-9]+' || (regex-grep --version; false)	\
-	&& true
-
 # -------------------- (composer) codeception --------------------
 RUN set -eux \
 	&& COMPOSER_HOME="/usr/local/src/composer" COMPOSER_MEMORY_LIMIT=-1 /usr/local/bin/composer-2 global require --no-interaction --no-cache  codeception/codeception \
 	&& ln -s /usr/local/src/composer/vendor/codeception/codeception/codecept /usr/local/bin/ \
 	&& rm -rf /usr/local/src/composer/cache/* \
 	&& codecept --version 2>/dev/null | grep -E '^Codeception(\sversion)?\s[0-9][.0-9]+$' || (codecept --version; false)	\
-	&& true
-
-# -------------------- (custom) deployer --------------------
-RUN set -eux \
-	&& TAG_VERSION="v4.3.4"	\
-	&& curl -sS -k -L --fail "https://deployer.org/releases/${TAG_VERSION}/deployer.phar" -L -o /usr/local/bin/dep	\
-	&& chmod +x /usr/local/bin/dep	\
-	&& dep --version 2>/dev/null | grep -Ei 'deployer\s*(version\s*)?[0-9][.0-9]+' || (dep --version; false)	\
-	&& true
-
-# -------------------- (custom) git-flow --------------------
-RUN set -eux \
-	&& git clone --depth=1 --single-branch https://github.com/CJ-Systems/gitflow-cjs /tmp/gitflow \
-	&& cd /tmp/gitflow \
-	&& make install \
-	&& cd / && rm -rf /tmp/gitflow \
-	\
-	&& git-flow version 2>&1 | grep -E '[0-9][.0-9]+' || (git-flow version; false)	\
 	&& true
 
 # -------------------- (npm) grunt-cli --------------------
@@ -397,19 +353,19 @@ RUN set -eux \
 	&& jq --version 2>&1 | grep -E '[0-9][.0-9]+' || (jq --version; false)	\
 	&& true
 
-# -------------------- (composer) laravel-installer --------------------
-RUN set -eux \
-	&& COMPOSER_HOME="/usr/local/src/composer" COMPOSER_MEMORY_LIMIT=-1 /usr/local/bin/composer-2 global require --no-interaction --no-cache  laravel/installer:2.2.0 \
-	&& ln -s /usr/local/src/composer/vendor/laravel/installer/laravel /usr/local/bin/ \
-	&& rm -rf /usr/local/src/composer/cache/* \
-	&& laravel --version | grep ^Laravel | grep -E '[0-9]\.[0-9]+' || (laravel --version; false)	\
-	&& true
-
 # -------------------- (custom) linkcheck --------------------
 RUN set -eux \
 	&& curl -sS -L --fail -o /usr/local/bin/linkcheck https://raw.githubusercontent.com/cytopia/linkcheck/master/linkcheck	\
 	&& chmod +x /usr/local/bin/linkcheck	\
 	&& linkcheck --version | grep -E 'v[0-9][.0-9]+' || (linkcheck --version; false)	\
+	&& true
+
+# -------------------- (custom) magerun --------------------
+RUN set -eux \
+	&& MAGERUN_URL="https://files.magerun.net/n98-magerun2-latest.phar"	\
+	&& curl -sS -k -L --fail -L "${MAGERUN_URL}" -o /usr/local/bin/magerun	\
+	&& chmod +x /usr/local/bin/magerun	\
+	&& magerun --version | grep -E 'version [0-9][.0-9]+' || (magerun --version; false)	\
 	&& true
 
 # -------------------- (npm) mdlint --------------------
@@ -548,16 +504,11 @@ RUN set -eux \
 	&& rsync --version | grep version | grep -E '[0-9]\.[0-9]+' || (rsync --version; false)	\
 	&& true
 
-# -------------------- (npm) sass --------------------
+# -------------------- (npm) stencil-cli --------------------
 RUN set -eux \
-	&& su -c '. /opt/nvm/nvm.sh; npm install --location=global sass' devilbox \
-	&& ln -s /opt/nvm/versions/node/$(su -c '. /opt/nvm/nvm.sh; node --version' devilbox)/bin/sass /usr/local/bin/ \
-	&& sass --version | grep -E '[0-9][.0-9]+' || (sass --version; false)	\
-	&& true
-
-# -------------------- (apt) shellcheck --------------------
-RUN set -eux \
-	&& shellcheck --version | grep -E '[0-9][.0-9]+' || (shellcheck --version; false)	\
+	&& su -c '. /opt/nvm/nvm.sh; npm install --location=global @bigcommerce/stencil-cli' devilbox \
+	&& ln -s /opt/nvm/versions/node/$(su -c '. /opt/nvm/nvm.sh; node --version' devilbox)/bin/stencil-cli /usr/local/bin/ \
+	&& stencil --version | grep -E '[0-9][.0-9]+' || (stencil --version; false)	\
 	&& true
 
 # -------------------- (npm) stylelint --------------------
@@ -565,11 +516,6 @@ RUN set -eux \
 	&& su -c '. /opt/nvm/nvm.sh; npm install --location=global stylelint' devilbox \
 	&& ln -s /opt/nvm/versions/node/$(su -c '. /opt/nvm/nvm.sh; node --version' devilbox)/bin/stylelint /usr/local/bin/ \
 	&& stylelint --version | grep -E '[0-9][.0-9]+' || (stylelint --version; false)	\
-	&& true
-
-# -------------------- (apt) svn --------------------
-RUN set -eux \
-	&& svn --version | grep version | grep -E '[0-9]+\.[0-9]+' || (svn --version; false)	\
 	&& true
 
 # -------------------- (custom) symfony-cli --------------------
@@ -582,11 +528,6 @@ RUN set -eux \
 RUN set -eux \
 	&& sh -c "$(curl -sS --fail -k https://taskfile.dev/install.sh)" -- -d -b /usr/local/bin/	\
 	&& task --version | grep -E '[0-9][.0-9]+' || (task --version; false)	\
-	&& true
-
-# -------------------- (apt) tig --------------------
-RUN set -eux \
-	&& tig --version 2>&1 | grep -E '[0-9][.0-9]+' || (tig --version; false)	\
 	&& true
 
 # -------------------- (apt) vim --------------------
@@ -705,14 +646,11 @@ RUN set -eux \
     && DEBIAN_FRONTEND=noninteractive apt-get update \
     && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends --no-install-suggests \
 		# ---------- run_deps ----------
-		dos2unix \
-		file \
 		fontconfig \
 		less \
 		libfontenc1 \
 		libxfont1 \
 		libxrender1 \
-		moreutils \
 		ruby \
 		xfonts-75dpi \
 		xfonts-base \
@@ -725,9 +663,6 @@ RUN set -eux \
 		net-tools \
 		openssh-client \
 		rsync \
-		shellcheck \
-		subversion \
-		tig \
 		vim \
 		zsh \
 	&& rm -rf /var/lib/apt/lists/*
@@ -776,11 +711,6 @@ COPY --from=devilbox-work-tools-builder /var/lib/gems /var/lib/gems
 FROM devilbox-work-tools as devilbox-work-tools-test
 
 
-# -------------------- (npm) angular-cli --------------------
-RUN set -eux \
-	&& ng version 2>&1 | grep -iE 'Angular CLI:\s*[0-9][.0-9]+' || (ng version; false)	\
-	&& true
-
 # -------------------- (npm) eslint --------------------
 RUN set -eux \
 	&& eslint -v | grep -E '[0-9][.0-9]+' || (eslint -v; false)	\
@@ -801,24 +731,9 @@ RUN set -eux \
 	&& mdl --version | grep -E '[.0-9]+' || (mdl --version; false)	\
 	&& true
 
-# -------------------- (custom) awesome-ci --------------------
-RUN set -eux \
-	&& regex-grep --version | grep -E '[0-9][.0-9]+' || (regex-grep --version; false)	\
-	&& true
-
 # -------------------- (composer) codeception --------------------
 RUN set -eux \
 	&& codecept --version 2>/dev/null | grep -E '^Codeception(\sversion)?\s[0-9][.0-9]+$' || (codecept --version; false)	\
-	&& true
-
-# -------------------- (custom) deployer --------------------
-RUN set -eux \
-	&& dep --version 2>/dev/null | grep -Ei 'deployer\s*(version\s*)?[0-9][.0-9]+' || (dep --version; false)	\
-	&& true
-
-# -------------------- (custom) git-flow --------------------
-RUN set -eux \
-	&& git-flow version 2>&1 | grep -E '[0-9][.0-9]+' || (git-flow version; false)	\
 	&& true
 
 # -------------------- (npm) grunt-cli --------------------
@@ -836,14 +751,14 @@ RUN set -eux \
 	&& jq --version 2>&1 | grep -E '[0-9][.0-9]+' || (jq --version; false)	\
 	&& true
 
-# -------------------- (composer) laravel-installer --------------------
-RUN set -eux \
-	&& laravel --version | grep ^Laravel | grep -E '[0-9]\.[0-9]+' || (laravel --version; false)	\
-	&& true
-
 # -------------------- (custom) linkcheck --------------------
 RUN set -eux \
 	&& linkcheck --version | grep -E 'v[0-9][.0-9]+' || (linkcheck --version; false)	\
+	&& true
+
+# -------------------- (custom) magerun --------------------
+RUN set -eux \
+	&& magerun --version | grep -E 'version [0-9][.0-9]+' || (magerun --version; false)	\
 	&& true
 
 # -------------------- (npm) mdlint --------------------
@@ -938,24 +853,14 @@ RUN set -eux \
 	&& rsync --version | grep version | grep -E '[0-9]\.[0-9]+' || (rsync --version; false)	\
 	&& true
 
-# -------------------- (npm) sass --------------------
+# -------------------- (npm) stencil-cli --------------------
 RUN set -eux \
-	&& sass --version | grep -E '[0-9][.0-9]+' || (sass --version; false)	\
-	&& true
-
-# -------------------- (apt) shellcheck --------------------
-RUN set -eux \
-	&& shellcheck --version | grep -E '[0-9][.0-9]+' || (shellcheck --version; false)	\
+	&& stencil --version | grep -E '[0-9][.0-9]+' || (stencil --version; false)	\
 	&& true
 
 # -------------------- (npm) stylelint --------------------
 RUN set -eux \
 	&& stylelint --version | grep -E '[0-9][.0-9]+' || (stylelint --version; false)	\
-	&& true
-
-# -------------------- (apt) svn --------------------
-RUN set -eux \
-	&& svn --version | grep version | grep -E '[0-9]+\.[0-9]+' || (svn --version; false)	\
 	&& true
 
 # -------------------- (custom) symfony-cli --------------------
@@ -966,11 +871,6 @@ RUN set -eux \
 # -------------------- (custom) taskfile --------------------
 RUN set -eux \
 	&& task --version | grep -E '[0-9][.0-9]+' || (task --version; false)	\
-	&& true
-
-# -------------------- (apt) tig --------------------
-RUN set -eux \
-	&& tig --version 2>&1 | grep -E '[0-9][.0-9]+' || (tig --version; false)	\
 	&& true
 
 # -------------------- (apt) vim --------------------

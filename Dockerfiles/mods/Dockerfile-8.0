@@ -57,7 +57,6 @@ RUN set -eux \
         libyaml-dev \
         libzip-dev \
         libzstd-dev \
-        re2c \
         snmp \
         unixodbc-dev \
         uuid-dev \
@@ -681,24 +680,6 @@ RUN set -eux \
 	&& true
 
 
-# -------------------- Installing PHP Extension: phalcon --------------------
-RUN set -eux \
-	# Installation: Generic
-	# Type:         GIT extension
-	&& git clone --depth=1 --single-branch --branch=$(git ls-remote --tags https://github.com/phalcon/cphalcon \
-  | sed 's/^.*tags\///g' \
-  | grep -E '^v[.0-9]+$' \
-  | tr '-' '~' | sort -V | tail -1 \
-) \
-  https://github.com/phalcon/cphalcon /tmp/phalcon \
-	&& cd /tmp/phalcon \
-	# Custom:       Install command
-	&& cd build && ./install \
-	# Enabling
-	&& docker-php-ext-enable phalcon \
-	&& true
-
-
 # -------------------- Installing PHP Extension: pspell --------------------
 RUN set -eux \
 	# Installation: Generic
@@ -1184,8 +1165,6 @@ RUN set -eux \
     && php-fpm -m | grep -oiE '^sqlite3$' \
     && php -m | grep -oiE '^sqlsrv$' \
     && php-fpm -m | grep -oiE '^sqlsrv$' \
-    && php -m | grep -oiE '^phalcon$' \
-    && php-fpm -m | grep -oiE '^phalcon$' \
     && php -m | grep -oiE '^phar$' \
     && php-fpm -m | grep -oiE '^phar$' \
     && php -m | grep -oiE '^posix$' \
@@ -1262,7 +1241,7 @@ RUN set -eux \
 RUN set -eux \
     && rm -f /usr/local/etc/php/conf.d/docker-php-ext-phalcon.ini || true \
     && rm -f /usr/local/etc/php/conf.d/docker-php-ext-psr.ini || true \
-    && rm -f /usr/local/etc/php/conf.d/docker-php-ext-xhprof.ini || true \
+    && rm -f /usr/local/etc/php/conf.d/docker-php-ext-xhprof.ini || true
 
 
 ###

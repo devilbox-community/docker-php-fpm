@@ -20,6 +20,7 @@ tools_enabled:
   - laravel-installer
   - laravel-lumen
   - linkcheck
+  - magerun
   - mdlint
   - mupdf-tools
   - net-tools
@@ -35,6 +36,7 @@ tools_enabled:
   - rsync
   - sass
   - shellcheck
+  - stencil-cli
   - stylelint
   - svn
   - symfony-cli
@@ -54,7 +56,7 @@ tools_enabled:
 # The following specifies how tools are being installed.
 tools_available:
   angular-cli:
-    disabled: []
+    disabled: [5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3]
     check: ng version 2>&1 | grep -iE 'Angular CLI:\s*[0-9][.0-9]+' || (ng version; false)
     all:
       type: npm
@@ -117,7 +119,7 @@ tools_available:
       pre:
       post:
   mdl:
-    disabled: []
+    disabled: [5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3]
     check: mdl --version | grep -E '[.0-9]+' || (mdl --version; false)
     all:
       type: rubygem
@@ -148,7 +150,7 @@ tools_available:
       pre: |
         gem install mixlib-config -v 2.2.4 \
   awesome-ci:
-    disabled: []
+    disabled: [5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3]
     check: regex-grep --version | grep -E '[0-9][.0-9]+' || (regex-grep --version; false)
     all:
       type: custom
@@ -177,7 +179,7 @@ tools_available:
       # pre:
       # post:
   deployer:
-    disabled: []
+    disabled: [5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3]
     check: dep --version 2>/dev/null | grep -Ei 'deployer\s*(version\s*)?[0-9][.0-9]+' || (dep --version; false)
     all:
       type: custom
@@ -209,7 +211,7 @@ tools_available:
       pre: TAG_VERSION="v4.3.4"
       command: curl -sS -k -L --fail "https://deployer.org/releases/${TAG_VERSION}/deployer.phar" -L -o /usr/local/bin/dep
   git-flow:
-    disabled: []
+    disabled: [5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3]
     check: git-flow version 2>&1 | grep -E '[0-9][.0-9]+' || (git-flow version; false)
     all:
       type: custom
@@ -249,7 +251,7 @@ tools_available:
       type: apt
       package: jq
   laravel-installer:
-    disabled: []
+    disabled: [5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3]
     check: laravel --version | grep ^Laravel | grep -E '[0-9]\.[0-9]+' || (laravel --version; false)
     all:
       type: composer
@@ -290,7 +292,7 @@ tools_available:
       # pre:
       # post:
   linkcheck:
-    disabled: []
+    disabled: [5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3]
     check: linkcheck --version | grep -E 'v[0-9][.0-9]+' || (linkcheck --version; false)
     all:
       type: custom
@@ -298,8 +300,16 @@ tools_available:
       post: chmod +x /usr/local/bin/linkcheck
       build_dep: []
       run_dep: []
-  mdlint:
+  magerun:
     disabled: []
+    check: magerun --version
+    all:
+      type: custom
+      command: curl -sS -k -L --fail -L "${MAGERUN_URL}" -o /usr/local/bin/magerun
+      pre: MAGERUN_URL="https://files.magerun.net/n98-magerun2-latest.phar"
+      post: chmod +x /usr/local/bin/magerun
+  mdlint:
+    disabled: [5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3]
     check: mdlint --version | grep -E '[0-9][.0-9]+' || (mdlint --version; false)
     all:
       type: npm
@@ -333,7 +343,7 @@ tools_available:
       type: apt
       package: net-tools
   phalcon-devtools:
-    disabled: [8.2, 8.3]
+    disabled: [5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3]
     check: |
         if find /usr/local/lib/php/extensions/ -name phalcon.so | grep phalcon; then \
           echo "extension=phalcon.so" > /usr/local/etc/php/conf.d/docker-php-ext-phalcon.ini; \
@@ -538,7 +548,7 @@ tools_available:
       type: apt
       package: rsync
   sass:
-    disabled: []
+    disabled: [5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3]
     check: sass --version | grep -E '[0-9][.0-9]+' || (sass --version; false)
     all:
       type: npm
@@ -550,13 +560,25 @@ tools_available:
       pre:
       post:
   shellcheck:
-    disabled: []
+    disabled: [5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3]
     check: shellcheck --version | grep -E '[0-9][.0-9]+' || (shellcheck --version; false)
     all:
       type: apt
       package: shellcheck
+  stencil-cli:
+    disabled: [5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3]
+    check: stencil --version | grep -E '[0-9][.0-9]+' || (stencil --version; false)
+    all:
+      type: npm
+      package: "@bigcommerce/stencil-cli"
+      binary: stencil-cli
+      version:
+      build_dep: []
+      run_dep: []
+      pre:
+      post:
   stylelint:
-    disabled: []
+    disabled: [5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3]
     check: stylelint --version | grep -E '[0-9][.0-9]+' || (stylelint --version; false)
     all:
       type: npm
@@ -568,13 +590,13 @@ tools_available:
       pre:
       post:
   svn:
-    disabled: []
+    disabled: [5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3]
     check: svn --version | grep version | grep -E '[0-9]+\.[0-9]+' || (svn --version; false)
     all:
       type: apt
       package: subversion
   symfony-cli:
-    disabled: []
+    disabled: [5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3]
     check: symfony --no-ansi -V | grep -E 'version [0-9][.0-9]+' || (symfony --no-ansi -V; false)
     all:
       type: custom
@@ -582,13 +604,13 @@ tools_available:
       build_dep: []
       run_dep: []
   taskfile:
-    disabled: []
+    disabled: [5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3]
     check: task --version | grep -E '[0-9][.0-9]+' || (task --version; false)
     all:
       type: custom
       command: sh -c "$(curl -sS --fail -k https://taskfile.dev/install.sh)" -- -d -b /usr/local/bin/
   tig:
-    disabled: []
+    disabled: [5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3]
     check: tig --version 2>&1 | grep -E '[0-9][.0-9]+' || (tig --version; false)
     all:
       type: apt
@@ -600,7 +622,7 @@ tools_available:
       type: apt
       package: vim
   vue-cli:
-    disabled: []
+    disabled: [5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3]
     check: vue --version | grep -E '[0-9][.0-9]+' || (vue --version; false)
     all:
       type: npm
