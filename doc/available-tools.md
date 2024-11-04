@@ -308,60 +308,62 @@ Additionally to all of the `slim` tools shown above, the following PHP cli tools
 
 <!-- TOOLS_WORK_START -->
 
-| Tool                                       | PHP 5.6 | PHP 7.0 | PHP 7.1 | PHP 7.2 | PHP 7.3 | PHP 7.4 | PHP 8.0 | PHP 8.1 | PHP 8.2 | PHP 8.3 |
-|--------------------------------------------|---------|---------|---------|---------|---------|---------|---------|---------|---------|---------|
-| [angular-cli][lnk_angular-cli]             |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
-| [asgardcms][lnk_asgardcms]                 |         |         |         |         |         |         |         |         |         |         |
-| [awesome-ci][lnk_awesome-ci]               |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
-| [codeception][lnk_codeception]             |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
-| [**composer**][lnk_**composer**]           |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
-| [**corepack**][lnk_**corepack**]           |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
-| [deployer][lnk_deployer]                   |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
-| [eslint][lnk_eslint]                       |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
-| [git][lnk_git]                             |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
-| [git-flow][lnk_git-flow]                   |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
-| [grunt-cli][lnk_grunt-cli]                 |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
-| [gulp][lnk_gulp]                           |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
-| [jq][lnk_jq]                               |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
-| [jsonlint][lnk_jsonlint]                   |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
-| [laravel-installer][lnk_laravel-installer] |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
-| [laravel-lumen][lnk_laravel-lumen]         |         |         |         |         |         |         |         |         |         |         |
-| [linkcheck][lnk_linkcheck]                 |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
-| [mdl][lnk_mdl]                             |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
-| [mdlint][lnk_mdlint]                       |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
-| [mupdf-tools][lnk_mupdf-tools]             |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
-| [net-tools][lnk_net-tools]                 |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
-| [**node**][lnk_**node**]                   |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
-| [**npm**][lnk_**npm**]                     |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
-| [**nvm**][lnk_**nvm**]                     |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
-| [phalcon-devtools][lnk_phalcon-devtools]   |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |         |         |
-| [php-cs-fixer][lnk_php-cs-fixer]           |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
-| [phpcbf][lnk_phpcbf]                       |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
-| [phpcs][lnk_phpcs]                         |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
-| [phpmd][lnk_phpmd]                         |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
-| [phpunit][lnk_phpunit]                     |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
-| [**pip**][lnk_**pip**]                     |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
-| [pm2][lnk_pm2]                             |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
-| [pwncat][lnk_pwncat]                       |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
-| [rsync][lnk_rsync]                         |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
-| [sass][lnk_sass]                           |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
-| [shellcheck][lnk_shellcheck]               |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
-| [ssh][lnk_ssh]                             |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
-| [stylelint][lnk_stylelint]                 |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
-| [svn][lnk_svn]                             |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
-| [symfony-cli][lnk_symfony-cli]             |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
-| [taskfile][lnk_taskfile]                   |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
-| [tig][lnk_tig]                             |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
-| [vim][lnk_vim]                             |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
-| [vue-cli][lnk_vue-cli]                     |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
-| [webpack-cli][lnk_webpack-cli]             |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
-| [wkhtmltopdf][lnk_wkhtmltopdf]             |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
-| [wp-cli][lnk_wp-cli]                       |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
-| [wscat][lnk_wscat]                         |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
-| [yamllint][lnk_yamllint]                   |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
-| [**yarn**][lnk_**yarn**]                   |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
-| [yq][lnk_yq]                               |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
-| [zsh][lnk_zsh]                             |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
+| Tool                                       | PHP 7.4 | PHP 8.0 | PHP 8.1 | PHP 8.2 | PHP 8.3 |
+|--------------------------------------------|---------|---------|---------|---------|---------|
+| [angular-cli][lnk_angular-cli]             |         |         |         |         |         |
+| [asgardcms][lnk_asgardcms]                 |         |         |         |         |         |
+| [awesome-ci][lnk_awesome-ci]               |         |         |         |         |         |
+| [codeception][lnk_codeception]             |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
+| [**composer**][lnk_**composer**]           |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
+| [**corepack**][lnk_**corepack**]           |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
+| [deployer][lnk_deployer]                   |         |         |         |         |         |
+| [eslint][lnk_eslint]                       |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
+| [git][lnk_git]                             |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
+| [git-flow][lnk_git-flow]                   |         |         |         |         |         |
+| [grunt-cli][lnk_grunt-cli]                 |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
+| [gulp][lnk_gulp]                           |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
+| [jq][lnk_jq]                               |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
+| [jsonlint][lnk_jsonlint]                   |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
+| [laravel-installer][lnk_laravel-installer] |         |         |         |         |         |
+| [laravel-lumen][lnk_laravel-lumen]         |         |         |         |         |         |
+| [linkcheck][lnk_linkcheck]                 |         |         |         |         |         |
+| [magerun][lnk_magerun]                     |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
+| [mdl][lnk_mdl]                             |         |         |         |         |         |
+| [mdlint][lnk_mdlint]                       |         |         |         |         |         |
+| [mupdf-tools][lnk_mupdf-tools]             |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
+| [net-tools][lnk_net-tools]                 |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
+| [**node**][lnk_**node**]                   |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
+| [**npm**][lnk_**npm**]                     |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
+| [**nvm**][lnk_**nvm**]                     |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
+| [phalcon-devtools][lnk_phalcon-devtools]   |         |         |         |         |         |
+| [php-cs-fixer][lnk_php-cs-fixer]           |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
+| [phpcbf][lnk_phpcbf]                       |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
+| [phpcs][lnk_phpcs]                         |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
+| [phpmd][lnk_phpmd]                         |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
+| [phpunit][lnk_phpunit]                     |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
+| [**pip**][lnk_**pip**]                     |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
+| [pm2][lnk_pm2]                             |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
+| [pwncat][lnk_pwncat]                       |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
+| [rsync][lnk_rsync]                         |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
+| [sass][lnk_sass]                           |         |         |         |         |         |
+| [shellcheck][lnk_shellcheck]               |         |         |         |         |         |
+| [ssh][lnk_ssh]                             |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
+| [stencil-cli][lnk_stencil-cli]             |         |         |         |         |         |
+| [stylelint][lnk_stylelint]                 |         |         |         |         |         |
+| [svn][lnk_svn]                             |         |         |         |         |         |
+| [symfony-cli][lnk_symfony-cli]             |         |         |         |         |         |
+| [taskfile][lnk_taskfile]                   |         |         |         |         |         |
+| [tig][lnk_tig]                             |         |         |         |         |         |
+| [vim][lnk_vim]                             |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
+| [vue-cli][lnk_vue-cli]                     |         |         |         |         |         |
+| [webpack-cli][lnk_webpack-cli]             |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
+| [wkhtmltopdf][lnk_wkhtmltopdf]             |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
+| [wp-cli][lnk_wp-cli]                       |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
+| [wscat][lnk_wscat]                         |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
+| [yamllint][lnk_yamllint]                   |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
+| [**yarn**][lnk_**yarn**]                   |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
+| [yq][lnk_yq]                               |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
+| [zsh][lnk_zsh]                             |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
 
 [lnk_angular-cli]: ../php_tools/angular-cli
 [lnk_asgardcms]: ../php_tools/asgardcms
@@ -380,6 +382,7 @@ Additionally to all of the `slim` tools shown above, the following PHP cli tools
 [lnk_laravel-installer]: ../php_tools/laravel-installer
 [lnk_laravel-lumen]: ../php_tools/laravel-lumen
 [lnk_linkcheck]: ../php_tools/linkcheck
+[lnk_magerun]: ../php_tools/magerun
 [lnk_mdl]: ../php_tools/mdl
 [lnk_mdlint]: ../php_tools/mdlint
 [lnk_mupdf-tools]: ../php_tools/mupdf-tools
@@ -400,6 +403,7 @@ Additionally to all of the `slim` tools shown above, the following PHP cli tools
 [lnk_sass]: ../php_tools/sass
 [lnk_shellcheck]: ../php_tools/shellcheck
 [lnk_ssh]: ../php_tools/ssh
+[lnk_stencil-cli]: ../php_tools/stencil-cli
 [lnk_stylelint]: ../php_tools/stylelint
 [lnk_svn]: ../php_tools/svn
 [lnk_symfony-cli]: ../php_tools/symfony-cli

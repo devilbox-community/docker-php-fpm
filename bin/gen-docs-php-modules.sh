@@ -241,23 +241,13 @@ update() {
 ###
 if [ "${VERSION}" = "" ]; then
 	# Update PHP modules for all versions at once
-	update "5.6"
-	update "7.0"
-	update "7.1"
-	update "7.2"
-	update "7.3"
 	update "7.4"
 	update "8.0"
 	update "8.1"
 	update "8.2"
 	update "8.3"
 else
-	if [ "${VERSION}" != "5.6" ] \
-	&& [ "${VERSION}" != "7.0" ] \
-	&& [ "${VERSION}" != "7.1" ] \
-	&& [ "${VERSION}" != "7.2" ] \
-	&& [ "${VERSION}" != "7.3" ] \
-	&& [ "${VERSION}" != "7.4" ] \
+	if [ "${VERSION}" != "7.4" ] \
 	&& [ "${VERSION}" != "8.0" ] \
 	&& [ "${VERSION}" != "8.1" ] \
 	&& [ "${VERSION}" != "8.2" ] \
