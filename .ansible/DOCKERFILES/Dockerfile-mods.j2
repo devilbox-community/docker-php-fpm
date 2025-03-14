@@ -1,6 +1,6 @@
 # vi: ft=dockerfile
 {{ edit_comment_mods }}
-FROM {{ docker_user }}/php-fpm:{{ php_version }}-base as builder
+FROM {{ docker_user }}/php-fpm:{{ php_version }}-base AS builder
 
 
 {#
@@ -113,8 +113,10 @@ RUN set -eux \
             {%- if extensions_available[ext][php_version]['type'] == 'builtin' -%}
                 {{- "\n\t" }}# Type:         Built-in extension
                 {%- if 'configure' in extensions_available[ext][php_version] -%}
-                    {{- "\n\t" }}# Custom:       configure command
-                    {{- "\n\t" }}&& docker-php-ext-configure {{ ext }} {{ extensions_available[ext][php_version]['configure'] }} \
+                    {%- if extensions_available[ext][php_version]['configure'] != 'DISABLED' -%}
+                        {{- "\n\t" }}# Custom:       configure command
+                        {{- "\n\t" }}&& docker-php-ext-configure {{ ext }} {{ extensions_available[ext][php_version]['configure'] }} \
+                    {%- endif -%}
                 {%- elif 'configure' in extensions_available[ext]['all'] -%}
                     {{- "\n\t" }}# Default:      configure command
                     {{- "\n\t" }}&& docker-php-ext-configure {{ ext }} {{ extensions_available[ext]['all']['configure'] }} \
@@ -184,8 +186,10 @@ RUN set -eux \
             {%- if extensions_available[ext]['all']['type'] == 'builtin' -%}
                 {{- "\n\t" }}# Type:         Built-in extension
                 {%- if 'configure' in extensions_available[ext]['all'] -%}
-                    {{- "\n\t" }}# Custom:       configure command
-                    {{- "\n\t" }}&& docker-php-ext-configure {{ ext }} {{ extensions_available[ext]['all']['configure'] }} \
+                    {%- if extensions_available[ext]['all']['configure'] != 'DISABLED' -%}
+                        {{- "\n\t" }}# Custom:       configure command
+                        {{- "\n\t" }}&& docker-php-ext-configure {{ ext }} {{ extensions_available[ext]['all']['configure'] }} \
+                    {%- endif -%}
                 {%- endif -%}
                 {{- "\n\t" }}&& docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) {{ ext }} \
             {#-
@@ -299,7 +303,7 @@ RUN set -eux \
                 {{- "\n\t" }}&& php-fpm -m | grep -oiE '^Zend Opcache$'
             {%- elif ext == 'readline' -%}
                 {{- "\n\t" }}&& php -m | grep -oiE '^readline$'
-            {%- elif ext not in ['blackfire', 'ioncube'] -%}
+            {%- elif ext not in ['blackfire', 'ioncube', 'sourceguardian'] -%}
                 {{- "\n\t" }}&& php -m | grep -oiE '^{{ ext }}$' \
                 {{- "\n\t" }}&& php-fpm -m | grep -oiE '^{{ ext }}$'
             {%- else %}
@@ -330,8 +334,7 @@ RUN set -eux \
 
 
 {{ edit_comment_mods }}
-FROM {{ docker_user }}/php-fpm:{{ php_version }}-base as final
-MAINTAINER "Toan Nguyen" <devilbox@nntoan.com>
+FROM {{ docker_user }}/php-fpm:{{ php_version }}-base AS final
 
 ###
 ### Labels
@@ -455,7 +458,7 @@ RUN set -eux \
         {%- elif ext == 'readline' %}
     && php -m | grep -oiE '^readline$' \
 {# #}
-        {%- elif ext not in ['blackfire', 'ioncube'] %}
+        {%- elif ext not in ['blackfire', 'ioncube', 'sourceguardian'] %}
     && php -m | grep -oiE '^{{ ext }}$' \
     && php-fpm -m | grep -oiE '^{{ ext }}$' \
 {# #}

@@ -11,6 +11,10 @@ all:
   # pre:
   # post:
 
+8.4:
+  type: pip
+  flags: --break-system-packages
+
 8.3:
   type: pip
   flags: --break-system-packages

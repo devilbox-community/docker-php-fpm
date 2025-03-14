@@ -86,6 +86,10 @@ get_modules_from_image() {
 		modules="$( printf "%s\n%s\n" "${modules}" "ioncube" )";
 	fi
 
+    if docker run --rm --platform "${ARCH}" --entrypoint=find "${IMAGE}:${img_tag}" /usr/local/lib/php/extensions -name 'sourceguardian.so' | grep -q sourceguardian.so; then
+		modules="$( printf "%s\n%s\n" "${modules}" "sourceguardian" )";
+	fi
+
 	if docker run --rm --platform "${ARCH}" --entrypoint=find "${IMAGE}:${img_tag}" /usr/local/lib/php/extensions -name 'blackfire.so' | grep -q blackfire.so; then
 		modules="$( printf "%s\n%s\n" "${modules}" "blackfire" )";
 	fi
@@ -120,6 +124,35 @@ validate_readme() {
 	local php_version="${1}"
 	local modules_img="${2}"  # Modules found in the PHP docker image
 	local stage="${3}"        # base or mods
+
+	# The following commented code is used to generate the README initially (every new PHP version)
+	# Uncommented it and paste the output to ../doc/php-modules.md
+	# echo "<table>"
+	# echo " <tr>"
+	# echo "   <th>Ext</th>"
+	# echo "   <th>PHP 7.4</th>"
+	# echo "   <th>PHP 8.0</th>"
+	# echo "   <th>PHP 8.1</th>"
+	# echo "   <th>PHP 8.2</th>"
+	# echo "   <th>PHP 8.3</th>"
+	# echo "   <th>PHP 8.4</th>"
+	# echo " </tr>"
+
+	# while read -r line; do
+	# 	MOD_NAME="$( echo "${line}" )"
+	# 	MOD_LOWER="$( echo "${MOD_NAME}" | tr '[:upper:]' '[:lower:]' )"
+	# 	echo " <tr>"
+	# 	echo "  <td><a href=\"../php_modules/${MOD_LOWER}\">${MOD_NAME}</a></td>"
+	# 	echo "  <td class=\"ext_${stage}_${MOD_LOWER}_7.4\">✓</td>"
+	# 	echo "  <td class=\"ext_${stage}_${MOD_LOWER}_8.0\">✓</td>"
+	# 	echo "  <td class=\"ext_${stage}_${MOD_LOWER}_8.1\">✓</td>"
+	# 	echo "  <td class=\"ext_${stage}_${MOD_LOWER}_8.2\">✓</td>"
+	# 	echo "  <td class=\"ext_${stage}_${MOD_LOWER}_8.3\">✓</td>"
+	# 	echo "  <td class=\"ext_${stage}_${MOD_LOWER}_8.4\">✓</td>"
+	# 	echo " </tr>"
+	# done < <(echo "${modules_img}")
+	# echo "</table>"
+	# exit
 
 	# Check if *.md contains all modules we have retrieved from the PHP image
 	while read -r line; do
@@ -178,16 +211,12 @@ update_readme() {
 #echo "<table>"
 #echo " <tr>"
 #echo "   <th>Ext</th>"
-#echo "   <th>PHP 5.6</th>"
-#echo "   <th>PHP 7.0</th>"
-#echo "   <th>PHP 7.1</th>"
-#echo "   <th>PHP 7.2</th>"
-#echo "   <th>PHP 7.3</th>"
 #echo "   <th>PHP 7.4</th>"
 #echo "   <th>PHP 8.0</th>"
 #echo "   <th>PHP 8.1</th>"
 #echo "   <th>PHP 8.2</th>"
 #echo "   <th>PHP 8.3</th>"
+#echo "   <th>PHP 8.4</th>"
 #echo " </tr>"
 #
 #while read -r line; do
@@ -195,16 +224,12 @@ update_readme() {
 #	MOD_LOWER="$( echo "${MOD_NAME}" | tr '[:upper:]' '[:lower:]' )"
 #	echo " <tr>"
 #	echo "  <td><a href=\"php_modules/${MOD_LOWER}\">${MOD_NAME}</a></td>"
-#	echo "  <td class=\"ext_mods_${MOD_LOWER}_5.6\">✓</td>"
-#	echo "  <td class=\"ext_mods_${MOD_LOWER}_7.0\">✓</td>"
-#	echo "  <td class=\"ext_mods_${MOD_LOWER}_7.1\">✓</td>"
-#	echo "  <td class=\"ext_mods_${MOD_LOWER}_7.2\">✓</td>"
-#	echo "  <td class=\"ext_mods_${MOD_LOWER}_7.3\">✓</td>"
 #	echo "  <td class=\"ext_mods_${MOD_LOWER}_7.4\">✓</td>"
 #	echo "  <td class=\"ext_mods_${MOD_LOWER}_8.0\">✓</td>"
 #	echo "  <td class=\"ext_mods_${MOD_LOWER}_8.1\">✓</td>"
 #	echo "  <td class=\"ext_mods_${MOD_LOWER}_8.2\">✓</td>"
 #	echo "  <td class=\"ext_mods_${MOD_LOWER}_8.3\">✓</td>"
+#	echo "  <td class=\"ext_mods_${MOD_LOWER}_8.4\">✓</td>"
 #	echo " </tr>"
 #done < <(echo "${MODS_IMAGE}")
 #echo "<table>"
@@ -246,12 +271,14 @@ if [ "${VERSION}" = "" ]; then
 	update "8.1"
 	update "8.2"
 	update "8.3"
+	update "8.4"
 else
 	if [ "${VERSION}" != "7.4" ] \
 	&& [ "${VERSION}" != "8.0" ] \
 	&& [ "${VERSION}" != "8.1" ] \
 	&& [ "${VERSION}" != "8.2" ] \
-	&& [ "${VERSION}" != "8.3" ]; then
+	&& [ "${VERSION}" != "8.3" ] \
+	&& [ "${VERSION}" != "8.4" ]; then
 		# Argument does not match any of the PHP versions
 		echo "Error, invalid argument."
 		print_usage

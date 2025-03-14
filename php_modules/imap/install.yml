@@ -11,3 +11,7 @@ all:
   configure: --with-kerberos --with-imap-ssl --with-imap
   build_dep: [libc-client-dev, libkrb5-dev, libcurl4-openssl-dev]
   run_dep: [libc-client2007e]
+
+8.4:
+  type: pecl
+  version: 1.0.3

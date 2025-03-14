@@ -52,6 +52,10 @@ all:
     && (ln -s /usr/lib/oracle/${ORACLE_VERSION_MAJOR}/client64/lib/*.so* /usr/lib/ || true) \
   build_dep: [alien]
 
+8.4:
+  type: pecl
+  command: printf "instantclient,/usr/lib/oracle/${ORACLE_VERSION_MAJOR}/client64/lib/,${ORACLE_VERSION_MAJOR}" | pecl install pdo_oci-1.1.0
+
 8.3:
   type: builtin
   configure: --with-pdo-oci=instantclient,/usr/lib/oracle/${ORACLE_VERSION_MAJOR}/client64/lib/,${ORACLE_VERSION_MAJOR}

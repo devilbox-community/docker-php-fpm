@@ -13,7 +13,7 @@
 ###
 ### Installs all cli tools required to install custom tools
 ###
-FROM {{ docker_user }}/php-fpm:{{ php_version }}-slim as devilbox-work-help-builder
+FROM {{ docker_user }}/php-fpm:{{ php_version }}-slim AS devilbox-work-help-builder
 
 {% set build_deps = [] -%}
 {%- for ext in help_software_enabled -%}
@@ -100,7 +100,7 @@ RUN set -eux \
 ###
 ### Copies all cli tools required to run Devilbox and its intranet into a clean image
 ###
-FROM {{ docker_user }}/php-fpm:{{ php_version }}-slim as devilbox-work-help
+FROM {{ docker_user }}/php-fpm:{{ php_version }}-slim AS devilbox-work-help
 
 {% set run_deps = [] -%}
 {%- for ext in help_software_enabled -%}
@@ -183,7 +183,7 @@ RUN set -eux \
 ###
 ### Test all Devilbox cli utils if copying was successful
 ###
-FROM devilbox-work-help as devilbox-work-help-test
+FROM devilbox-work-help AS devilbox-work-help-test
 
 ###
 ### Devilbox required helper tools from group_vars (work-help.yml)
@@ -250,7 +250,7 @@ RUN set -eux \
 ###
 ### This stage can be easily modified by adding tools into the ./php_tools/ directory.
 ###
-FROM devilbox-work-help as devilbox-work-tools-builder
+FROM devilbox-work-help AS devilbox-work-tools-builder
 
 {% set build_deps = [] -%}
 {%- set run_deps = [] -%}
@@ -398,7 +398,7 @@ RUN set -eux \
 ###
 ### This stage can be easily modified by adding tools into the ./php_tools/ directory.
 ###
-FROM devilbox-work-help as devilbox-work-tools
+FROM devilbox-work-help AS devilbox-work-tools
 
 {% set run_deps = [] -%}
 {%- set tools_apt = [] -%}
@@ -479,7 +479,7 @@ COPY --from=devilbox-work-tools-builder /var/lib/gems /var/lib/gems
 ###
 ### Test all Devilbox cli utils if copying was successful
 ###
-FROM devilbox-work-tools as devilbox-work-tools-test
+FROM devilbox-work-tools AS devilbox-work-tools-test
 
 {% for tool in tools_enabled -%}
     {%- if fn.is_not_disabled(php_version, tool, tools_available) -%}
@@ -538,8 +538,7 @@ RUN set -eux \
 ###
 ### Prepare final base image (STAGE: work)
 ###
-FROM devilbox-work-tools as work
-MAINTAINER "Toan Nguyen" <devilbox@nntoan.com>
+FROM devilbox-work-tools AS work
 
 ###
 ### Labels

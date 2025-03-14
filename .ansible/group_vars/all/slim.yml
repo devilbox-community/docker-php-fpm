@@ -16,6 +16,9 @@ os_release:
   all:
     debian: bookworm
     ubuntu: jammy
+  8.4:
+    debian: bookworm
+    ubuntu: jammy
   8.3:
     debian: bookworm
     ubuntu: jammy

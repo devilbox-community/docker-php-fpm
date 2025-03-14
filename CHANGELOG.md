@@ -4,6 +4,23 @@
 ## Unreleased
 
 
+## Release 0.155
+
+### Changed
+- Added PHP 8.4
+- Added `sourceguardian` to all supported PHP versions
+- Fixed issues while compile PHP extensions for PHP 8.4
+- Disabled `PHP-CS-Fixer` for PHP 8.4
+- Support new way to drop `docker-php-ext-configure` in `mods` flavour
+
+
+## Release 0.154
+
+### Changed
+- Fixed empty continuation in Dockerfiles
+- Removed unsupported PHP versions: 5.6, 7.0, 7.1, 7.2, 7.3
+
+
 ## Release 0.153
 
 ### Changed

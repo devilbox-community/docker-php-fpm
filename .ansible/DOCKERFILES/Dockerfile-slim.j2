@@ -13,7 +13,7 @@
 ###
 ### Installs all cli tools required to run Devilbox and its intranet
 ###
-FROM {{ docker_user }}/php-fpm:{{ php_version }}-prod as devilbox-slim-base-builder
+FROM {{ docker_user }}/php-fpm:{{ php_version }}-prod AS devilbox-slim-base-builder
 
 ###
 ### Install apt Tools
@@ -82,7 +82,7 @@ RUN set -eux \
     && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends --no-install-suggests \
         file \
         git \
-{% if php_version in [7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3] %}
+{% if php_version in [7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3, 8.4] %}
         mariadb-client \
 {% else %}
         mysql-client \
@@ -249,7 +249,7 @@ RUN set -eux \
 ###
 ### Copies all cli tools required to run Devilbox and its intranet into a clean image
 ###
-FROM {{ docker_user }}/php-fpm:{{ php_version }}-prod as devilbox-slim-base
+FROM {{ docker_user }}/php-fpm:{{ php_version }}-prod AS devilbox-slim-base
 ARG ARCH
 
 {% set tools_apt = [] -%}
@@ -426,7 +426,7 @@ RUN set -eux \
 ###
 ### Test all Devilbox cli utils if copying was successful
 ###
-FROM devilbox-slim-base as devilbox-slim-base-test
+FROM devilbox-slim-base AS devilbox-slim-base-test
 RUN set -eux \
     && mysql --version \
     && redis-cli --version \
@@ -497,8 +497,7 @@ RUN set -eux \
 ###
 ### Prepare final base image (STAGE: slim)
 ###
-FROM devilbox-slim-base as slim
-MAINTAINER "Toan Nguyen" <devilbox@nntoan.com>
+FROM devilbox-slim-base AS slim
 
 ###
 ### Labels

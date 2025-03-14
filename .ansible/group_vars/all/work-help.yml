@@ -118,6 +118,7 @@ help_software_available:
         && chmod 0777 {{ nvm_home }} \
         && find {{ nvm_home }} -type f -print0 | xargs -n1 -0 chmod go+w \
         && find {{ nvm_home }} -type d -print0 | xargs -n1 -0 chmod 0777 \
+        && chown -Rf devilbox:devilbox {{ nvm_home }} \
         \
         && rm -rf {{ nvm_home }}/.cache \
         && rm -rf {{ nvm_home }}/versions/node/$(su -c '. /opt/nvm/nvm.sh; node --version' devilbox)/share \

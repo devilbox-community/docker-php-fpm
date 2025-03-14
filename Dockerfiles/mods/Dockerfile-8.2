@@ -1,6 +1,6 @@
 # vi: ft=dockerfile
 # Auto-generated via Ansible: edit ./ansible/DOCKERFILES/Dockerfile-mods.j2 instead.
-FROM devilboxcommunity/php-fpm:8.2-base as builder
+FROM devilboxcommunity/php-fpm:8.2-base AS builder
 
 
 ###
@@ -770,6 +770,24 @@ RUN set -eux \
 	&& true
 
 
+# -------------------- Installing PHP Extension: sourceguardian --------------------
+RUN set -eux \
+	# Installation: Generic
+	# Type:         Custom extension
+	&& EXTENSION_DIR="$( php -i | grep ^extension_dir | awk -F '=>' '{print $2}' | xargs )" \
+&& if [ ! -d "${EXTENSION_DIR}" ]; then mkdir -p "${EXTENSION_DIR}"; fi \
+&& curl -sS --fail -k https://www.sourceguardian.com/loaders/download/loaders.linux-$(dpkg-architecture --query DEB_HOST_GNU_CPU | sed 's/_/-/g').tar.gz -L -o sourceguardian.tar.gz \
+&& mkdir -p sourceguardian \
+&& tar xvfz sourceguardian.tar.gz -C ./sourceguardian \
+&& cd sourceguardian \
+&& cp "ixed.8.2.lin" "${EXTENSION_DIR}/sourceguardian.so" \
+&& cd ../ \
+&& rm -rf sourceguardian \
+&& rm -rf sourceguardian.tar.gz \
+ \
+	&& true
+
+
 # -------------------- Installing PHP Extension: zip --------------------
 RUN set -eux \
 	# Installation: Generic
@@ -916,8 +934,7 @@ RUN set -eux \
 
 
 # Auto-generated via Ansible: edit ./ansible/DOCKERFILES/Dockerfile-mods.j2 instead.
-FROM devilboxcommunity/php-fpm:8.2-base as final
-MAINTAINER "Toan Nguyen" <devilbox@nntoan.com>
+FROM devilboxcommunity/php-fpm:8.2-base AS final
 
 ###
 ### Labels

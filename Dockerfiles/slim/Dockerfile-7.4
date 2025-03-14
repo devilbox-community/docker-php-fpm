@@ -12,7 +12,7 @@
 ###
 ### Installs all cli tools required to run Devilbox and its intranet
 ###
-FROM devilboxcommunity/php-fpm:7.4-prod as devilbox-slim-base-builder
+FROM devilboxcommunity/php-fpm:7.4-prod AS devilbox-slim-base-builder
 
 ###
 ### Install apt Tools
@@ -310,7 +310,7 @@ RUN set -eux \
 ###
 ### Copies all cli tools required to run Devilbox and its intranet into a clean image
 ###
-FROM devilboxcommunity/php-fpm:7.4-prod as devilbox-slim-base
+FROM devilboxcommunity/php-fpm:7.4-prod AS devilbox-slim-base
 ARG ARCH
 
 ###
@@ -474,7 +474,7 @@ RUN set -eux \
 ###
 ### Test all Devilbox cli utils if copying was successful
 ###
-FROM devilbox-slim-base as devilbox-slim-base-test
+FROM devilbox-slim-base AS devilbox-slim-base-test
 RUN set -eux \
     && mysql --version \
     && redis-cli --version \
@@ -602,8 +602,7 @@ RUN set -eux \
 ###
 ### Prepare final base image (STAGE: slim)
 ###
-FROM devilbox-slim-base as slim
-MAINTAINER "Toan Nguyen" <devilbox@nntoan.com>
+FROM devilbox-slim-base AS slim
 
 ###
 ### Labels

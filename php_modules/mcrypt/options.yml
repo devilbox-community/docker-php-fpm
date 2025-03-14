@@ -6,7 +6,7 @@ name: mcrypt
 # Exclude module build/installation for the following PHP versions
 # mcrypt 1.0.4 requires PHP 8.1.0 or older
 # version >= 7.2.0, version <= 8.1.0, excluded versions: 8.1.0
-exclude: [8.1, 8.2, 8.3]
+exclude: [8.1, 8.2, 8.3, 8.4]
 
 # In order for this module to built correctly against all dependencies,
 # the following modules must have been built first.

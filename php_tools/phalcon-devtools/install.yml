@@ -42,6 +42,10 @@ all:
       echo "extension=psr.so" > /usr/local/etc/php/conf.d/docker-php-ext-psr.ini; \
     fi \
 
+8.4:
+  type: composer
+  version: 6.0.x-dev -W
+
 8.3:
   type: composer
   version: 5.0.x-dev -W

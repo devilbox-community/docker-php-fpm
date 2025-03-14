@@ -1,0 +1,20 @@
+---
+
+# Available Jinja2 variables:
+# ---------------------------
+# * {{ php_all_versions }}:  Array of all PHP versions
+
+
+all:
+  type: custom
+  command: |
+    EXTENSION_DIR="$( php -i | grep ^extension_dir | awk -F '=>' '{print $2}' | xargs )" \
+    && if [ ! -d "${EXTENSION_DIR}" ]; then mkdir -p "${EXTENSION_DIR}"; fi \
+    && curl -sS --fail -k https://www.sourceguardian.com/loaders/download/loaders.linux-$(dpkg-architecture --query DEB_HOST_GNU_CPU | sed 's/_/-/g').tar.gz -L -o sourceguardian.tar.gz \
+    && mkdir -p sourceguardian \
+    && tar xvfz sourceguardian.tar.gz -C ./sourceguardian \
+    && cd sourceguardian \
+    && cp "ixed.{{ php_version }}.lin" "${EXTENSION_DIR}/sourceguardian.so" \
+    && cd ../ \
+    && rm -rf sourceguardian \
+    && rm -rf sourceguardian.tar.gz \

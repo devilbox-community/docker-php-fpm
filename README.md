@@ -183,6 +183,7 @@ The provided Docker images heavily rely on inheritance to guarantee smallest pos
 [`sockets`](php_modules/sockets/)
 [`sodium`](php_modules/sodium/)
 [`solr`](php_modules/solr/)
+[`sourceguardian`](php_modules/sourceguardian/)
 [`SPL`](php_modules/spl/)
 [`sqlite`](php_modules/sqlite/)
 [`sqlite3`](php_modules/sqlite3/)
