@@ -735,7 +735,7 @@ RUN set -eux \
 	# Type:         Custom extension
 	&& EXTENSION_DIR="$( php -i | grep ^extension_dir | awk -F '=>' '{print $2}' | xargs )" \
 && if [ ! -d "${EXTENSION_DIR}" ]; then mkdir -p "${EXTENSION_DIR}"; fi \
-&& curl -sS --fail -k https://www.sourceguardian.com/loaders/download/loaders.linux-$(dpkg-architecture --query DEB_HOST_GNU_CPU | sed 's/_/-/g').tar.gz -L -o sourceguardian.tar.gz \
+&& curl -sS --fail -k https://www.sourceguardian.com/loaders/download/loaders.linux-$(dpkg-architecture --query DEB_HOST_GNU_CPU).tar.gz -L -o sourceguardian.tar.gz \
 && mkdir -p sourceguardian \
 && tar xvfz sourceguardian.tar.gz -C ./sourceguardian \
 && cd sourceguardian \
