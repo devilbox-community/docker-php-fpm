@@ -6,7 +6,7 @@
 
 all:
   type: builtin
-  configure: --with-pdo-oci=instantclient,/usr,${ORACLE_VERSION_MAJOR}
+  configure: --with-pdo-oci=instantclient,/usr/lib/oracle/${ORACLE_VERSION_MAJOR}/client64/lib/,${ORACLE_VERSION_MAJOR}
   pre: |
     ARCH="$(dpkg-architecture --query DEB_HOST_GNU_CPU)" \
     && OL_VERSION="8" \
@@ -31,8 +31,8 @@ all:
       | tail -1 \
     )" \
     && ORACLE_VERSION_MAJOR="$( echo "${ORACLE_HREF}" | grep -Eo 'instantclient[.0-9]+' | sed 's/instantclient//g' )" \
-    && ORACLE_VERSION_FULL="$( echo "${ORACLE_HREF}" | grep -Eo 'basiclite-[-.0-9]+' | sed -e 's/basiclite-//g' -e 's/\.$//g' )" \
-    && ORACLE_VERSION_DEVEL_FULL="$( echo "${ORACLE_DEVEL_HREF}" | grep -Eo 'devel-[-.0-9]+' | sed -e 's/devel-//g' -e 's/\.$//g' )" \
+    && ORACLE_VERSION_FULL="$( echo "${ORACLE_HREF}" | grep -Eo 'basiclite-[-.0-9el]+' | sed -e 's/basiclite-//g' -e 's/\.$//g' )" \
+    && ORACLE_VERSION_DEVEL_FULL="$( echo "${ORACLE_DEVEL_HREF}" | grep -Eo 'devel-[-.0-9el]+' | sed -e 's/devel-//g' -e 's/\.$//g' )" \
     \
     && rpm --import http://yum.oracle.com/RPM-GPG-KEY-oracle-ol${OL_VERSION} \
     && curl -sS -o /tmp/oracle-instantclient${ORACLE_VERSION_MAJOR}-basiclite-${ORACLE_VERSION_FULL}.${ARCH}.rpm \
@@ -54,32 +54,16 @@ all:
 
 8.4:
   type: pecl
-  command: printf "instantclient,/usr/lib/oracle/${ORACLE_VERSION_MAJOR}/client64/lib/,${ORACLE_VERSION_MAJOR}" | pecl install pdo_oci-1.1.0
+  command: printf "instantclient,/usr/lib/oracle/${ORACLE_VERSION_MAJOR}/client64/lib/,${ORACLE_VERSION_MAJOR}" | pecl install pdo_oci
 
-8.3:
+7.1:
   type: builtin
-  configure: --with-pdo-oci=instantclient,/usr/lib/oracle/${ORACLE_VERSION_MAJOR}/client64/lib/,${ORACLE_VERSION_MAJOR}
+  configure: --with-pdo-oci=instantclient,/usr,${ORACLE_VERSION_MAJOR}
 
-8.2:
+7.0:
   type: builtin
-  configure: --with-pdo-oci=instantclient,/usr/lib/oracle/${ORACLE_VERSION_MAJOR}/client64/lib/,${ORACLE_VERSION_MAJOR}
+  configure: --with-pdo-oci=instantclient,/usr,${ORACLE_VERSION_MAJOR}
 
-8.1:
+5.6:
   type: builtin
-  configure: --with-pdo-oci=instantclient,/usr/lib/oracle/${ORACLE_VERSION_MAJOR}/client64/lib/,${ORACLE_VERSION_MAJOR}
-
-8.0:
-  type: builtin
-  configure: --with-pdo-oci=instantclient,/usr/lib/oracle/${ORACLE_VERSION_MAJOR}/client64/lib/,${ORACLE_VERSION_MAJOR}
-
-7.4:
-  type: builtin
-  configure: --with-pdo-oci=instantclient,/usr/lib/oracle/${ORACLE_VERSION_MAJOR}/client64/lib/,${ORACLE_VERSION_MAJOR}
-
-7.3:
-  type: builtin
-  configure: --with-pdo-oci=instantclient,/usr/lib/oracle/${ORACLE_VERSION_MAJOR}/client64/lib/,${ORACLE_VERSION_MAJOR}
-
-7.2:
-  type: builtin
-  configure: --with-pdo-oci=instantclient,/usr/lib/oracle/${ORACLE_VERSION_MAJOR}/client64/lib/,${ORACLE_VERSION_MAJOR}
+  configure: --with-pdo-oci=instantclient,/usr,${ORACLE_VERSION_MAJOR}

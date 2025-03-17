@@ -38,7 +38,7 @@ RUN set -eux \
 # -------------------- composer --------------------
 RUN set -eux \
 	&& COMPOSER_1_VERSION="latest-1.x" \
-	&& COMPOSER_2_VERSION="latest-2.x" \
+	&& COMPOSER_2_VERSION="latest-2.2.x" \
 	\
 	&& curl -sS -L --fail "https://getcomposer.org/download/${COMPOSER_1_VERSION}/composer.phar" > /usr/local/bin/composer-1 \
 	&& curl -sS -L --fail "https://getcomposer.org/download/${COMPOSER_2_VERSION}/composer.phar" > /usr/local/bin/composer-2 \
@@ -149,6 +149,11 @@ COPY --from=devilbox-work-help-builder /usr/local/bin /usr/local/bin
 ###
 COPY --from=devilbox-work-help-builder /usr/local/lib /usr/local/lib
 
+###
+### Set permission for nvm
+###
+RUN set -eux \
+    && chown -Rf devilbox:devilbox /opt/nvm
 
 ###
 ### Configure Bash (composer, node yarn)
@@ -273,15 +278,7 @@ RUN set -eux \
     && DEBIAN_FRONTEND=noninteractive apt-get update \
     && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends --no-install-suggests \
 		# ---------- run_deps ----------
-		fontconfig \
 		less \
-		libfontenc1 \
-		libxfont2 \
-		libxrender1 \
-		xfonts-75dpi \
-		xfonts-base \
-		xfonts-encodings \
-		xfonts-utils \
 		# ---------- type: apt ----------
 		git \
 		jq \
@@ -453,34 +450,6 @@ RUN set -eux \
 	&& webpack-cli --version | grep -E '[0-9][.0-9]+' || (webpack-cli --version; false)	\
 	&& true
 
-# -------------------- (custom) wkhtmltopdf --------------------
-RUN set -eux \
-	&& OS_RELEASE="bullseye"	\
-	&& DEB_HOST_ARCH="$( dpkg-architecture --query DEB_HOST_ARCH )" \
-	&& if [ "${OS_RELEASE}" = "bookworm" ]; then \
-	  WK_VERSION="$( \
-	    curl -sS 'https://github.com/wkhtmltopdf/packaging/releases' \
-	    | grep -Eo '/wkhtmltopdf/packaging/releases/tag/[-.0-9]+' \
-	    | grep -Eo '[-.0-9]+' \
-	    | sort -V \
-	    | tail -1 \
-	  )" \
-	  && WK_URL="https://github.com/wkhtmltopdf/packaging/releases/download/${WK_VERSION}/wkhtmltox_${WK_VERSION}.${OS_RELEASE}_${DEB_HOST_ARCH}.deb"; \
-	else \
-	  WK_URL="$( \
-	    curl -sS -k -L --fail 'https://wkhtmltopdf.org/downloads.html' \
-	    | awk -F'"' "/wkhtmltopdf.*${OS_RELEASE}_${DEB_HOST_ARCH}\.deb/{print \$(NF-1)}" \
-	    | head -1 \
-	  )"; \
-	fi \
-	&& echo "URL: ${WK_URL}" \
-	&& curl -sS -k -L --fail -o /tmp/wkhtmltopdf.deb "${WK_URL}" \
-	&& dpkg -i /tmp/wkhtmltopdf.deb \
-	&& rm -f /tmp/wkhtmltopdf.deb \
-	\
-	&& wkhtmltopdf --version | grep ^wkhtmltopdf | grep -E '[0-9]\.[0-9]+' | grep patched || (wkhtmltopdf --version; false)	\
-	&& true
-
 # -------------------- (custom) wp-cli --------------------
 RUN set -eux \
 	&& WPCLI_URL="https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar"	\
@@ -543,15 +512,7 @@ RUN set -eux \
     && DEBIAN_FRONTEND=noninteractive apt-get update \
     && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends --no-install-suggests \
 		# ---------- run_deps ----------
-		fontconfig \
 		less \
-		libfontenc1 \
-		libxfont2 \
-		libxrender1 \
-		xfonts-75dpi \
-		xfonts-base \
-		xfonts-encodings \
-		xfonts-utils \
 		# ---------- type: apt ----------
 		git \
 		jq \
@@ -590,6 +551,12 @@ COPY --from=devilbox-work-tools-builder /var/lib/gems /var/lib/gems
 
 
 # FIXME: / TODO: Add post: stage into here as well
+
+###
+### Set permission for nvm
+###
+RUN set -eux \
+    && chown -Rf devilbox:devilbox /opt/nvm
 
 
 
@@ -720,11 +687,6 @@ RUN set -eux \
 # -------------------- (npm) webpack-cli --------------------
 RUN set -eux \
 	&& webpack-cli --version | grep -E '[0-9][.0-9]+' || (webpack-cli --version; false)	\
-	&& true
-
-# -------------------- (custom) wkhtmltopdf --------------------
-RUN set -eux \
-	&& wkhtmltopdf --version | grep ^wkhtmltopdf | grep -E '[0-9]\.[0-9]+' | grep patched || (wkhtmltopdf --version; false)	\
 	&& true
 
 # -------------------- (custom) wp-cli --------------------

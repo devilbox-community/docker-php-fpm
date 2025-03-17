@@ -60,6 +60,21 @@ help_software_available:
       post: |
         ln -sf /usr/local/bin/composer-2 /usr/local/bin/composer \
       run_dep: [unzip]  # Required for composer to unzip packages
+    8.1:
+      type: custom
+      pre: |
+        COMPOSER_1_VERSION="latest-1.x" \
+        && COMPOSER_2_VERSION="latest-2.2.x" \
+    8.0:
+      type: custom
+      pre: |
+        COMPOSER_1_VERSION="latest-1.x" \
+        && COMPOSER_2_VERSION="latest-2.2.x" \
+    7.4:
+      type: custom
+      pre: |
+        COMPOSER_1_VERSION="latest-1.x" \
+        && COMPOSER_2_VERSION="latest-2.2.x" \
     7.1:
       type: custom
       pre: |

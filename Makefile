@@ -225,7 +225,7 @@ _gen-readme-main:
 	@echo "################################################################################"
 	MODULES="$$( cat doc/php-modules.md \
 		| grep href \
-		| sed -e 's|</a.*||g' -e 's|.*">||g' \
+		| sed -e 's|</a.*||g' -e 's|.*\">||g' \
 		| sort -fu \
 		| xargs -n1 sh -c 'echo "[\`$$1\`](php_modules/$$(echo "$${1}" | tr "[:upper:]" "[:lower:]")/)"' -- )"; \
 	cat "README.md" \

@@ -138,6 +138,11 @@ COPY --from=devilbox-work-help-builder /usr/local/bin /usr/local/bin
 ###
 COPY --from=devilbox-work-help-builder /usr/local/lib /usr/local/lib
 
+###
+### Set permission for nvm
+###
+RUN set -eux \
+    && chown -Rf devilbox:devilbox /opt/nvm
 
 ###
 ### Configure Bash (composer, node yarn)
@@ -465,6 +470,12 @@ COPY --from=devilbox-work-tools-builder /var/lib/gems /var/lib/gems
 
 
 # FIXME: / TODO: Add post: stage into here as well
+
+###
+### Set permission for nvm
+###
+RUN set -eux \
+    && chown -Rf devilbox:devilbox /opt/nvm
 
 
 

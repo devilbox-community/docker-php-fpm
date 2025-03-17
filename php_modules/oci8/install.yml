@@ -32,8 +32,8 @@ all:
       | tail -1 \
     )" \
     && ORACLE_VERSION_MAJOR="$( echo "${ORACLE_HREF}" | grep -Eo 'instantclient[.0-9]+' | sed 's/instantclient//g' )" \
-    && ORACLE_VERSION_FULL="$( echo "${ORACLE_HREF}" | grep -Eo 'basiclite-[-.0-9]+' | sed -e 's/basiclite-//g' -e 's/\.$//g' )" \
-    && ORACLE_VERSION_DEVEL_FULL="$( echo "${ORACLE_DEVEL_HREF}" | grep -Eo 'devel-[-.0-9]+' | sed -e 's/devel-//g' -e 's/\.$//g' )" \
+    && ORACLE_VERSION_FULL="$( echo "${ORACLE_HREF}" | grep -Eo 'basiclite-[-.0-9el]+' | sed -e 's/basiclite-//g' -e 's/\.$//g' )" \
+    && ORACLE_VERSION_DEVEL_FULL="$( echo "${ORACLE_DEVEL_HREF}" | grep -Eo 'devel-[-.0-9el]+' | sed -e 's/devel-//g' -e 's/\.$//g' )" \
     \
     && rpm --import http://yum.oracle.com/RPM-GPG-KEY-oracle-ol${OL_VERSION} \
     && curl -sS -o /tmp/oracle-instantclient${ORACLE_VERSION_MAJOR}-basiclite-${ORACLE_VERSION_FULL}.${ARCH}.rpm \
@@ -72,4 +72,4 @@ all:
 
 8.4:
   type: pecl
-  version: 3.4.0
+  command: printf "instantclient,/usr/lib/oracle/${ORACLE_VERSION_MAJOR}/client64/lib/,${ORACLE_VERSION_MAJOR}" | pecl install oci8

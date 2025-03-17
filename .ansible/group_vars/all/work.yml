@@ -305,9 +305,21 @@ tools_available:
     check: magerun --version
     all:
       type: custom
-      command: curl -sS -k -L --fail -L "${MAGERUN_URL}" -o /usr/local/bin/magerun
       pre: MAGERUN_URL="https://files.magerun.net/n98-magerun2-latest.phar"
+      command: curl -sS -k -L --fail -L "${MAGERUN_URL}" -o /usr/local/bin/magerun
       post: chmod +x /usr/local/bin/magerun
+    7.4:
+      type: custom
+      pre: MAGERUN_URL="https://files.magerun.net/n98-magerun2-7.5.0.phar"
+    7.3:
+      type: custom
+      pre: MAGERUN_URL="https://files.magerun.net/n98-magerun2-6.1.1.phar"
+    7.2:
+      type: custom
+      pre: MAGERUN_URL="https://files.magerun.net/n98-magerun2-4.7.0.phar"
+    7.1:
+      type: custom
+      pre: MAGERUN_URL="https://files.magerun.net/n98-magerun-1.103.2.phar"
   mdlint:
     disabled: [5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3, 8.4]
     check: mdlint --version | grep -E '[0-9][.0-9]+' || (mdlint --version; false)
@@ -472,6 +484,9 @@ tools_available:
       run_dep: []
       pre: PHP_UNIT_VERSION=""
       post: chmod +x /usr/local/bin/phpunit
+    8.2:
+      type: custom
+      pre: PHP_UNIT_VERSION="11"
     8.1:
       type: custom
       pre: PHP_UNIT_VERSION="10"
@@ -652,7 +667,7 @@ tools_available:
       pre:
       post:
   wkhtmltopdf:
-    disabled: []
+    disabled: [5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3, 8.4]
     check: wkhtmltopdf --version | grep ^wkhtmltopdf | grep -E '[0-9]\.[0-9]+' | grep patched || (wkhtmltopdf --version; false)
     all:
       type: custom

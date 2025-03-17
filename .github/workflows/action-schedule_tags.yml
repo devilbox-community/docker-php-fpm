@@ -31,7 +31,7 @@ jobs:
   # -----------------------------------------------------------------------------------------------
   configure:
     needs: [params]
-    uses: devilbox/github-actions/.github/workflows/docker-multistage-configure.yml@master
+    uses: devilbox-community/github-actions/.github/workflows/docker-multistage-configure.yml@master
     with:
       enabled: true
       can_deploy: true
@@ -48,7 +48,7 @@ jobs:
   build-base:
     needs:
       - configure
-    uses: devilbox/github-actions/.github/workflows/docker-multistage-build.yml@master
+    uses: devilbox-community/github-actions/.github/workflows/docker-multistage-build.yml@master
     with:
       has_refs: ${{ needs.configure.outputs.has_refs == 'true' }}
       run_tests: false
@@ -63,7 +63,7 @@ jobs:
     needs:
       - configure
       - build-base
-    uses: devilbox/github-actions/.github/workflows/docker-multistage-test.yml@master
+    uses: devilbox-community/github-actions/.github/workflows/docker-multistage-test.yml@master
     with:
       has_refs: ${{ needs.configure.outputs.has_refs == 'true' }}
       matrix: ${{ needs.configure.outputs.matrix_build }}
@@ -78,7 +78,7 @@ jobs:
     needs:
       - configure
       - build-base
-    uses: devilbox/github-actions/.github/workflows/docker-multistage-build.yml@master
+    uses: devilbox-community/github-actions/.github/workflows/docker-multistage-build.yml@master
     with:
       has_refs: ${{ needs.configure.outputs.has_refs == 'true' }}
       run_tests: false
@@ -92,7 +92,7 @@ jobs:
     needs:
       - configure
       - build-mods
-    uses: devilbox/github-actions/.github/workflows/docker-multistage-test.yml@master
+    uses: devilbox-community/github-actions/.github/workflows/docker-multistage-test.yml@master
     with:
       has_refs: ${{ needs.configure.outputs.has_refs == 'true' }}
       matrix: ${{ needs.configure.outputs.matrix_build }}
@@ -107,7 +107,7 @@ jobs:
     needs:
       - configure
       - build-mods
-    uses: devilbox/github-actions/.github/workflows/docker-multistage-build.yml@master
+    uses: devilbox-community/github-actions/.github/workflows/docker-multistage-build.yml@master
     with:
       has_refs: ${{ needs.configure.outputs.has_refs == 'true' }}
       run_tests: false
@@ -121,7 +121,7 @@ jobs:
     needs:
       - configure
       - build-prod
-    uses: devilbox/github-actions/.github/workflows/docker-multistage-test.yml@master
+    uses: devilbox-community/github-actions/.github/workflows/docker-multistage-test.yml@master
     with:
       has_refs: ${{ needs.configure.outputs.has_refs == 'true' }}
       matrix: ${{ needs.configure.outputs.matrix_build }}
@@ -136,7 +136,7 @@ jobs:
     needs:
       - configure
       - build-prod
-    uses: devilbox/github-actions/.github/workflows/docker-multistage-build.yml@master
+    uses: devilbox-community/github-actions/.github/workflows/docker-multistage-build.yml@master
     with:
       has_refs: ${{ needs.configure.outputs.has_refs == 'true' }}
       run_tests: false
@@ -150,7 +150,7 @@ jobs:
     needs:
       - configure
       - build-slim
-    uses: devilbox/github-actions/.github/workflows/docker-multistage-test.yml@master
+    uses: devilbox-community/github-actions/.github/workflows/docker-multistage-test.yml@master
     with:
       has_refs: ${{ needs.configure.outputs.has_refs == 'true' }}
       matrix: ${{ needs.configure.outputs.matrix_build }}
@@ -165,7 +165,7 @@ jobs:
     needs:
       - configure
       - build-slim
-    uses: devilbox/github-actions/.github/workflows/docker-multistage-build.yml@master
+    uses: devilbox-community/github-actions/.github/workflows/docker-multistage-build.yml@master
     with:
       has_refs: ${{ needs.configure.outputs.has_refs == 'true' }}
       run_tests: false
@@ -179,7 +179,7 @@ jobs:
     needs:
       - configure
       - build-work
-    uses: devilbox/github-actions/.github/workflows/docker-multistage-test.yml@master
+    uses: devilbox-community/github-actions/.github/workflows/docker-multistage-test.yml@master
     with:
       has_refs: ${{ needs.configure.outputs.has_refs == 'true' }}
       matrix: ${{ needs.configure.outputs.matrix_build }}
@@ -198,7 +198,7 @@ jobs:
       - test-prod
       - test-slim
       - test-work
-    uses: devilbox/github-actions/.github/workflows/docker-multistage-push-image.yml@master
+    uses: devilbox-community/github-actions/.github/workflows/docker-multistage-push-image.yml@master
     with:
       can_deploy: ${{ needs.configure.outputs.can_login == 'true' && needs.configure.outputs.can_push == 'true' }}
       has_refs: ${{ needs.configure.outputs.has_refs == 'true' }}
@@ -217,7 +217,7 @@ jobs:
       - test-prod
       - test-slim
       - test-work
-    uses: devilbox/github-actions/.github/workflows/docker-multistage-push-image.yml@master
+    uses: devilbox-community/github-actions/.github/workflows/docker-multistage-push-image.yml@master
     with:
       can_deploy: ${{ needs.configure.outputs.can_login == 'true' && needs.configure.outputs.can_push == 'true' }}
       has_refs: ${{ needs.configure.outputs.has_refs == 'true' }}
@@ -236,7 +236,7 @@ jobs:
       - test-prod
       - test-slim
       - test-work
-    uses: devilbox/github-actions/.github/workflows/docker-multistage-push-image.yml@master
+    uses: devilbox-community/github-actions/.github/workflows/docker-multistage-push-image.yml@master
     with:
       can_deploy: ${{ needs.configure.outputs.can_login == 'true' && needs.configure.outputs.can_push == 'true' }}
       has_refs: ${{ needs.configure.outputs.has_refs == 'true' }}
@@ -255,7 +255,7 @@ jobs:
       - test-prod
       - test-slim
       - test-work
-    uses: devilbox/github-actions/.github/workflows/docker-multistage-push-image.yml@master
+    uses: devilbox-community/github-actions/.github/workflows/docker-multistage-push-image.yml@master
     with:
       can_deploy: ${{ needs.configure.outputs.can_login == 'true' && needs.configure.outputs.can_push == 'true' }}
       has_refs: ${{ needs.configure.outputs.has_refs == 'true' }}
@@ -274,7 +274,7 @@ jobs:
       - test-prod
       - test-slim
       - test-work
-    uses: devilbox/github-actions/.github/workflows/docker-multistage-push-image.yml@master
+    uses: devilbox-community/github-actions/.github/workflows/docker-multistage-push-image.yml@master
     with:
       can_deploy: ${{ needs.configure.outputs.can_login == 'true' && needs.configure.outputs.can_push == 'true' }}
       has_refs: ${{ needs.configure.outputs.has_refs == 'true' }}
@@ -293,7 +293,7 @@ jobs:
     needs:
       - configure
       - push-base
-    uses: devilbox/github-actions/.github/workflows/docker-multistage-push-manifest.yml@master
+    uses: devilbox-community/github-actions/.github/workflows/docker-multistage-push-manifest.yml@master
     with:
       can_deploy: ${{ needs.configure.outputs.can_login == 'true' && needs.configure.outputs.can_push == 'true' }}
       has_refs: ${{ needs.configure.outputs.has_refs == 'true' }}
@@ -308,7 +308,7 @@ jobs:
     needs:
       - configure
       - push-mods
-    uses: devilbox/github-actions/.github/workflows/docker-multistage-push-manifest.yml@master
+    uses: devilbox-community/github-actions/.github/workflows/docker-multistage-push-manifest.yml@master
     with:
       can_deploy: ${{ needs.configure.outputs.can_login == 'true' && needs.configure.outputs.can_push == 'true' }}
       has_refs: ${{ needs.configure.outputs.has_refs == 'true' }}
@@ -323,7 +323,7 @@ jobs:
     needs:
       - configure
       - push-prod
-    uses: devilbox/github-actions/.github/workflows/docker-multistage-push-manifest.yml@master
+    uses: devilbox-community/github-actions/.github/workflows/docker-multistage-push-manifest.yml@master
     with:
       can_deploy: ${{ needs.configure.outputs.can_login == 'true' && needs.configure.outputs.can_push == 'true' }}
       has_refs: ${{ needs.configure.outputs.has_refs == 'true' }}
@@ -338,7 +338,7 @@ jobs:
     needs:
       - configure
       - push-slim
-    uses: devilbox/github-actions/.github/workflows/docker-multistage-push-manifest.yml@master
+    uses: devilbox-community/github-actions/.github/workflows/docker-multistage-push-manifest.yml@master
     with:
       can_deploy: ${{ needs.configure.outputs.can_login == 'true' && needs.configure.outputs.can_push == 'true' }}
       has_refs: ${{ needs.configure.outputs.has_refs == 'true' }}
@@ -353,7 +353,7 @@ jobs:
     needs:
       - configure
       - push-work
-    uses: devilbox/github-actions/.github/workflows/docker-multistage-push-manifest.yml@master
+    uses: devilbox-community/github-actions/.github/workflows/docker-multistage-push-manifest.yml@master
     with:
       can_deploy: ${{ needs.configure.outputs.can_login == 'true' && needs.configure.outputs.can_push == 'true' }}
       has_refs: ${{ needs.configure.outputs.has_refs == 'true' }}

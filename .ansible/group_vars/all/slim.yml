@@ -102,39 +102,57 @@ base_apt_repositories_available:
     # [Bookworm]
     all:
       type: repo
-      pre: apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 648ACFD622F3D138 6A26B1AE64C3C388
+      pre: |
+        curl -sS -L --fail "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x648ACFD622F3D138" | APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1 apt-key add - \
+        && curl -sS -L --fail "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x6A26B1AE64C3C388" | APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1 apt-key add - \
       deb: deb http://ftp.debian.org/debian {{ os_release['all'].debian }}-backports main contrib non-free
     # [Bullseye]
     8.0:
       type: repo
-      pre: apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 648ACFD622F3D138 6A26B1AE64C3C388
+      pre: |
+        curl -sS -L --fail "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x648ACFD622F3D138" | APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1 apt-key add - \
+        && curl -sS -L --fail "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x6A26B1AE64C3C388" | APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1 apt-key add - \
       deb: deb http://ftp.debian.org/debian {{ os_release[8.0].debian }}-backports main contrib non-free
     7.4:
       type: repo
-      pre: apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 648ACFD622F3D138 6A26B1AE64C3C388
+      pre: |
+        curl -sS -L --fail "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x648ACFD622F3D138" | APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1 apt-key add - \
+        && curl -sS -L --fail "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x6A26B1AE64C3C388" | APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1 apt-key add - \
       deb: deb http://ftp.debian.org/debian {{ os_release[7.4].debian }}-backports main contrib non-free
     7.3:
       type: repo
-      pre: apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 648ACFD622F3D138 6A26B1AE64C3C388
+      pre: |
+        curl -sS -L --fail "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x648ACFD622F3D138" | APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1 apt-key add - \
+        && curl -sS -L --fail "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x6A26B1AE64C3C388" | APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1 apt-key add - \
       deb: deb http://ftp.debian.org/debian {{ os_release[7.3].debian }}-backports main contrib non-free
     # [Buster]
     7.2:
       type: repo
-      pre: apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 648ACFD622F3D138 0E98404D386FA1D9 6ED0E7B82643E131 6A26B1AE64C3C388
+      pre: |
+        curl -sS -L --fail "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x648ACFD622F3D138" | APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1 apt-key add - \
+        && curl -sS -L --fail "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x0E98404D386FA1D9" | APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1 apt-key add - \
+        && curl -sS -L --fail "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x6ED0E7B82643E131" | APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1 apt-key add - \
+        && curl -sS -L --fail "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x6A26B1AE64C3C388" | APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1 apt-key add - \
       deb: deb http://archive.debian.org/debian {{ os_release[7.2].debian }}-backports main contrib non-free
     7.1:
       type: repo
-      pre: apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 648ACFD622F3D138 0E98404D386FA1D9 6ED0E7B82643E131 6A26B1AE64C3C388
+      pre: |
+        curl -sS -L --fail "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x648ACFD622F3D138" | APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1 apt-key add - \
+        && curl -sS -L --fail "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x0E98404D386FA1D9" | APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1 apt-key add - \
+        && curl -sS -L --fail "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x6ED0E7B82643E131" | APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1 apt-key add - \
+        && curl -sS -L --fail "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x6A26B1AE64C3C388" | APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1 apt-key add - \
       deb: deb http://archive.debian.org/debian {{ os_release[7.1].debian }}-backports main contrib non-free
     # [Stretch]
     7.0:
       type: repo
-      pre: apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 648ACFD622F3D138
+      pre: |
+        curl -sS -L --fail "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x648ACFD622F3D138" | APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1 apt-key add - \
       deb: deb http://archive.debian.org/debian {{ os_release[7.0].debian }}-backports main contrib non-free
     # [Stretch]
     5.6:
       type: repo
-      pre: apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 648ACFD622F3D138
+      pre: |
+        curl -sS -L --fail "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x648ACFD622F3D138" | APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1 apt-key add - \
       deb: deb http://archive.debian.org/debian {{ os_release[5.6].debian }}-backports main contrib non-free
 
   ###
@@ -346,7 +364,7 @@ base_software_available:
     all:
       type: custom
       pre: |
-        APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1 apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv E162F504A20CDF15827F718D4B7C549A058F8B6B \
+        curl -sS -k -L --fail https://www.mongodb.org/static/pgp/server-6.0.asc | APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1 apt-key add - \
         && echo "deb http://repo.mongodb.org/apt/ubuntu {{ os_release[php_version].ubuntu }}/mongodb-org/6.0 multiverse" > /etc/apt/sources.list.d/mongo.list \
         && apt-get update \
       command: |
@@ -435,12 +453,30 @@ base_software_available:
       type: custom
       pre: |
         curl -sS -k -L --fail https://www.postgresql.org/media/keys/ACCC4CF8.asc | APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1 apt-key add - \
-        && echo "deb http://apt.postgresql.org/pub/repos/apt/ {{ os_release[php_version].debian }}-pgdg main" > /etc/apt/sources.list.d/pgsql.list \
+        && echo "deb https://apt.postgresql.org/pub/repos/apt/ {{ os_release[php_version].debian }}-pgdg main" > /etc/apt/sources.list.d/pgsql.list \
         && apt-get update \
       command: |
         apt-get install -y --no-install-recommends --no-install-suggests \
           postgresql-client \
       post: rm -rf /var/lib/apt/lists/*
+    7.2:
+      type: custom
+      pre: |
+        curl -sS -k -L --fail https://www.postgresql.org/media/keys/ACCC4CF8.asc | APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1 apt-key add - \
+        && echo "deb https://apt-archive.postgresql.org/pub/repos/apt/ {{ os_release[php_version].debian }}-pgdg main" > /etc/apt/sources.list.d/pgsql.list \
+        && apt-get update \
+      command: |
+        apt-get install -y --no-install-recommends --no-install-suggests \
+          postgresql-client \
+    7.1:
+      type: custom
+      pre: |
+        curl -sS -k -L --fail https://www.postgresql.org/media/keys/ACCC4CF8.asc | APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1 apt-key add - \
+        && echo "deb https://apt-archive.postgresql.org/pub/repos/apt/ {{ os_release[php_version].debian }}-pgdg main" > /etc/apt/sources.list.d/pgsql.list \
+        && apt-get update \
+      command: |
+        apt-get install -y --no-install-recommends --no-install-suggests \
+          postgresql-client \
     7.0:
       type: custom
       pre: |

@@ -4,6 +4,22 @@ check: magerun --version
 
 all:
   type: custom
-  command: curl -sS -k -L --fail -L "${MAGERUN_URL}" -o /usr/local/bin/magerun
   pre: MAGERUN_URL="https://files.magerun.net/n98-magerun2-latest.phar"
+  command: curl -sS -k -L --fail -L "${MAGERUN_URL}" -o /usr/local/bin/magerun
   post: chmod +x /usr/local/bin/magerun
+
+7.4:
+  type: custom
+  pre: MAGERUN_URL="https://files.magerun.net/n98-magerun2-7.5.0.phar"
+
+7.3:
+  type: custom
+  pre: MAGERUN_URL="https://files.magerun.net/n98-magerun2-6.1.1.phar"
+
+7.2:
+  type: custom
+  pre: MAGERUN_URL="https://files.magerun.net/n98-magerun2-4.7.0.phar"
+
+7.1:
+  type: custom
+  pre: MAGERUN_URL="https://files.magerun.net/n98-magerun-1.103.2.phar"

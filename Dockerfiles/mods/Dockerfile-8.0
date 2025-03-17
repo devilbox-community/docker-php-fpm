@@ -369,10 +369,10 @@ RUN set -eux \
 
 # -------------------- Installing PHP Extension: mongodb --------------------
 RUN set -eux \
-	# Installation: Generic
+	# Installation: Version specific
 	# Type:         PECL extension
 	# Default:      Pecl command
-	&& pecl install mongodb \
+	&& pecl install mongodb-1.20.1 \
 	# Enabling
 	&& docker-php-ext-enable mongodb \
 	&& true
@@ -423,8 +423,8 @@ ORACLE_HREF="$( \
   | tail -1 \
 )" \
 && ORACLE_VERSION_MAJOR="$( echo "${ORACLE_HREF}" | grep -Eo 'instantclient[.0-9]+' | sed 's/instantclient//g' )" \
-&& ORACLE_VERSION_FULL="$( echo "${ORACLE_HREF}" | grep -Eo 'basiclite-[-.0-9]+' | sed -e 's/basiclite-//g' -e 's/\.$//g' )" \
-&& ORACLE_VERSION_DEVEL_FULL="$( echo "${ORACLE_DEVEL_HREF}" | grep -Eo 'devel-[-.0-9]+' | sed -e 's/devel-//g' -e 's/\.$//g' )" \
+&& ORACLE_VERSION_FULL="$( echo "${ORACLE_HREF}" | grep -Eo 'basiclite-[-.0-9el]+' | sed -e 's/basiclite-//g' -e 's/\.$//g' )" \
+&& ORACLE_VERSION_DEVEL_FULL="$( echo "${ORACLE_DEVEL_HREF}" | grep -Eo 'devel-[-.0-9el]+' | sed -e 's/devel-//g' -e 's/\.$//g' )" \
 \
 && rpm --import http://yum.oracle.com/RPM-GPG-KEY-oracle-ol${OL_VERSION} \
 && curl -sS -o /tmp/oracle-instantclient${ORACLE_VERSION_MAJOR}-basiclite-${ORACLE_VERSION_FULL}.${ARCH}.rpm \
@@ -538,8 +538,8 @@ ORACLE_HREF="$( \
   | tail -1 \
 )" \
 && ORACLE_VERSION_MAJOR="$( echo "${ORACLE_HREF}" | grep -Eo 'instantclient[.0-9]+' | sed 's/instantclient//g' )" \
-&& ORACLE_VERSION_FULL="$( echo "${ORACLE_HREF}" | grep -Eo 'basiclite-[-.0-9]+' | sed -e 's/basiclite-//g' -e 's/\.$//g' )" \
-&& ORACLE_VERSION_DEVEL_FULL="$( echo "${ORACLE_DEVEL_HREF}" | grep -Eo 'devel-[-.0-9]+' | sed -e 's/devel-//g' -e 's/\.$//g' )" \
+&& ORACLE_VERSION_FULL="$( echo "${ORACLE_HREF}" | grep -Eo 'basiclite-[-.0-9el]+' | sed -e 's/basiclite-//g' -e 's/\.$//g' )" \
+&& ORACLE_VERSION_DEVEL_FULL="$( echo "${ORACLE_DEVEL_HREF}" | grep -Eo 'devel-[-.0-9el]+' | sed -e 's/devel-//g' -e 's/\.$//g' )" \
 \
 && rpm --import http://yum.oracle.com/RPM-GPG-KEY-oracle-ol${OL_VERSION} \
 && curl -sS -o /tmp/oracle-instantclient${ORACLE_VERSION_MAJOR}-basiclite-${ORACLE_VERSION_FULL}.${ARCH}.rpm \
@@ -558,11 +558,10 @@ https://yum.oracle.com/repo/OracleLinux/OL${OL_VERSION}/oracle/instantclient/${A
 && rm -f /tmp/oracle-instantclient${ORACLE_VERSION_MAJOR}-devel-${ORACLE_VERSION_DEVEL_FULL}.${ARCH}.rpm \
 && (ln -s /usr/lib/oracle/${ORACLE_VERSION_MAJOR}/client64/lib/*.so* /usr/lib/ || true) \
  \
-	# Installation: Version specific
+	# Installation: Generic
 	# Type:         Built-in extension
 	# Custom:       configure command
 	&& docker-php-ext-configure pdo_oci --with-pdo-oci=instantclient,/usr/lib/oracle/${ORACLE_VERSION_MAJOR}/client64/lib/,${ORACLE_VERSION_MAJOR} \
-	# Installation
 	&& docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) pdo_oci \
 	&& true
 
@@ -608,19 +607,9 @@ RUN set -eux \
 # -------------------- Installing PHP Extension: zstd --------------------
 RUN set -eux \
 	# Installation: Generic
-	# Type:         GIT extension
-	&& git clone --depth=1 --single-branch --branch=$(git ls-remote --tags https://github.com/kjdev/php-ext-zstd \
-  | sed 's/^.*tags\///g' \
-  | grep -E '^[.0-9]+$' \
-  | tr '-' '~' | sort -V | tail -1 \
-) \
-  https://github.com/kjdev/php-ext-zstd /tmp/zstd \
-	&& cd /tmp/zstd \
-	# Default:      Install command
-	&& phpize \
-	&& ./configure  --enable-zstd --with-libzstd \
-	&& make -j$(getconf _NPROCESSORS_ONLN) \
-	&& make install \
+	# Type:         PECL extension
+	# Default:      Pecl command
+	&& pecl install zstd \
 	# Enabling
 	&& docker-php-ext-enable zstd \
 	&& true
@@ -628,42 +617,10 @@ RUN set -eux \
 
 # -------------------- Installing PHP Extension: redis --------------------
 RUN set -eux \
-	# Generic pre-command
-	&& if [ -f /usr/include/liblzf/lzf.h ]; then \
-  ln -s /usr/include/liblzf/lzf.h /usr/include/; \
-fi \
- \
 	# Installation: Generic
-	# Type:         GIT extension
-	&& git clone --depth=1 --single-branch --branch=$(git ls-remote --tags https://github.com/phpredis/phpredis \
-  | sed 's/^.*tags\///g' \
-  | grep -E '^[.0-9]+$' \
-  | tr '-' '~' | sort -V | tail -1 \
-) \
-  https://github.com/phpredis/phpredis /tmp/redis \
-	&& cd /tmp/redis \
-	# Custom:       Install command
-	&& REDIS_ARGS=""; \
-if php -m | grep -q "igbinary"; then \
-  REDIS_ARGS="${REDIS_ARGS} --enable-redis-igbinary"; \
-fi; \
-if php -m | grep -q "lz4"; then \
-  REDIS_ARGS="${REDIS_ARGS} --enable-redis-lz4 --with-liblz4=/usr"; \
-fi; \
-if php -m | grep -q "lzf"; then \
-  REDIS_ARGS="${REDIS_ARGS} --enable-redis-lzf --with-liblzf=/usr"; \
-fi; \
-if php -m | grep -q "msgpack"; then \
-  REDIS_ARGS="${REDIS_ARGS} --enable-redis-msgpack"; \
-fi; \
-if php -m | grep -q "zstd"; then \
-  REDIS_ARGS="${REDIS_ARGS} --enable-redis-zstd"; \
-fi; \
-phpize \
-&& ./configure --enable-redis ${REDIS_ARGS} \
-&& make -j$(getconf _NPROCESSORS_ONLN) \
-&& make install \
- \
+	# Type:         PECL extension
+	# Default:      Pecl command
+	&& pecl install redis \
 	# Enabling
 	&& docker-php-ext-enable redis \
 	&& true
@@ -786,10 +743,10 @@ RUN set -eux \
 
 # -------------------- Installing PHP Extension: swoole --------------------
 RUN set -eux \
-	# Installation: Generic
+	# Installation: Version specific
 	# Type:         PECL extension
-	# Custom:       Pecl command
-	&& pecl install -D 'enable-sockets="no" enable-openssl="yes" enable-http2="yes" enable-mysqlnd="yes" enable-swoole-json="no" enable-swoole-curl="yes" enable-cares="yes" with-postgres="yes"' swoole \
+	# Default:      Pecl command
+	&& pecl install swoole-5.1.7 \
 	# Enabling
 	&& docker-php-ext-enable swoole \
 	&& true
