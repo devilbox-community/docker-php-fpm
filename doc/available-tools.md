@@ -276,7 +276,7 @@ Additionally to all of the `slim` tools shown above, the following PHP cli tools
 | [vim][lnk_vim]                             |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
 | [vue-cli][lnk_vue-cli]                     |         |         |         |         |         |         |
 | [webpack-cli][lnk_webpack-cli]             |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
-| [wkhtmltopdf][lnk_wkhtmltopdf]             |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
+| [wkhtmltopdf][lnk_wkhtmltopdf]             |         |         |         |         |         |         |
 | [wp-cli][lnk_wp-cli]                       |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
 | [wscat][lnk_wscat]                         |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
 | [yamllint][lnk_yamllint]                   |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
