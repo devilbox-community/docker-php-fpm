@@ -4,10 +4,30 @@
 ## Unreleased
 
 
-## Release 0.155
+## Release 0.157
+
+### Added
+- Added `shopify-cli` tool to all PHP flavours
+- Added `buggregator/trap` for PHP flavours >= 8.1
 
 ### Changed
+- Update softwares to latest version
+
+
+## Release 0.156
+
+### Changed
+- Update softwares to latest version
+- Correcting document in `doc/available_tools.md`
+- Updated the nightly jobs for docker images
+
+
+## Release 0.155
+
+### Added
 - Added PHP 8.4
+
+### Changed
 - Added `sourceguardian` to all supported PHP versions
 - Fixed issues while compile PHP extensions for PHP 8.4
 - Disabled `PHP-CS-Fixer` for PHP 8.4

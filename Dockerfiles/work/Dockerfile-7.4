@@ -438,6 +438,13 @@ RUN set -eux \
 	&& rsync --version | grep version | grep -E '[0-9]\.[0-9]+' || (rsync --version; false)	\
 	&& true
 
+# -------------------- (npm) shopify-cli --------------------
+RUN set -eux \
+	&& su -c '. /opt/nvm/nvm.sh; npm install --location=global @shopify/cli@latest' devilbox \
+	&& ln -s /opt/nvm/versions/node/$(su -c '. /opt/nvm/nvm.sh; node --version' devilbox)/bin/shopify /usr/local/bin/ \
+	&& shopify --version | grep -E '[0-9][.0-9]+' || (shopify --version; false)	\
+	&& true
+
 # -------------------- (apt) vim --------------------
 RUN set -eux \
 	&& vim --version | grep ^VIM | grep -E '[0-9]\.[0-9]+' || (vim --version; false)	\
@@ -677,6 +684,11 @@ RUN set -eux \
 # -------------------- (apt) rsync --------------------
 RUN set -eux \
 	&& rsync --version | grep version | grep -E '[0-9]\.[0-9]+' || (rsync --version; false)	\
+	&& true
+
+# -------------------- (npm) shopify-cli --------------------
+RUN set -eux \
+	&& shopify --version | grep -E '[0-9][.0-9]+' || (shopify --version; false)	\
 	&& true
 
 # -------------------- (apt) vim --------------------

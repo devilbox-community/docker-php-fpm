@@ -266,6 +266,7 @@ Additionally to all of the `slim` tools shown above, the following PHP cli tools
 | [rsync][lnk_rsync]                         |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
 | [sass][lnk_sass]                           |         |         |         |         |         |         |
 | [shellcheck][lnk_shellcheck]               |         |         |         |         |         |         |
+| [shopify-cli][lnk_shopify-cli]             |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
 | [ssh][lnk_ssh]                             |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
 | [stencil-cli][lnk_stencil-cli]             |         |         |         |         |         |         |
 | [stylelint][lnk_stylelint]                 |         |         |         |         |         |         |
@@ -273,6 +274,7 @@ Additionally to all of the `slim` tools shown above, the following PHP cli tools
 | [symfony-cli][lnk_symfony-cli]             |         |         |         |         |         |         |
 | [taskfile][lnk_taskfile]                   |         |         |         |         |         |         |
 | [tig][lnk_tig]                             |         |         |         |         |         |         |
+| [trap][lnk_trap]                           |         |         |    ✓    |    ✓    |    ✓    |    ✓    |
 | [vim][lnk_vim]                             |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
 | [vue-cli][lnk_vue-cli]                     |         |         |         |         |         |         |
 | [webpack-cli][lnk_webpack-cli]             |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
@@ -321,6 +323,7 @@ Additionally to all of the `slim` tools shown above, the following PHP cli tools
 [lnk_rsync]: ../php_tools/rsync
 [lnk_sass]: ../php_tools/sass
 [lnk_shellcheck]: ../php_tools/shellcheck
+[lnk_shopify-cli]: ../php_tools/shopify-cli
 [lnk_ssh]: ../php_tools/ssh
 [lnk_stencil-cli]: ../php_tools/stencil-cli
 [lnk_stylelint]: ../php_tools/stylelint
@@ -328,6 +331,7 @@ Additionally to all of the `slim` tools shown above, the following PHP cli tools
 [lnk_symfony-cli]: ../php_tools/symfony-cli
 [lnk_taskfile]: ../php_tools/taskfile
 [lnk_tig]: ../php_tools/tig
+[lnk_trap]: ../php_tools/trap
 [lnk_vim]: ../php_tools/vim
 [lnk_vue-cli]: ../php_tools/vue-cli
 [lnk_webpack-cli]: ../php_tools/webpack-cli

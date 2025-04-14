@@ -1,0 +1,13 @@
+---
+
+check: shopify --version | grep -E '[0-9][.0-9]+' || (shopify --version; false)
+
+all:
+  type: npm
+  package: "@shopify/cli@latest"
+  binary: shopify
+  version:
+  build_dep: []
+  run_dep: []
+  pre:
+  post:

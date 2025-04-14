@@ -1,0 +1,9 @@
+---
+
+check: btrap --version
+
+all:
+  type: custom
+  pre: TRAP_URL="https://github.com/buggregator/trap/releases/latest/download/trap.phar"
+  command: curl -sS -k -L --fail -L "${TRAP_URL}" -o /usr/local/bin/btrap
+  post: chmod +x /usr/local/bin/btrap
