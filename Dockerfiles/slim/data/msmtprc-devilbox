@@ -3,6 +3,6 @@ defaults
 
 # Set up a default account's settings.
 account default
-host mailhog
+host buggregator
 port 1025
 from devilbox@devilbox-community.org

@@ -4,6 +4,13 @@
 ## Unreleased
 
 
+## Release 0.158
+
+### Fixed
+- Resolved critical issue of `msmtp` which prevent users to use their own SMTP server
+- Use `buggregator/smtp` as default SMTP server
+
+
 ## Release 0.157
 
 ### Added

@@ -307,7 +307,7 @@ base_software_available:
       command: |
         DEB_HOST_ARCH="$( dpkg-architecture --query DEB_HOST_ARCH )" \
         && if [ "${DEB_HOST_ARCH}" = "amd64" ] || [ "${DEB_HOST_ARCH}" = "arm64" ]; then \
-          apt-get install -y --no-install-recommends --no-install-suggests \
+          DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-suggests \
           msmtp; \
         else \
           printf '%s\n%s\n%s\n' '#!/bin/sh' 'echo "Not available for this platform."' 'exit 1' > /usr/bin/msmtp \
