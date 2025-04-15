@@ -67,6 +67,7 @@ RUN set -eux \
 		# ---------- type: apt ----------
 		dnsutils \
 		iputils-ping \
+		msmtp \
 		netcat-openbsd \
 		sudo \
 	&& rm -rf /var/lib/apt/lists/*
@@ -102,7 +103,7 @@ RUN set -eux \
 	&& apt-get install -y --no-install-recommends --no-install-suggests \
 	  blackfire-agent \
 	\
-	&& rm -rf /var/lib/apt/lists/*	\
+	&& rm -rf /var/lib/apt/lists/	\
 	&& blackfire version \
 	&& blackfire-agent -v \
 	\
@@ -110,18 +111,6 @@ RUN set -eux \
 
 # -------------------- msmtp --------------------
 RUN set -eux \
-	&& apt-get update \
-	\
-	&& DEB_HOST_ARCH="$( dpkg-architecture --query DEB_HOST_ARCH )" \
-	&& if [ "${DEB_HOST_ARCH}" = "amd64" ] || [ "${DEB_HOST_ARCH}" = "arm64" ]; then \
-	  DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-suggests \
-	  msmtp; \
-	else \
-	  printf '%s\n%s\n%s\n' '#!/bin/sh' 'echo "Not available for this platform."' 'exit 1' > /usr/bin/msmtp \
-	  && chmod +x /usr/bin/msmtp; \
-	fi \
-	\
-	&& rm -rf /var/lib/apt/lists/*	\
 	&& msmtp --version 2>&1 | grep -E 'version [0-9]+\.[0-9]+'	\
 	&& true
 
@@ -324,6 +313,7 @@ RUN set -eux \
 		# ---------- type: apt ----------
 		dnsutils \
 		iputils-ping \
+		msmtp \
 		netcat-openbsd \
 		sudo \
 	&& rm -rf /var/lib/apt/lists/*

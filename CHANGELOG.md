@@ -4,6 +4,12 @@
 ## Unreleased
 
 
+## Release 0.159
+
+### Fixed
+- Resolved issue missing shared libraries of `msmtp`
+
+
 ## Release 0.158
 
 ### Fixed

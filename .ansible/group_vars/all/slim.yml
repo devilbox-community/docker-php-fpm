@@ -280,6 +280,15 @@ base_software_available:
       package: sudo
 
   ###
+  ### msmtp
+  ###
+  msmtp:
+    check: msmtp --version 2>&1 | grep -E 'version [0-9]+\.[0-9]+'
+    all:
+      type: apt
+      package: msmtp
+
+  ###
   ### Blackfire
   ###
   blackfire:
@@ -293,27 +302,7 @@ base_software_available:
       command: |
         apt-get install -y --no-install-recommends --no-install-suggests \
           blackfire-agent \
-      post: rm -rf /var/lib/apt/lists/*
-
-  ###
-  ### msmtp
-  ###
-  msmtp:
-    check: msmtp --version 2>&1 | grep -E 'version [0-9]+\.[0-9]+'
-    all:
-      type: custom
-      pre: |
-        apt-get update \
-      command: |
-        DEB_HOST_ARCH="$( dpkg-architecture --query DEB_HOST_ARCH )" \
-        && if [ "${DEB_HOST_ARCH}" = "amd64" ] || [ "${DEB_HOST_ARCH}" = "arm64" ]; then \
-          DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-suggests \
-          msmtp; \
-        else \
-          printf '%s\n%s\n%s\n' '#!/bin/sh' 'echo "Not available for this platform."' 'exit 1' > /usr/bin/msmtp \
-          && chmod +x /usr/bin/msmtp; \
-        fi \
-      post: rm -rf /var/lib/apt/lists/*
+      post: rm -rf /var/lib/apt/lists/
 
   ###
   ### mhsendmail
