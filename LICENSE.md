@@ -1,6 +1,7 @@
 # MIT License
 
-**Copyright (c) 2018 [cytopia](https://github.com/cytopia)**
+**Copyright (c) 2018-2023 [cytopia](https://github.com/cytopia)**
+**Copyright (c) 2024-present [nntoan](https://github.com/nntoan)**
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
