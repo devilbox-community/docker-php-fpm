@@ -13,6 +13,7 @@
 # -------------------------------------------------------------------------------------------------
 composer_home: /usr/local/src/composer
 nvm_home: /opt/nvm
+cloudcli_home: /home/devilbox/.magento-cloud
 node_version: --lts
 
 
@@ -23,6 +24,7 @@ help_software_enabled:
   - composer
   - nvm
   - pip
+  - cloud-cli
 
 
 ## -------------------------------------------------------------------------------------------------
@@ -199,3 +201,14 @@ help_software_available:
         curl -sS -L --fail https://bootstrap.pypa.io/pip/2.7/get-pip.py | python \
       run_dep: []
       build_dep: [libpython-dev]
+
+  ###
+  ### Commerce on Cloud CLI
+  ###
+  cloud-cli:
+    check: magento-cloud --version 2>/dev/null | grep -Ei 'CLI\s*(version\s*)?[0-9][.0-9]+' || (magento-cloud --version; false)
+    all:
+      type: custom
+      command: |
+        curl -sS -L --fail https://accounts.magento.cloud/cli/installer | php \
+        && runuser -l devilbox -c 'curl -sS -L --fail https://accounts.magento.cloud/cli/installer | php' \

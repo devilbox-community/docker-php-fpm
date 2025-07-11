@@ -1,8 +1,8 @@
-# stencil-cli
+# shopify-cli
 
-The BigCommerce Stencil CLI command line interface.
+The Shopify CLI command line interface.
 
 | Platform | Url                                                              |
 |----------|------------------------------------------------------------------|
-| NPM      | https://www.npmjs.com/package/@bigcommerce/stencil-cli           |
-| GitHub   | https://github.com/bigcommerce/stencil-cli                       |
+| NPM      | https://www.npmjs.com/package/@shopify/cli                       |
+| Website  | https://shopify.dev/docs/api/shopify-cli                        |

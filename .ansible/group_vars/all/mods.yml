@@ -256,8 +256,15 @@ extensions_available:
     disabled: []
     already_avail: "{{ php_all_versions }}"
   ftp:
-    disabled: [8.2, 8.3, 8.4]
-    already_avail: "{{ php_all_versions }}"
+    disabled: []
+    already_avail: [5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1]
+    all:
+      type: builtin
+      configure: --with-openssl-dir=/usr
+      build_dep: [libssl-dev]
+    8.4:
+      type: builtin
+      configure: --with-ftp-ssl
   gd:
     disabled: []
     all:

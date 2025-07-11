@@ -109,6 +109,13 @@ RUN set -eux \
 	\
 	&& true
 
+# -------------------- cloud-cli --------------------
+RUN set -eux \
+	&& curl -sS -L --fail https://accounts.magento.cloud/cli/installer | php \
+	&& runuser -l devilbox -c 'curl -sS -L --fail https://accounts.magento.cloud/cli/installer | php' \
+	\
+	&& true
+
 
 
 ########################################################################################################################
@@ -145,15 +152,21 @@ COPY --from=devilbox-work-help-builder /opt/nvm /opt/nvm
 COPY --from=devilbox-work-help-builder /usr/local/bin /usr/local/bin
 
 ###
+### Magento Cloud packages
+###
+COPY --from=devilbox-work-help-builder /home/devilbox/.magento-cloud /home/devilbox/.magento-cloud
+
+###
 ### Python packages
 ###
 COPY --from=devilbox-work-help-builder /usr/local/lib /usr/local/lib
 
 ###
-### Set permission for nvm
+### Set permission for home binaries
 ###
 RUN set -eux \
-    && chown -Rf devilbox:devilbox /opt/nvm
+    && chown -Rf ${MY_USER}:${MY_GROUP} /opt/nvm \
+    && chown -Rf ${MY_USER}:${MY_GROUP} /home/devilbox/.magento-cloud
 
 ###
 ### Configure Bash (composer, node yarn)
@@ -162,9 +175,10 @@ RUN set -eux \
     && { \
         #echo 'PATH="${PATH}:/usr/local/bin:/usr/local/sbin"'; \
         echo; \
-        echo "# [Devilbox] Ensure yarn, composer and node are in PATH"; \
+        echo "# [Devilbox] Ensure yarn, composer, magento-cloud and node are in PATH"; \
         echo 'PATH="${HOME}/.yarn/bin:${PATH}"'; \
         echo 'PATH="${HOME}/.composer/vendor/bin:${PATH}"'; \
+        echo 'PATH="${HOME}/.magento-cloud/bin:${PATH}"'; \
         echo 'PATH="/opt/nvm/versions/node/$(node --version)/bin:${PATH}"'; \
         echo "export PATH"; \
         echo; \
@@ -221,6 +235,11 @@ RUN set -eux \
 # -------------------- pip --------------------
 RUN set -eux \
 	&& pip --version	\
+	&& true
+
+# -------------------- cloud-cli --------------------
+RUN set -eux \
+	&& magento-cloud --version 2>/dev/null | grep -Ei 'CLI\s*(version\s*)?[0-9][.0-9]+' || (magento-cloud --version; false)	\
 	&& true
 
 ###
@@ -537,9 +556,14 @@ RUN set -eux \
 COPY --from=devilbox-work-tools-builder /usr/local/bin /usr/local/bin
 
 ###
-### Copy NPM
+### Copy NVM
 ###
 COPY --from=devilbox-work-tools-builder /opt/nvm /opt/nvm
+
+###
+### Magento Cloud packages
+###
+COPY --from=devilbox-work-tools-builder /home/devilbox/.magento-cloud /home/devilbox/.magento-cloud
 
 ###
 ### Copy Composer
@@ -560,10 +584,11 @@ COPY --from=devilbox-work-tools-builder /var/lib/gems /var/lib/gems
 # FIXME: / TODO: Add post: stage into here as well
 
 ###
-### Set permission for nvm
+### Set permission for home binaries
 ###
 RUN set -eux \
-    && chown -Rf devilbox:devilbox /opt/nvm
+    && chown -Rf ${MY_USER}:${MY_GROUP} /opt/nvm \
+    && chown -Rf ${MY_USER}:${MY_GROUP} /home/devilbox/.magento-cloud
 
 
 

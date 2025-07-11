@@ -126,7 +126,7 @@ RUN set -eux \
 ###
 ### Copy nvm
 ###
-COPY --from=devilbox-work-help-builder /opt/nvm /opt/nvm
+COPY --from=devilbox-work-help-builder {{ nvm_home }} {{ nvm_home }}
 
 ###
 ### Copy binaries (Composer & Pip binaries)
@@ -134,15 +134,21 @@ COPY --from=devilbox-work-help-builder /opt/nvm /opt/nvm
 COPY --from=devilbox-work-help-builder /usr/local/bin /usr/local/bin
 
 ###
+### Magento Cloud packages
+###
+COPY --from=devilbox-work-help-builder {{ cloudcli_home }} {{ cloudcli_home }}
+
+###
 ### Python packages
 ###
 COPY --from=devilbox-work-help-builder /usr/local/lib /usr/local/lib
 
 ###
-### Set permission for nvm
+### Set permission for home binaries
 ###
 RUN set -eux \
-    && chown -Rf devilbox:devilbox /opt/nvm
+    && chown -Rf ${MY_USER}:${MY_GROUP} {{ nvm_home }} \
+    && chown -Rf ${MY_USER}:${MY_GROUP} {{ cloudcli_home }}
 
 ###
 ### Configure Bash (composer, node yarn)
@@ -151,9 +157,10 @@ RUN set -eux \
     && { \
         #echo 'PATH="${PATH}:/usr/local/bin:/usr/local/sbin"'; \
         echo; \
-        echo "# [Devilbox] Ensure yarn, composer and node are in PATH"; \
+        echo "# [Devilbox] Ensure yarn, composer, magento-cloud and node are in PATH"; \
         echo 'PATH="${HOME}/.yarn/bin:${PATH}"'; \
         echo 'PATH="${HOME}/.composer/vendor/bin:${PATH}"'; \
+        echo 'PATH="${HOME}/.magento-cloud/bin:${PATH}"'; \
         echo 'PATH="{{ nvm_home }}/versions/node/$(node --version)/bin:${PATH}"'; \
         echo "export PATH"; \
         echo; \
@@ -449,9 +456,14 @@ RUN set -eux \
 COPY --from=devilbox-work-tools-builder /usr/local/bin /usr/local/bin
 
 ###
-### Copy NPM
+### Copy NVM
 ###
-COPY --from=devilbox-work-tools-builder /opt/nvm /opt/nvm
+COPY --from=devilbox-work-tools-builder {{ nvm_home }} {{ nvm_home }}
+
+###
+### Magento Cloud packages
+###
+COPY --from=devilbox-work-tools-builder {{ cloudcli_home }} {{ cloudcli_home }}
 
 ###
 ### Copy Composer
@@ -472,10 +484,11 @@ COPY --from=devilbox-work-tools-builder /var/lib/gems /var/lib/gems
 # FIXME: / TODO: Add post: stage into here as well
 
 ###
-### Set permission for nvm
+### Set permission for home binaries
 ###
 RUN set -eux \
-    && chown -Rf devilbox:devilbox /opt/nvm
+    && chown -Rf ${MY_USER}:${MY_GROUP} {{ nvm_home }} \
+    && chown -Rf ${MY_USER}:${MY_GROUP} {{ cloudcli_home }}
 
 
 
