@@ -31,6 +31,7 @@ The following PHP cli tools are available on the [`prod`](flavours.md#prod) flav
    <th>PHP 8.1</th>
    <th>PHP 8.2</th>
    <th>PHP 8.3</th>
+   <th>PHP 8.4</th>
  </tr>
  <tr>
   <td><a target="_blank" href="https://linux.die.net/man/8/cron">Cron</a></td>
@@ -246,6 +247,7 @@ Additionally to all of the `slim` tools shown above, the following PHP cli tools
 | [laravel-installer][lnk_laravel-installer] |         |         |         |         |         |         |
 | [laravel-lumen][lnk_laravel-lumen]         |         |         |         |         |         |         |
 | [linkcheck][lnk_linkcheck]                 |         |         |         |         |         |         |
+| [**magento-cloud**][lnk_**magento-cloud**] |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
 | [magerun][lnk_magerun]                     |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |    ✓    |
 | [mdl][lnk_mdl]                             |         |         |         |         |         |         |
 | [mdlint][lnk_mdlint]                       |         |         |         |         |         |         |
@@ -303,6 +305,7 @@ Additionally to all of the `slim` tools shown above, the following PHP cli tools
 [lnk_laravel-installer]: ../php_tools/laravel-installer
 [lnk_laravel-lumen]: ../php_tools/laravel-lumen
 [lnk_linkcheck]: ../php_tools/linkcheck
+[lnk_**magento-cloud**]: https://experienceleague.adobe.com/en/docs/commerce-on-cloud/user-guide/dev-tools/cloud-cli/cloud-cli-overview
 [lnk_magerun]: ../php_tools/magerun
 [lnk_mdl]: ../php_tools/mdl
 [lnk_mdlint]: ../php_tools/mdlint

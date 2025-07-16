@@ -509,9 +509,9 @@ The following PHP modules are available on the `mods`, `prod`, `slim` and `work`
   <td class="ext_mods_ftp_7.4">✓</td>
   <td class="ext_mods_ftp_8.0">✓</td>
   <td class="ext_mods_ftp_8.1">✓</td>
-  <td class="ext_mods_ftp_8.2"></td>
-  <td class="ext_mods_ftp_8.3"></td>
-  <td class="ext_mods_ftp_8.4"></td>
+  <td class="ext_mods_ftp_8.2">✓</td>
+  <td class="ext_mods_ftp_8.3">✓</td>
+  <td class="ext_mods_ftp_8.4">✓</td>
  </tr>
  <tr>
   <td><a href="../php_modules/gd">gd</a></td>

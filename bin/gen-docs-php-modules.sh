@@ -106,6 +106,8 @@ get_modules_from_image() {
 		modules="$( printf "%s\n%s\n" "${modules}" "xhprof" )";
 	fi
 
+	echo "${modules}"
+
 	# Sort alphabetically
 	modules="$( echo "${modules}" | sort -fu )"
 
