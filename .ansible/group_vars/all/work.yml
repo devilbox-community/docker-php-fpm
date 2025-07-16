@@ -310,6 +310,9 @@ tools_available:
       pre: MAGERUN_URL="https://files.magerun.net/n98-magerun2-latest.phar"
       command: curl -sS -k -L --fail -L "${MAGERUN_URL}" -o /usr/local/bin/magerun
       post: chmod +x /usr/local/bin/magerun
+    8.0:
+      type: custom
+      pre: MAGERUN_URL="https://files.magerun.net/n98-magerun2-8.1.1.phar"
     7.4:
       type: custom
       pre: MAGERUN_URL="https://files.magerun.net/n98-magerun2-7.5.0.phar"

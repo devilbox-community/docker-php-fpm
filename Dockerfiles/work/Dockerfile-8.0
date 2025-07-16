@@ -361,7 +361,7 @@ RUN set -eux \
 
 # -------------------- (custom) magerun --------------------
 RUN set -eux \
-	&& MAGERUN_URL="https://files.magerun.net/n98-magerun2-latest.phar"	\
+	&& MAGERUN_URL="https://files.magerun.net/n98-magerun2-8.1.1.phar"	\
 	&& curl -sS -k -L --fail -L "${MAGERUN_URL}" -o /usr/local/bin/magerun	\
 	&& chmod +x /usr/local/bin/magerun	\
 	&& magerun --version	\

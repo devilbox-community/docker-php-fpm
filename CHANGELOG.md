@@ -4,6 +4,19 @@
 ## Unreleased
 
 
+## Release 0.160
+
+### Added
+- Added `magento-cli` tool to all PHP flavours
+
+### Changed
+- Update softwares to latest version
+
+### Fixed
+- Resolved issue missing `ftp` extension in PHP 8.2 and above
+- Resolved compatibility issue for `magerun` on PHP 8.0 image
+
+
 ## Release 0.159
 
 ### Fixed
