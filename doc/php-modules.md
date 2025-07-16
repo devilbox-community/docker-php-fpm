@@ -152,6 +152,15 @@ The following PHP modules are available on the `base` flavour:
   <td class="ext_base_mysqlnd_8.4">✓</td>
  </tr>
  <tr>
+  <td><a href="../php_modules/opcache">OPcache</a></td>
+  <td class="ext_base_opcache_7.4"></td>
+  <td class="ext_base_opcache_8.0"></td>
+  <td class="ext_base_opcache_8.1">✓</td>
+  <td class="ext_base_opcache_8.2">✓</td>
+  <td class="ext_base_opcache_8.3">✓</td>
+  <td class="ext_base_opcache_8.4">✓</td>
+ </tr>
+ <tr>
   <td><a href="../php_modules/openssl">openssl</a></td>
   <td class="ext_base_openssl_7.4">✓</td>
   <td class="ext_base_openssl_8.0">✓</td>

@@ -71,6 +71,9 @@ get_modules_from_image() {
 	local img_tag="${2}"
 	local modules
 
+	# Get modules which are available in the PHP image
+	#docker run --rm --platform "${ARCH}" --entrypoint=php "${IMAGE}:${img_tag}" -m
+
 	modules="$( \
 		docker run --rm --platform "${ARCH}" --entrypoint=php "${IMAGE}:${img_tag}" -m \
 		| sed 's/Zend //g' \
@@ -105,8 +108,6 @@ get_modules_from_image() {
 	if docker run --rm --platform "${ARCH}" --entrypoint=find "${IMAGE}:${img_tag}" /usr/local/lib/php/extensions -name 'xhprof.so' | grep -q xhprof.so; then
 		modules="$( printf "%s\n%s\n" "${modules}" "xhprof" )";
 	fi
-
-	echo "${modules}"
 
 	# Sort alphabetically
 	modules="$( echo "${modules}" | sort -fu )"
