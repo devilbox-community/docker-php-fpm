@@ -15,6 +15,7 @@
 ### Fixed
 - Resolved issue missing `ftp` extension in PHP 8.2 and above
 - Resolved compatibility issue for `magerun` on PHP 8.0 image
+- Resolved ownership/permissions issues for `/opt/nvm`
 
 
 ## Release 0.159

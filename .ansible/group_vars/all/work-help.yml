@@ -100,9 +100,9 @@ help_software_available:
   ###
   nvm:
     check: |
-      su  -c '. {{ nvm_home }}/nvm.sh; nvm --version' devilbox | grep -E '^v?[0-9][.0-9]+' \
-      && su  -c '. {{ nvm_home }}/nvm.sh; node --version' devilbox | grep -E '^v?[0-9][.0-9]+' \
-      && su  -c '. {{ nvm_home }}/nvm.sh; yarn --version' devilbox | grep -E '^v?[0-9][.0-9]+' \
+      runuser -l devilbox -c '. {{ nvm_home }}/nvm.sh; nvm --version' | grep -E '^v?[0-9][.0-9]+' \
+      && runuser -l devilbox -c '. {{ nvm_home }}/nvm.sh; node --version' | grep -E '^v?[0-9][.0-9]+' \
+      && runuser -l devilbox -c '. {{ nvm_home }}/nvm.sh; yarn --version' | grep -E '^v?[0-9][.0-9]+' \
     all:
       type: custom
       pre: |
@@ -122,15 +122,15 @@ help_software_available:
         && chown -Rf devilbox:devilbox "{{ nvm_home }}" \
       # Install latest and LTS version and yarn
       post: |
-        su  -c ". {{ nvm_home }}/nvm.sh; nvm install ${NODE_VERSION}" devilbox \
-        && su  -c ". {{ nvm_home }}/nvm.sh; nvm use ${NODE_VERSION}" devilbox \
-        && su  -c ". {{ nvm_home }}/nvm.sh; corepack enable" devilbox \
+        runuser -l devilbox -c ". {{ nvm_home }}/nvm.sh; nvm install ${NODE_VERSION}" \
+        && runuser -l devilbox -c ". {{ nvm_home }}/nvm.sh; nvm use ${NODE_VERSION}" \
+        && runuser -l devilbox -c ". {{ nvm_home }}/nvm.sh; corepack enable" \
         \
-        && ln -s "{{ nvm_home }}/versions/node/$(su -c '. {{ nvm_home }}/nvm.sh; node --version' devilbox)/bin/corepack" /usr/local/bin/ \
-        && ln -s "{{ nvm_home }}/versions/node/$(su -c '. {{ nvm_home }}/nvm.sh; node --version' devilbox)/bin/node" /usr/local/bin/ \
-        && ln -s "{{ nvm_home }}/versions/node/$(su -c '. {{ nvm_home }}/nvm.sh; node --version' devilbox)/bin/npm" /usr/local/bin/ \
-        && ln -s "{{ nvm_home }}/versions/node/$(su -c '. {{ nvm_home }}/nvm.sh; node --version' devilbox)/bin/npx" /usr/local/bin/ \
-        && ln -s "{{ nvm_home }}/versions/node/$(su -c '. {{ nvm_home }}/nvm.sh; node --version' devilbox)/bin/yarn" /usr/local/bin/ \
+        && ln -s "{{ nvm_home }}/versions/node/$(runuser -l devilbox -c '. {{ nvm_home }}/nvm.sh; node --version')/bin/corepack" /usr/local/bin/ \
+        && ln -s "{{ nvm_home }}/versions/node/$(runuser -l devilbox -c '. {{ nvm_home }}/nvm.sh; node --version')/bin/node" /usr/local/bin/ \
+        && ln -s "{{ nvm_home }}/versions/node/$(runuser -l devilbox -c '. {{ nvm_home }}/nvm.sh; node --version')/bin/npm" /usr/local/bin/ \
+        && ln -s "{{ nvm_home }}/versions/node/$(runuser -l devilbox -c '. {{ nvm_home }}/nvm.sh; node --version')/bin/npx" /usr/local/bin/ \
+        && ln -s "{{ nvm_home }}/versions/node/$(runuser -l devilbox -c '. {{ nvm_home }}/nvm.sh; node --version')/bin/yarn" /usr/local/bin/ \
         \
         && chmod 0777 {{ nvm_home }} \
         && find {{ nvm_home }} -type f -print0 | xargs -n1 -0 chmod go+w \
@@ -138,8 +138,8 @@ help_software_available:
         && chown -Rf devilbox:devilbox {{ nvm_home }} \
         \
         && rm -rf {{ nvm_home }}/.cache \
-        && rm -rf {{ nvm_home }}/versions/node/$(su -c '. /opt/nvm/nvm.sh; node --version' devilbox)/share \
-        && rm -rf {{ nvm_home }}/versions/node/$(su -c '. /opt/nvm/nvm.sh; node --version' devilbox)/include \
+        && rm -rf {{ nvm_home }}/versions/node/$(runuser -l devilbox -c '. /opt/nvm/nvm.sh; node --version')/share \
+        && rm -rf {{ nvm_home }}/versions/node/$(runuser -l devilbox -c '. /opt/nvm/nvm.sh; node --version')/include \
     7.0:
       type: custom
       pre: |

@@ -66,15 +66,15 @@ RUN set -eux \
 	\
 	&& chown -Rf devilbox:devilbox "/opt/nvm" \
 	\
-	&& su  -c ". /opt/nvm/nvm.sh; nvm install ${NODE_VERSION}" devilbox \
-	&& su  -c ". /opt/nvm/nvm.sh; nvm use ${NODE_VERSION}" devilbox \
-	&& su  -c ". /opt/nvm/nvm.sh; corepack enable" devilbox \
+	&& runuser -l devilbox -c ". /opt/nvm/nvm.sh; nvm install ${NODE_VERSION}" \
+	&& runuser -l devilbox -c ". /opt/nvm/nvm.sh; nvm use ${NODE_VERSION}" \
+	&& runuser -l devilbox -c ". /opt/nvm/nvm.sh; corepack enable" \
 	\
-	&& ln -s "/opt/nvm/versions/node/$(su -c '. /opt/nvm/nvm.sh; node --version' devilbox)/bin/corepack" /usr/local/bin/ \
-	&& ln -s "/opt/nvm/versions/node/$(su -c '. /opt/nvm/nvm.sh; node --version' devilbox)/bin/node" /usr/local/bin/ \
-	&& ln -s "/opt/nvm/versions/node/$(su -c '. /opt/nvm/nvm.sh; node --version' devilbox)/bin/npm" /usr/local/bin/ \
-	&& ln -s "/opt/nvm/versions/node/$(su -c '. /opt/nvm/nvm.sh; node --version' devilbox)/bin/npx" /usr/local/bin/ \
-	&& ln -s "/opt/nvm/versions/node/$(su -c '. /opt/nvm/nvm.sh; node --version' devilbox)/bin/yarn" /usr/local/bin/ \
+	&& ln -s "/opt/nvm/versions/node/$(runuser -l devilbox -c '. /opt/nvm/nvm.sh; node --version')/bin/corepack" /usr/local/bin/ \
+	&& ln -s "/opt/nvm/versions/node/$(runuser -l devilbox -c '. /opt/nvm/nvm.sh; node --version')/bin/node" /usr/local/bin/ \
+	&& ln -s "/opt/nvm/versions/node/$(runuser -l devilbox -c '. /opt/nvm/nvm.sh; node --version')/bin/npm" /usr/local/bin/ \
+	&& ln -s "/opt/nvm/versions/node/$(runuser -l devilbox -c '. /opt/nvm/nvm.sh; node --version')/bin/npx" /usr/local/bin/ \
+	&& ln -s "/opt/nvm/versions/node/$(runuser -l devilbox -c '. /opt/nvm/nvm.sh; node --version')/bin/yarn" /usr/local/bin/ \
 	\
 	&& chmod 0777 /opt/nvm \
 	&& find /opt/nvm -type f -print0 | xargs -n1 -0 chmod go+w \
@@ -82,8 +82,8 @@ RUN set -eux \
 	&& chown -Rf devilbox:devilbox /opt/nvm \
 	\
 	&& rm -rf /opt/nvm/.cache \
-	&& rm -rf /opt/nvm/versions/node/$(su -c '. /opt/nvm/nvm.sh; node --version' devilbox)/share \
-	&& rm -rf /opt/nvm/versions/node/$(su -c '. /opt/nvm/nvm.sh; node --version' devilbox)/include \
+	&& rm -rf /opt/nvm/versions/node/$(runuser -l devilbox -c '. /opt/nvm/nvm.sh; node --version')/share \
+	&& rm -rf /opt/nvm/versions/node/$(runuser -l devilbox -c '. /opt/nvm/nvm.sh; node --version')/include \
 	\
 	&& true
 
@@ -226,9 +226,9 @@ RUN set -eux \
 
 # -------------------- nvm --------------------
 RUN set -eux \
-	&& su  -c '. /opt/nvm/nvm.sh; nvm --version' devilbox | grep -E '^v?[0-9][.0-9]+' \
-	&& su  -c '. /opt/nvm/nvm.sh; node --version' devilbox | grep -E '^v?[0-9][.0-9]+' \
-	&& su  -c '. /opt/nvm/nvm.sh; yarn --version' devilbox | grep -E '^v?[0-9][.0-9]+' \
+	&& runuser -l devilbox -c '. /opt/nvm/nvm.sh; nvm --version' | grep -E '^v?[0-9][.0-9]+' \
+	&& runuser -l devilbox -c '. /opt/nvm/nvm.sh; node --version' | grep -E '^v?[0-9][.0-9]+' \
+	&& runuser -l devilbox -c '. /opt/nvm/nvm.sh; yarn --version' | grep -E '^v?[0-9][.0-9]+' \
 	\
 	&& true
 
