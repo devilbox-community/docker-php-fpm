@@ -10,6 +10,10 @@ all:
   build_dep: [libpspell-dev]
   run_dep: [libaspell15]
 
+8.5:
+  type: pecl
+  version: 1.0.1
+
 8.4:
   type: pecl
   version: 1.0.1

@@ -70,6 +70,16 @@ all:
     && ORACLE_VERSION_MAJOR="$( echo "${ORACLE_HREF}" | grep -Eo 'instantclient[.0-9]+' | sed 's/instantclient//g' )" \
     && (ln -sf /usr/lib/oracle/${ORACLE_VERSION_MAJOR}/client64/lib/*.so* /usr/lib/ || true) \
 
+8.5:
+  type: pecl
+  command: printf "instantclient,/usr/lib/oracle/${ORACLE_VERSION_MAJOR}/client64/lib/,${ORACLE_VERSION_MAJOR}" | pecl install oci8
+  pre: |
+    # libaio symlink for Debian Trixie (time_t transition: libaio.so.1 renamed to libaio.so.1t64)
+    if [ -f /lib/$(dpkg-architecture --query DEB_BUILD_GNU_TYPE)/libaio.so.1t64 ]; then \
+         ln -sf libaio.so.1t64 /lib/$(dpkg-architecture --query DEB_BUILD_GNU_TYPE)/libaio.so.1; \
+       fi
+  run_dep: [libaio1t64]
+
 8.4:
   type: pecl
   command: printf "instantclient,/usr/lib/oracle/${ORACLE_VERSION_MAJOR}/client64/lib/,${ORACLE_VERSION_MAJOR}" | pecl install oci8

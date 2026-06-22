@@ -4,7 +4,7 @@
 name: webpack-cli
 
 # Exclude module build/installation for the following PHP versions
-exclude: []
+exclude: [8.5]  # webpack-cli 7.x broke --version output
 
 # In order for this tool to build/install correctly,
 # the following tools must have been installed first.

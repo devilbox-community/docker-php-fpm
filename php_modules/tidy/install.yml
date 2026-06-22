@@ -10,6 +10,10 @@ all:
   build_dep: [libtidy-dev]
   run_dep: [libtidy5deb1]
 
+8.5:
+  type: builtin
+  run_dep: [libtidy58]
+
 7.0:
   type: builtin
   run_dep: [libtidy5]
