@@ -11,6 +11,11 @@ all:
   build_dep: [libzip-dev]
   run_dep: [libzip4]
 
+8.5:
+  type: builtin
+  configure: --with-zip
+  run_dep: [libzip5]
+
 7.3:
   type: builtin
   configure: --enable-zip --with-zlib-dir=/usr --with-pcre-dir=/usr --with-libzip=/usr

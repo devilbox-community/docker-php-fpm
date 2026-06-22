@@ -3,6 +3,8 @@
 
 ## Unreleased
 
+### Added
+- Added PHP 8.5 support across all flavours (base, mods, prod, slim, work)
 
 ## Release 0.160
 

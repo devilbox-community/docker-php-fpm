@@ -177,6 +177,28 @@ help_software_available:
         done \
       run_dep: [python3-distutils]
       build_dep: [libpython3-dev]
+    8.5:
+      type: custom
+      pre: rm -rf /usr/lib/python3.*/EXTERNALLY-MANAGED
+      command: |
+        curl -sS -L --fail https://bootstrap.pypa.io/get-pip.py | python3 \
+      post: |
+        /bin/ls -1 /usr/local/lib/ | grep ^python | while read -r version; do \
+          cd "/usr/local/lib/${version}/" \
+          && find . -name '*.pyc' -print0 | xargs -0 -n1 rm -rf \
+          && find . -name '*.exe' -print0 | xargs -0 -n1 rm -rf \
+          && find . -name '__pycache__' -print0 | xargs -0 -n1 rm -rf \
+          \
+          && if [ -d "dist-packages" ]; then \
+            cd "dist-packages" \
+            && pwd \
+            && if /bin/ls -1 | grep -v '^pip'; then \
+              /bin/ls -1 | grep -v '^pip' | xargs -n1 rm -rf; \
+            fi \
+          fi \
+        done \
+      run_dep: []
+      build_dep: [libpython3-dev]
     7.2:
       type: custom
       command: |

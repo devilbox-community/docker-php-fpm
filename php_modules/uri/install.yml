@@ -1,0 +1,13 @@
+---
+
+# Available Jinja2 variables:
+# ---------------------------
+# * {{ php_all_versions }}:  Array of all PHP versions
+
+
+# URI extension is built-in in PHP 8.5 and requires no deps
+all:
+  type: builtin
+
+8.5:
+  type: builtin

@@ -16,6 +16,9 @@ os_release:
   all:
     debian: bookworm
     ubuntu: jammy
+  8.5:
+    debian: trixie
+    ubuntu: jammy
   8.4:
     debian: bookworm
     ubuntu: jammy
@@ -99,6 +102,16 @@ base_apt_repositories_available:
   ### Backports
   ###
   backports:
+    # [Trixie]
+    # Trixie uses sqv for key verification which rejects SHA1 binding signatures;
+    # backports on trixie is optional since trixie is already testing/unstable.
+    # pre is required to prevent fallback to all: which uses apt-key (removed on Trixie)
+    8.5:
+      type: repo
+      pre: |
+        apt-get update -qq \
+        && apt-get install -y --no-install-recommends --no-install-suggests dirmngr \
+      deb: deb [trusted=yes] http://ftp.debian.org/debian trixie-backports main contrib non-free
     # [Bookworm]
     all:
       type: repo
@@ -159,6 +172,11 @@ base_apt_repositories_available:
   ### Blackfire
   ###
   blackfire:
+    # [Trixie]
+    8.5:
+      type: repo
+      deb: deb [signed-by=/usr/share/keyrings/blackfire.gpg] http://packages.blackfire.io/debian any main
+      pre: curl -sS -L --fail "https://packages.blackfire.io/gpg.key" | gpg --dearmor -o /usr/share/keyrings/blackfire.gpg
     all:
       type: repo
       deb: deb http://packages.blackfire.io/debian any main
@@ -350,6 +368,17 @@ base_software_available:
       else \
         mongosh --version; \
       fi \
+    8.5:
+      type: custom
+      pre: |
+        echo "deb [trusted=yes] http://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/6.0 multiverse" > /etc/apt/sources.list.d/mongo.list \
+        && apt-get update \
+      command: |
+        apt-get install -y --no-install-recommends --no-install-suggests \
+          mongodb-org-tools \
+          mongodb-mongosh \
+      post: rm -rf /var/lib/apt/lists/*
+      build_dep: [libsnappy-dev]  # Required to copy libsnappy.so to next stage
     all:
       type: custom
       pre: |
@@ -438,6 +467,15 @@ base_software_available:
       else \
         pg_isready --version; \
       fi \
+    8.5:
+      type: custom
+      pre: |
+        echo "deb [trusted=yes] https://apt.postgresql.org/pub/repos/apt/ trixie-pgdg main" > /etc/apt/sources.list.d/pgsql.list \
+        && apt-get update \
+      command: |
+        apt-get install -y --no-install-recommends --no-install-suggests \
+          postgresql-client \
+      post: rm -rf /var/lib/apt/lists/*
     all:
       type: custom
       pre: |

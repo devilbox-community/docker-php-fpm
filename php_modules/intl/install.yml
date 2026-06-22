@@ -10,6 +10,10 @@ all:
   build_dep: [libicu-dev]
   run_dep: [libicu72]
 
+8.5:
+  type: builtin
+  run_dep: [libicu76]
+
 8.0:
   type: builtin
   run_dep: [libicu67]
