@@ -5,5 +5,5 @@ check: phpcs --version | grep -E 'version [0-9][.0-9]+' || (phpcs --version; fal
 all:
   type: custom
   command: curl -sS -k -L --fail -L "${PHPCS_URL}" -o /usr/local/bin/phpcs
-  pre: PHPCS_URL="https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar"
+  pre: PHPCS_URL="https://phars.phpcodesniffer.com/phpcs.phar"
   post: chmod +x /usr/local/bin/phpcs

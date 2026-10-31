@@ -68,6 +68,7 @@ RUN set -eux \
 	\
 	&& runuser -l devilbox -c ". /opt/nvm/nvm.sh; nvm install ${NODE_VERSION}" \
 	&& runuser -l devilbox -c ". /opt/nvm/nvm.sh; nvm use ${NODE_VERSION}" \
+	&& runuser -l devilbox -c ". /opt/nvm/nvm.sh; npm install -g corepack" \
 	&& runuser -l devilbox -c ". /opt/nvm/nvm.sh; corepack enable" \
 	\
 	&& ln -s "/opt/nvm/versions/node/$(runuser -l devilbox -c '. /opt/nvm/nvm.sh; node --version')/bin/corepack" /usr/local/bin/ \
@@ -397,7 +398,7 @@ RUN set -eux \
 
 # -------------------- (custom) phpcbf --------------------
 RUN set -eux \
-	&& PHPCBF_URL="https://squizlabs.github.io/PHP_CodeSniffer/phpcbf.phar"	\
+	&& PHPCBF_URL="https://phars.phpcodesniffer.com/phpcbf.phar"	\
 	&& curl -sS -k -L --fail -L "${PHPCBF_URL}" -o /usr/local/bin/phpcbf	\
 	&& chmod +x /usr/local/bin/phpcbf	\
 	&& phpcbf --version | grep -E 'version [0-9][.0-9]+' || (phpcbf --version; false)	\
@@ -405,7 +406,7 @@ RUN set -eux \
 
 # -------------------- (custom) phpcs --------------------
 RUN set -eux \
-	&& PHPCS_URL="https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar"	\
+	&& PHPCS_URL="https://phars.phpcodesniffer.com/phpcs.phar"	\
 	&& curl -sS -k -L --fail -L "${PHPCS_URL}" -o /usr/local/bin/phpcs	\
 	&& chmod +x /usr/local/bin/phpcs	\
 	&& phpcs --version | grep -E 'version [0-9][.0-9]+' || (phpcs --version; false)	\
@@ -481,7 +482,7 @@ RUN set -eux \
 RUN set -eux \
 	&& su -c '. /opt/nvm/nvm.sh; npm install --location=global webpack-cli' devilbox \
 	&& ln -s /opt/nvm/versions/node/$(su -c '. /opt/nvm/nvm.sh; node --version' devilbox)/bin/webpack-cli /usr/local/bin/ \
-	&& webpack-cli --version | grep -E '[0-9][.0-9]+' || (webpack-cli --version; false)	\
+	&& webpack-cli info | grep -E 'webpack-cli:\s*[0-9][.0-9]+' || (webpack-cli info; false)	\
 	&& true
 
 # -------------------- (custom) wp-cli --------------------
@@ -736,7 +737,7 @@ RUN set -eux \
 
 # -------------------- (npm) webpack-cli --------------------
 RUN set -eux \
-	&& webpack-cli --version | grep -E '[0-9][.0-9]+' || (webpack-cli --version; false)	\
+	&& webpack-cli info | grep -E 'webpack-cli:\s*[0-9][.0-9]+' || (webpack-cli info; false)	\
 	&& true
 
 # -------------------- (custom) wp-cli --------------------

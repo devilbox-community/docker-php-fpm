@@ -58,7 +58,7 @@ tools_enabled:
 # The following specifies how tools are being installed.
 tools_available:
   angular-cli:
-    disabled: [5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3, 8.4]
+    disabled: [5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3, 8.4, 8.5]
     check: ng version 2>&1 | grep -iE 'Angular CLI:\s*[0-9][.0-9]+' || (ng version; false)
     all:
       type: npm
@@ -76,7 +76,7 @@ tools_available:
       type: npm
       version: 16
   asgardcms:
-    disabled: [5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3, 8.4]
+    disabled: [5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3, 8.4, 8.5]
     check: asgardcms --version 2>/dev/null | grep -Ei 'AsgardCMS\sInstaller\s[0-9][.0-9]+' || (asgardcms --version; false)
     all:
       type: composer
@@ -121,7 +121,7 @@ tools_available:
       pre:
       post:
   mdl:
-    disabled: [5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3, 8.4]
+    disabled: [5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3, 8.4, 8.5]
     check: mdl --version | grep -E '[.0-9]+' || (mdl --version; false)
     all:
       type: rubygem
@@ -152,7 +152,7 @@ tools_available:
       pre: |
         gem install mixlib-config -v 2.2.4 \
   awesome-ci:
-    disabled: [5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3, 8.4]
+    disabled: [5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3, 8.4, 8.5]
     check: regex-grep --version | grep -E '[0-9][.0-9]+' || (regex-grep --version; false)
     all:
       type: custom
@@ -181,7 +181,7 @@ tools_available:
       # pre:
       # post:
   deployer:
-    disabled: [5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3, 8.4]
+    disabled: [5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3, 8.4, 8.5]
     check: dep --version 2>/dev/null | grep -Ei 'deployer\s*(version\s*)?[0-9][.0-9]+' || (dep --version; false)
     all:
       type: custom
@@ -213,7 +213,7 @@ tools_available:
       pre: TAG_VERSION="v4.3.4"
       command: curl -sS -k -L --fail "https://deployer.org/releases/${TAG_VERSION}/deployer.phar" -L -o /usr/local/bin/dep
   git-flow:
-    disabled: [5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3, 8.4]
+    disabled: [5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3, 8.4, 8.5]
     check: git-flow version 2>&1 | grep -E '[0-9][.0-9]+' || (git-flow version; false)
     all:
       type: custom
@@ -253,7 +253,7 @@ tools_available:
       type: apt
       package: jq
   laravel-installer:
-    disabled: [5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3, 8.4]
+    disabled: [5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3, 8.4, 8.5]
     check: laravel --version | grep ^Laravel | grep -E '[0-9]\.[0-9]+' || (laravel --version; false)
     all:
       type: composer
@@ -280,7 +280,7 @@ tools_available:
       binary: laravel
       version: 2.2.0
   laravel-lumen:
-    disabled: [5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3, 8.4]
+    disabled: [5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3, 8.4, 8.5]
     check: lumen --version 2>/dev/null | grep ^Lumen | grep -E '[0-9]\.[0-9]+' || (lumen --version; false)
     all:
       type: composer
@@ -294,7 +294,7 @@ tools_available:
       # pre:
       # post:
   linkcheck:
-    disabled: [5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3, 8.4]
+    disabled: [5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3, 8.4, 8.5]
     check: linkcheck --version | grep -E 'v[0-9][.0-9]+' || (linkcheck --version; false)
     all:
       type: custom
@@ -310,6 +310,9 @@ tools_available:
       pre: MAGERUN_URL="https://files.magerun.net/n98-magerun2-latest.phar"
       command: curl -sS -k -L --fail -L "${MAGERUN_URL}" -o /usr/local/bin/magerun
       post: chmod +x /usr/local/bin/magerun
+    8.1:
+      type: custom
+      pre: MAGERUN_URL="https://files.magerun.net/n98-magerun2-9.5.1.phar"
     8.0:
       type: custom
       pre: MAGERUN_URL="https://files.magerun.net/n98-magerun2-8.1.1.phar"
@@ -326,7 +329,7 @@ tools_available:
       type: custom
       pre: MAGERUN_URL="https://files.magerun.net/n98-magerun-1.103.2.phar"
   mdlint:
-    disabled: [5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3, 8.4]
+    disabled: [5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3, 8.4, 8.5]
     check: mdlint --version | grep -E '[0-9][.0-9]+' || (mdlint --version; false)
     all:
       type: npm
@@ -360,7 +363,7 @@ tools_available:
       type: apt
       package: net-tools
   phalcon-devtools:
-    disabled: [5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3, 8.4]
+    disabled: [5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3, 8.4, 8.5]
     check: |
         if find /usr/local/lib/php/extensions/ -name phalcon.so | grep phalcon; then \
           echo "extension=phalcon.so" > /usr/local/etc/php/conf.d/docker-php-ext-phalcon.ini; \
@@ -400,6 +403,9 @@ tools_available:
         && if [ -f /usr/local/etc/php/conf.d/docker-php-ext-psr.ini ]; then \
           echo "extension=psr.so" > /usr/local/etc/php/conf.d/docker-php-ext-psr.ini; \
         fi \
+    8.5:
+      type: composer
+      version: 6.0.x-dev -W
     8.4:
       type: composer
       version: 6.0.x-dev -W
@@ -428,7 +434,7 @@ tools_available:
       type: composer
       version: 3.4.11
   php-cs-fixer:
-    disabled: [8.4]
+    disabled: []
     check: php-cs-fixer --version 2>&1 | grep -E 'Fixer\s+(version\s*)?[-_.0-9]+\s+' || (php-cs-fixer --version; false)
     all:
       type: custom
@@ -456,7 +462,7 @@ tools_available:
     all:
       type: custom
       command: curl -sS -k -L --fail -L "${PHPCBF_URL}" -o /usr/local/bin/phpcbf
-      pre: PHPCBF_URL="https://squizlabs.github.io/PHP_CodeSniffer/phpcbf.phar"
+      pre: PHPCBF_URL="https://phars.phpcodesniffer.com/phpcbf.phar"
       post: chmod +x /usr/local/bin/phpcbf
   phpcs:
     disabled: []
@@ -464,7 +470,7 @@ tools_available:
     all:
       type: custom
       command: curl -sS -k -L --fail -L "${PHPCS_URL}" -o /usr/local/bin/phpcs
-      pre: PHPCS_URL="https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar"
+      pre: PHPCS_URL="https://phars.phpcodesniffer.com/phpcs.phar"
       post: chmod +x /usr/local/bin/phpcs
   phpmd:
     disabled: []
@@ -473,6 +479,12 @@ tools_available:
       type: custom
       command: curl -sS -k -L --fail https://phpmd.org/static/latest/phpmd.phar -L -o /usr/local/bin/phpmd
       post: chmod +x /usr/local/bin/phpmd
+    8.5:
+      type: custom
+      command: curl -sS -k -L --fail https://github.com/phpmd/phpmd/releases/latest/download/phpmd.phar -L -o /usr/local/bin/phpmd
+    8.4:
+      type: custom
+      command: curl -sS -k -L --fail https://github.com/phpmd/phpmd/releases/latest/download/phpmd.phar -L -o /usr/local/bin/phpmd
   phpunit:
     disabled: []
     check: phpunit --version | grep -iE '^PHPUnit\s[0-9][.0-9]+' || (phpunit --version; false)
@@ -489,6 +501,9 @@ tools_available:
       run_dep: []
       pre: PHP_UNIT_VERSION=""
       post: chmod +x /usr/local/bin/phpunit
+    8.3:
+      type: custom
+      pre: PHP_UNIT_VERSION="12"
     8.2:
       type: custom
       pre: PHP_UNIT_VERSION="11"
@@ -540,6 +555,9 @@ tools_available:
       pre:
       post: |
         ln -s pwncat /usr/local/bin/netcat \
+    8.5:
+      type: pip
+      flags: --break-system-packages
     8.4:
       type: pip
       flags: --break-system-packages
@@ -574,7 +592,7 @@ tools_available:
       type: apt
       package: rsync
   sass:
-    disabled: [5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3, 8.4]
+    disabled: [5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3, 8.4, 8.5]
     check: sass --version | grep -E '[0-9][.0-9]+' || (sass --version; false)
     all:
       type: npm
@@ -586,7 +604,7 @@ tools_available:
       pre:
       post:
   shellcheck:
-    disabled: [5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3, 8.4]
+    disabled: [5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3, 8.4, 8.5]
     check: shellcheck --version | grep -E '[0-9][.0-9]+' || (shellcheck --version; false)
     all:
       type: apt
@@ -604,7 +622,7 @@ tools_available:
       pre:
       post:
   stencil-cli:
-    disabled: [5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3, 8.4]
+    disabled: [5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3, 8.4, 8.5]
     check: stencil --version | grep -E '[0-9][.0-9]+' || (stencil --version; false)
     all:
       type: npm
@@ -616,7 +634,7 @@ tools_available:
       pre:
       post:
   stylelint:
-    disabled: [5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3, 8.4]
+    disabled: [5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3, 8.4, 8.5]
     check: stylelint --version | grep -E '[0-9][.0-9]+' || (stylelint --version; false)
     all:
       type: npm
@@ -628,13 +646,13 @@ tools_available:
       pre:
       post:
   svn:
-    disabled: [5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3, 8.4]
+    disabled: [5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3, 8.4, 8.5]
     check: svn --version | grep version | grep -E '[0-9]+\.[0-9]+' || (svn --version; false)
     all:
       type: apt
       package: subversion
   symfony-cli:
-    disabled: [5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3, 8.4]
+    disabled: [5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3, 8.4, 8.5]
     check: symfony --no-ansi -V | grep -E 'version [0-9][.0-9]+' || (symfony --no-ansi -V; false)
     all:
       type: custom
@@ -642,13 +660,13 @@ tools_available:
       build_dep: []
       run_dep: []
   taskfile:
-    disabled: [5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3, 8.4]
+    disabled: [5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3, 8.4, 8.5]
     check: task --version | grep -E '[0-9][.0-9]+' || (task --version; false)
     all:
       type: custom
       command: sh -c "$(curl -sS --fail -k https://taskfile.dev/install.sh)" -- -d -b /usr/local/bin/
   tig:
-    disabled: [5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3, 8.4]
+    disabled: [5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3, 8.4, 8.5]
     check: tig --version 2>&1 | grep -E '[0-9][.0-9]+' || (tig --version; false)
     all:
       type: apt
@@ -661,6 +679,9 @@ tools_available:
       pre: TRAP_URL="https://github.com/buggregator/trap/releases/latest/download/trap.phar"
       command: curl -sS -k -L --fail -L "${TRAP_URL}" -o /usr/local/bin/btrap
       post: chmod +x /usr/local/bin/btrap
+    8.1:
+      type: custom
+      pre: TRAP_URL="https://github.com/buggregator/trap/releases/download/1.17.1/trap.phar"
   vim:
     disabled: []
     check: vim --version | grep ^VIM | grep -E '[0-9]\.[0-9]+' || (vim --version; false)
@@ -668,7 +689,7 @@ tools_available:
       type: apt
       package: vim
   vue-cli:
-    disabled: [5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3, 8.4]
+    disabled: [5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3, 8.4, 8.5]
     check: vue --version | grep -E '[0-9][.0-9]+' || (vue --version; false)
     all:
       type: npm
@@ -681,7 +702,7 @@ tools_available:
       post:
   webpack-cli:
     disabled: []
-    check: webpack-cli --version | grep -E '[0-9][.0-9]+' || (webpack-cli --version; false)
+    check: webpack-cli info | grep -E 'webpack-cli:\s*[0-9][.0-9]+' || (webpack-cli info; false)
     all:
       type: npm
       package: webpack-cli
@@ -692,7 +713,7 @@ tools_available:
       pre:
       post:
   wkhtmltopdf:
-    disabled: [5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3, 8.4]
+    disabled: [5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3, 8.4, 8.5]
     check: wkhtmltopdf --version | grep ^wkhtmltopdf | grep -E '[0-9]\.[0-9]+' | grep patched || (wkhtmltopdf --version; false)
     all:
       type: custom
@@ -779,6 +800,9 @@ tools_available:
       run_dep: [less]
       pre: WPCLI_URL="https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar"
       post: chmod +x /usr/local/bin/wp
+    8.5:
+      type: custom
+      pre: WPCLI_URL="https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli-nightly.phar"
   wscat:
     disabled: []
     check: wscat --version | grep -E '[0-9][.0-9]+' || (wscat --version; false)
@@ -802,6 +826,9 @@ tools_available:
       flags:
       # pre:
       # post:
+    8.5:
+      type: pip
+      flags: --break-system-packages
     8.4:
       type: pip
       flags: --break-system-packages
@@ -875,6 +902,9 @@ tools_available:
       flags:
       pre:
       post:
+    8.5:
+      type: pip
+      flags: --break-system-packages
     8.4:
       type: pip
       flags: --break-system-packages

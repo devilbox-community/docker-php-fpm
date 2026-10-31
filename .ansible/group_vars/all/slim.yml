@@ -16,6 +16,9 @@ os_release:
   all:
     debian: bookworm
     ubuntu: jammy
+  8.5:
+    debian: bookworm
+    ubuntu: jammy
   8.4:
     debian: bookworm
     ubuntu: jammy
@@ -112,19 +115,19 @@ base_apt_repositories_available:
       pre: |
         curl -sS -L --fail "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x648ACFD622F3D138" | APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1 apt-key add - \
         && curl -sS -L --fail "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x6A26B1AE64C3C388" | APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1 apt-key add - \
-      deb: deb http://ftp.debian.org/debian {{ os_release[8.0].debian }}-backports main contrib non-free
+      deb: deb http://archive.debian.org/debian {{ os_release[8.0].debian }}-backports main contrib non-free
     7.4:
       type: repo
       pre: |
         curl -sS -L --fail "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x648ACFD622F3D138" | APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1 apt-key add - \
         && curl -sS -L --fail "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x6A26B1AE64C3C388" | APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1 apt-key add - \
-      deb: deb http://ftp.debian.org/debian {{ os_release[7.4].debian }}-backports main contrib non-free
+      deb: deb http://archive.debian.org/debian {{ os_release[7.4].debian }}-backports main contrib non-free
     7.3:
       type: repo
       pre: |
         curl -sS -L --fail "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x648ACFD622F3D138" | APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1 apt-key add - \
         && curl -sS -L --fail "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x6A26B1AE64C3C388" | APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1 apt-key add - \
-      deb: deb http://ftp.debian.org/debian {{ os_release[7.3].debian }}-backports main contrib non-free
+      deb: deb http://archive.debian.org/debian {{ os_release[7.3].debian }}-backports main contrib non-free
     # [Buster]
     7.2:
       type: repo
@@ -438,11 +441,12 @@ base_software_available:
       else \
         pg_isready --version; \
       fi \
+    # [Bullseye] (7.3, 7.4, 8.0) bullseye-pgdg moved to apt-archive.postgresql.org
     all:
       type: custom
       pre: |
         curl -sS -k -L --fail https://www.postgresql.org/media/keys/ACCC4CF8.asc | APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1 apt-key add - \
-        && echo "deb https://apt.postgresql.org/pub/repos/apt/ {{ os_release[php_version].debian }}-pgdg main" > /etc/apt/sources.list.d/pgsql.list \
+        && echo "deb https://{{ 'apt-archive' if os_release[php_version].debian == 'bullseye' else 'apt' }}.postgresql.org/pub/repos/apt/ {{ os_release[php_version].debian }}-pgdg main" > /etc/apt/sources.list.d/pgsql.list \
         && apt-get update \
       command: |
         apt-get install -y --no-install-recommends --no-install-suggests \

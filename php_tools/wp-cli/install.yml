@@ -11,3 +11,9 @@ all:
   run_dep: [less]
   pre: WPCLI_URL="https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar"
   post: chmod +x /usr/local/bin/wp
+
+# ponytail: 2.12.0 (latest stable) emits PHP 8.5 deprecations to STDOUT, breaking --format=json
+# (wp-cli/wp-cli#6271). Drop this block once a stable release > 2.12.0 ships.
+8.5:
+  type: custom
+  pre: WPCLI_URL="https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli-nightly.phar"

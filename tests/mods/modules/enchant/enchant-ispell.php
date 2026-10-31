@@ -15,12 +15,10 @@ if (PHP_MAJOR_VERSION == 7) {
 	}
 }
 
-// FIXME: Currently not available for PHP 8.0 and PHP 8.1
-if (PHP_MAJOR_VERSION == 8) {
-	if (PHP_MINOR_VERSION == 0 || PHP_MINOR_VERSION == 1 || PHP_MINOR_VERSION == 2 || PHP_MINOR_VERSION == 3 || PHP_MINOR_VERSION == 4) {
-		echo 'SKIP';
-		exit(0);
-	}
+// enchant 2 (used by all PHP 8 images) no longer ships an ispell backend
+if (PHP_MAJOR_VERSION >= 8) {
+	echo 'SKIP';
+	exit(0);
 }
 
 

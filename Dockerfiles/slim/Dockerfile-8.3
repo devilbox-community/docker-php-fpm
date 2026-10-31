@@ -359,6 +359,8 @@ COPY --from=devilbox-slim-base-builder /tmp/mongo/ /usr/bin/
 ### Copy MysQL Client
 ###
 COPY --from=devilbox-slim-base-builder /usr/bin/mysql* /usr/bin/
+# Auth plugins are loaded at runtime (caching_sha2_password is the only option on MySQL 9.x)
+COPY --from=devilbox-slim-base-builder /usr/lib/${ARCH}-linux-gnu/libmariadb3/plugin/ /usr/lib/${ARCH}-linux-gnu/libmariadb3/plugin/
 
 ###
 ### Copy mysqldump-secure

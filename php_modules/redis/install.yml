@@ -51,6 +51,9 @@
 
 all:
   type: pecl
+  command: pecl install -D 'enable-redis-igbinary="yes" enable-redis-lzf="yes" enable-redis-zstd="yes" enable-redis-msgpack="yes" enable-redis-lz4="yes" with-liblz4="yes"' redis
+  build_dep: [liblz4-dev, libzstd-dev]
+  run_dep: [liblz4-1, libzstd1]
 
 7.3:
   type: pecl

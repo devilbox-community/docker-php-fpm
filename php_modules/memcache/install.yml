@@ -9,6 +9,14 @@ all:
   type: pecl
   build_dep: [zlib1g-dev]
 
+# PECL 8.2 does not build on PHP 8.5 (php_smart_string_public.h removed); fixed upstream in
+# websupport-sk/pecl-memcache#118, not yet released. Drop this block once a PECL release > 8.2 exists.
+8.5:
+  type: git
+  git_url: https://github.com/websupport-sk/pecl-memcache
+  git_ref: ac8e8c521a18aae14c8f2859694536ead304ce97
+  configure: --enable-memcache
+
 7.4:
   type: pecl
   version: 4.0.5.2

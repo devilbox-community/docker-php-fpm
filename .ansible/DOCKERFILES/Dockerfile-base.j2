@@ -1,6 +1,7 @@
 # vi: ft=dockerfile
 {{ edit_comment_base }}
-FROM php:{{ php_version }}-fpm
+FROM php:{{ php_version }}-fpm{% if php_version in [8.1, 8.2, 8.3, 8.4, 8.5] %}-bookworm{% endif %}
+
 
 
 ###
@@ -56,6 +57,14 @@ RUN set -eux \
 RUN set -eux \
     && sed -i 's/^deb /# deb /g' /etc/apt/sources.list \
     && echo "deb http://archive.debian.org/debian/ buster main contrib non-free" > /etc/apt/sources.list
+
+{% elif php_version in [7.4, 8.0] %}
+
+###
+### Fix end of support in Debian (bullseye-security moved to archive)
+###
+RUN set -eux \
+    && sed -i 's#http://deb.debian.org/debian-security#http://archive.debian.org/debian-security#' /etc/apt/sources.list
 
 {% endif %}
 

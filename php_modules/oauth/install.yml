@@ -9,6 +9,16 @@ all:
   type: pecl
   build_dep: [libpcre3-dev, libcurl4-openssl-dev]
 
+8.5:
+  type: git
+  git_url: https://github.com/php/pecl-web_services-oauth
+  flags: --depth=1 --single-branch --branch=2.0.13
+
+8.4:
+  type: git
+  git_url: https://github.com/php/pecl-web_services-oauth
+  flags: --depth=1 --single-branch --branch=2.0.13
+
 5.6:
   type: pecl
   version: 1.2.3

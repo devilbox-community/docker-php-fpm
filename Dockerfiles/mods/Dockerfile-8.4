@@ -15,6 +15,7 @@ RUN set -eux \
         ghostscript \
         libaio-dev \
         libavif-dev \
+        libbrotli-dev \
         libbz2-dev \
         libc-ares-dev \
         libc-client-dev \
@@ -34,6 +35,7 @@ RUN set -eux \
         liblzf-dev \
         libmagickwand-dev \
         libmariadb-dev \
+        libmcrypt-dev \
         libmemcached-dev \
         libnghttp2-dev \
         libpcre3-dev \
@@ -45,6 +47,7 @@ RUN set -eux \
         libsasl2-dev \
         libsnmp-dev \
         libsodium-dev \
+        libssh2-1-dev \
         libssl-dev \
         libtidy-dev \
         libvpx-dev \
@@ -246,16 +249,10 @@ RUN set -eux \
 
 # -------------------- Installing PHP Extension: imagick --------------------
 RUN set -eux \
-	# Installation: Version specific
-	# Type:         GIT extension
-	&& git clone --depth=1 --single-branch --branch=master https://github.com/Imagick/imagick/ /tmp/imagick \
-	&& cd /tmp/imagick \
-	# Custom:       Install command
-	&& phpize \
-&& ./configure \
-&& make -j$(getconf _NPROCESSORS_ONLN) \
-&& make install \
- \
+	# Installation: Generic
+	# Type:         PECL extension
+	# Default:      Pecl command
+	&& pecl install imagick \
 	# Enabling
 	&& docker-php-ext-enable imagick \
 	# Generic post-command
@@ -354,6 +351,17 @@ RUN set -eux \
 	&& true
 
 
+# -------------------- Installing PHP Extension: mcrypt --------------------
+RUN set -eux \
+	# Installation: Generic
+	# Type:         PECL extension
+	# Default:      Pecl command
+	&& pecl install mcrypt \
+	# Enabling
+	&& docker-php-ext-enable mcrypt \
+	&& true
+
+
 # -------------------- Installing PHP Extension: memcache --------------------
 RUN set -eux \
 	# Installation: Generic
@@ -378,19 +386,10 @@ RUN set -eux \
 
 # -------------------- Installing PHP Extension: memcached --------------------
 RUN set -eux \
-	# Installation: Version specific
-	# Type:         GIT extension
-	&& git clone --depth=1 --single-branch --branch=master https://github.com/php-memcached-dev/php-memcached /tmp/memcached \
-	&& cd /tmp/memcached \
-	# Custom:       Install command
-	&& true \
-# FIXME: This is a work-around to mitigate compile error with PHP 8.4
-&& sed -i'' 's/\sTSRMLS_CC//g' php_memcached_session.c \
-&& phpize \
-&& ./configure --enable-memcached \
-&& make -j$(getconf _NPROCESSORS_ONLN) \
-&& make install \
- \
+	# Installation: Generic
+	# Type:         PECL extension
+	# Custom:       Pecl command
+	&& printf "\n\n\nyes\nyes\nyes\n" | pecl install memcached \
 	# Enabling
 	&& docker-php-ext-enable memcached \
 	&& true
@@ -417,10 +416,15 @@ RUN set -eux \
 
 # -------------------- Installing PHP Extension: oauth --------------------
 RUN set -eux \
-	# Installation: Generic
-	# Type:         PECL extension
-	# Default:      Pecl command
-	&& pecl install oauth \
+	# Installation: Version specific
+	# Type:         GIT extension
+	&& git clone --depth=1 --single-branch --branch=2.0.13 https://github.com/php/pecl-web_services-oauth /tmp/oauth \
+	&& cd /tmp/oauth \
+	# Default:      Install command
+	&& phpize \
+	&& ./configure  \
+	&& make -j$(getconf _NPROCESSORS_ONLN) \
+	&& make install \
 	# Enabling
 	&& docker-php-ext-enable oauth \
 	&& true
@@ -643,8 +647,8 @@ RUN set -eux \
 RUN set -eux \
 	# Installation: Generic
 	# Type:         PECL extension
-	# Default:      Pecl command
-	&& pecl install redis \
+	# Custom:       Pecl command
+	&& pecl install -D 'enable-redis-igbinary="yes" enable-redis-lzf="yes" enable-redis-zstd="yes" enable-redis-msgpack="yes" enable-redis-lz4="yes" with-liblz4="yes"' redis \
 	# Enabling
 	&& docker-php-ext-enable redis \
 	&& true
@@ -729,6 +733,17 @@ RUN set -eux \
 	&& true
 
 
+# -------------------- Installing PHP Extension: solr --------------------
+RUN set -eux \
+	# Installation: Generic
+	# Type:         PECL extension
+	# Default:      Pecl command
+	&& pecl install solr \
+	# Enabling
+	&& docker-php-ext-enable solr \
+	&& true
+
+
 # -------------------- Installing PHP Extension: sourceguardian --------------------
 RUN set -eux \
 	# Installation: Generic
@@ -747,6 +762,17 @@ RUN set -eux \
 	&& true
 
 
+# -------------------- Installing PHP Extension: ssh2 --------------------
+RUN set -eux \
+	# Installation: Version specific
+	# Type:         PECL extension
+	# Default:      Pecl command
+	&& pecl install ssh2-1.5.0 \
+	# Enabling
+	&& docker-php-ext-enable ssh2 \
+	&& true
+
+
 # -------------------- Installing PHP Extension: zip --------------------
 RUN set -eux \
 	# Installation: Generic
@@ -762,7 +788,7 @@ RUN set -eux \
 	# Installation: Generic
 	# Type:         PECL extension
 	# Custom:       Pecl command
-	&& pecl install -D 'enable-sockets="no" enable-openssl="yes" enable-http2="yes" enable-mysqlnd="yes" enable-swoole-json="no" enable-swoole-curl="yes" enable-cares="yes" with-postgres="yes"' swoole \
+	&& pecl install -D 'enable-sockets="no" enable-mysqlnd="yes" enable-swoole-curl="yes" enable-cares="yes" enable-brotli="yes" enable-swoole-pgsql="yes"' swoole \
 	# Enabling
 	&& docker-php-ext-enable swoole \
 	&& true
@@ -924,6 +950,7 @@ RUN set -eux \
     libaio1 \
     libaspell15 \
     libavif15 \
+    libbrotli1 \
     libc-ares2 \
     libc-client2007e \
     libenchant-2-2 \
@@ -937,12 +964,14 @@ RUN set -eux \
     liblzf1 \
     libmagickwand-6.q16-6 \
     libmariadbd19 \
+    libmcrypt4 \
     libmemcachedutil2 \
     libnghttp2-14 \
     libpng16-16 \
     libpq5 \
     librabbitmq4 \
     librdkafka1 \
+    libssh2-1 \
     libsybdb5 \
     libtidy5deb1 \
     libvpx7 \
@@ -1089,6 +1118,8 @@ RUN set -eux \
     && php-fpm -m | grep -oiE '^lz4$' \
     && php -m | grep -oiE '^lzf$' \
     && php-fpm -m | grep -oiE '^lzf$' \
+    && php -m | grep -oiE '^mcrypt$' \
+    && php-fpm -m | grep -oiE '^mcrypt$' \
     && php -m | grep -oiE '^memcache$' \
     && php-fpm -m | grep -oiE '^memcache$' \
     && php -m | grep -oiE '^msgpack$' \
@@ -1166,8 +1197,12 @@ RUN set -eux \
     && php-fpm -m | grep -oiE '^sockets$' \
     && php -m | grep -oiE '^sodium$' \
     && php-fpm -m | grep -oiE '^sodium$' \
+    && php -m | grep -oiE '^solr$' \
+    && php-fpm -m | grep -oiE '^solr$' \
     && php -m | grep -oiE '^spl$' \
     && php-fpm -m | grep -oiE '^spl$' \
+    && php -m | grep -oiE '^ssh2$' \
+    && php-fpm -m | grep -oiE '^ssh2$' \
     && php -m | grep -oiE '^xml$' \
     && php-fpm -m | grep -oiE '^xml$' \
     && php -m | grep -oiE '^zip$' \

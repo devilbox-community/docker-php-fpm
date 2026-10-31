@@ -12,7 +12,11 @@ all:
   configure: --with-openssl-dir=/usr
   build_dep: [libssl-dev]
 
-# PHP 8.4 is using a different option
+# PHP 8.4+ uses a different option
+8.5:
+  type: builtin
+  configure: --with-ftp-ssl
+
 8.4:
   type: builtin
   configure: --with-ftp-ssl

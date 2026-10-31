@@ -15,6 +15,7 @@ RUN set -eux \
         ghostscript \
         libaio-dev \
         libavif-dev \
+        libbrotli-dev \
         libbz2-dev \
         libc-ares-dev \
         libc-client-dev \
@@ -638,8 +639,8 @@ RUN set -eux \
 RUN set -eux \
 	# Installation: Generic
 	# Type:         PECL extension
-	# Default:      Pecl command
-	&& pecl install redis \
+	# Custom:       Pecl command
+	&& pecl install -D 'enable-redis-igbinary="yes" enable-redis-lzf="yes" enable-redis-zstd="yes" enable-redis-msgpack="yes" enable-redis-lz4="yes" with-liblz4="yes"' redis \
 	# Enabling
 	&& docker-php-ext-enable redis \
 	&& true
@@ -765,7 +766,7 @@ RUN set -eux \
 	# Installation: Generic
 	# Type:         PECL extension
 	# Custom:       Pecl command
-	&& pecl install -D 'enable-sockets="no" enable-openssl="yes" enable-http2="yes" enable-mysqlnd="yes" enable-swoole-json="no" enable-swoole-curl="yes" enable-cares="yes" with-postgres="yes"' swoole \
+	&& pecl install -D 'enable-sockets="no" enable-mysqlnd="yes" enable-swoole-curl="yes" enable-cares="yes" enable-brotli="yes" enable-swoole-pgsql="yes"' swoole \
 	# Enabling
 	&& docker-php-ext-enable swoole \
 	&& true
@@ -927,6 +928,7 @@ RUN set -eux \
     libaio1 \
     libaspell15 \
     libavif15 \
+    libbrotli1 \
     libc-ares2 \
     libc-client2007e \
     libenchant-2-2 \

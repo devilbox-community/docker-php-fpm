@@ -41,6 +41,13 @@ RUN set -eux \
 
 
 ###
+### Fix end of support in Debian (bullseye-security moved to archive)
+###
+RUN set -eux \
+    && sed -i 's#http://deb.debian.org/debian-security#http://archive.debian.org/debian-security#' /etc/apt/sources.list
+
+
+###
 ### Upgrade (install ps)
 ###
 RUN set -eux \

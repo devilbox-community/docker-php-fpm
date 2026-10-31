@@ -33,7 +33,7 @@ RUN set -eux \
 	&& curl -sS -L --fail "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x648ACFD622F3D138" | APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1 apt-key add - \
 	&& curl -sS -L --fail "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x6A26B1AE64C3C388" | APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1 apt-key add - \
 	\
-	&& echo "deb http://ftp.debian.org/debian bullseye-backports main contrib non-free" > /etc/apt/sources.list.d/backports.list \
+	&& echo "deb http://archive.debian.org/debian bullseye-backports main contrib non-free" > /etc/apt/sources.list.d/backports.list \
 	&& curl -sS -L --fail "https://packages.blackfire.io/gpg.key" | APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1 apt-key add -	\
 	&& echo "deb http://packages.blackfire.io/debian any main" > /etc/apt/sources.list.d/blackfire.list \
 	&& true
@@ -185,7 +185,7 @@ RUN set -eux \
 # -------------------- pgsql_client --------------------
 RUN set -eux \
 	&& curl -sS -k -L --fail https://www.postgresql.org/media/keys/ACCC4CF8.asc | APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1 apt-key add - \
-	&& echo "deb https://apt.postgresql.org/pub/repos/apt/ bullseye-pgdg main" > /etc/apt/sources.list.d/pgsql.list \
+	&& echo "deb https://apt-archive.postgresql.org/pub/repos/apt/ bullseye-pgdg main" > /etc/apt/sources.list.d/pgsql.list \
 	&& apt-get update \
 	\
 	&& apt-get install -y --no-install-recommends --no-install-suggests \
@@ -359,6 +359,8 @@ COPY --from=devilbox-slim-base-builder /tmp/mongo/ /usr/bin/
 ### Copy MysQL Client
 ###
 COPY --from=devilbox-slim-base-builder /usr/bin/mysql* /usr/bin/
+# Auth plugins are loaded at runtime (caching_sha2_password is the only option on MySQL 9.x)
+COPY --from=devilbox-slim-base-builder /usr/lib/${ARCH}-linux-gnu/libmariadb3/plugin/ /usr/lib/${ARCH}-linux-gnu/libmariadb3/plugin/
 
 ###
 ### Copy mysqldump-secure

@@ -10,6 +10,15 @@ all:
   build_dep: [unixodbc-dev]
   run_dep: [unixodbc]
 
+# 5.13.x requires PHP >= 8.3
+8.2:
+  type: pecl
+  version: 5.12.0
+
+8.1:
+  type: pecl
+  version: 5.12.0
+
 8.0:
   type: pecl
   version: 5.11.1

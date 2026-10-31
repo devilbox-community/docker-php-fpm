@@ -124,6 +124,7 @@ help_software_available:
       post: |
         runuser -l devilbox -c ". {{ nvm_home }}/nvm.sh; nvm install ${NODE_VERSION}" \
         && runuser -l devilbox -c ". {{ nvm_home }}/nvm.sh; nvm use ${NODE_VERSION}" \
+        && runuser -l devilbox -c ". {{ nvm_home }}/nvm.sh; npm install -g corepack" \
         && runuser -l devilbox -c ". {{ nvm_home }}/nvm.sh; corepack enable" \
         \
         && ln -s "{{ nvm_home }}/versions/node/$(runuser -l devilbox -c '. {{ nvm_home }}/nvm.sh; node --version')/bin/corepack" /usr/local/bin/ \
@@ -157,8 +158,9 @@ help_software_available:
     all:
       type: custom
       pre: rm -rf /usr/lib/python3.*/EXTERNALLY-MANAGED
+      # [Bullseye] (7.3, 7.4, 8.0) ships Python 3.9, which latest get-pip.py no longer supports
       command: |
-        curl -sS -L --fail https://bootstrap.pypa.io/get-pip.py | python3 \
+        curl -sS -L --fail https://bootstrap.pypa.io/{{ 'pip/3.9/' if os_release[php_version].debian == 'bullseye' else '' }}get-pip.py | python3 \
       # Cleanup
       post: |
         /bin/ls -1 /usr/local/lib/ | grep ^python | while read -r version; do \

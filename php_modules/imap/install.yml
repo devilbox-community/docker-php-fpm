@@ -12,6 +12,10 @@ all:
   build_dep: [libc-client-dev, libkrb5-dev, libcurl4-openssl-dev]
   run_dep: [libc-client2007e]
 
+8.5:
+  type: pecl
+  version: 1.0.3
+
 8.4:
   type: pecl
   version: 1.0.3

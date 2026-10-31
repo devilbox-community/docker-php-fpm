@@ -14,6 +14,7 @@ RUN set -eux \
         freetds-dev \
         ghostscript \
         libaio-dev \
+        libbrotli-dev \
         libbz2-dev \
         libc-ares-dev \
         libc-client-dev \
@@ -293,20 +294,22 @@ RUN set -eux \
 
 # -------------------- Installing PHP Extension: lz4 --------------------
 RUN set -eux \
-	# Installation: Generic
+	# Installation: Version specific
 	# Type:         GIT extension
 	&& git clone --depth=1 --single-branch --branch=$(git ls-remote --tags https://github.com/kjdev/php-ext-lz4 \
   | sed 's/^.*tags\///g' \
   | grep -E '^[.0-9]+$' \
   | tr '-' '~' | sort -V | tail -1 \
 ) \
-  https://github.com/kjdev/php-ext-lz4 /tmp/lz4 \
+ https://github.com/kjdev/php-ext-lz4 /tmp/lz4 \
 	&& cd /tmp/lz4 \
-	# Default:      Install command
-	&& phpize \
-	&& ./configure  --enable-lz4 --with-lz4-includedir=/usr \
-	&& make -j$(getconf _NPROCESSORS_ONLN) \
-	&& make install \
+	# Custom:       Install command
+	&& touch lz4_arginfo.h \
+&& phpize \
+&& ./configure --enable-lz4 --with-lz4-includedir=/usr \
+&& make -j$(getconf _NPROCESSORS_ONLN) \
+&& make install \
+ \
 	# Enabling
 	&& docker-php-ext-enable lz4 \
 	&& true
@@ -619,8 +622,8 @@ RUN set -eux \
 RUN set -eux \
 	# Installation: Generic
 	# Type:         PECL extension
-	# Default:      Pecl command
-	&& pecl install redis \
+	# Custom:       Pecl command
+	&& pecl install -D 'enable-redis-igbinary="yes" enable-redis-lzf="yes" enable-redis-zstd="yes" enable-redis-msgpack="yes" enable-redis-lz4="yes" with-liblz4="yes"' redis \
 	# Enabling
 	&& docker-php-ext-enable redis \
 	&& true
@@ -918,6 +921,7 @@ RUN set -eux \
     ghostscript \
     libaio1 \
     libaspell15 \
+    libbrotli1 \
     libc-ares2 \
     libc-client2007e \
     libenchant-2-2 \
